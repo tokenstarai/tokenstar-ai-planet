@@ -17,7 +17,7 @@ export const mockNews = [
   {
     id: 3, title: 'OpenClaw Skills 生态突破 500 个，开发者社区活跃度创新高', slug: 'skills-ecosystem-500',
     summary: 'OpenClaw Skills 生态系统正式突破 500 个技能包，覆盖金融、医疗、教育、制造等 20+ 行业垂直场景。',
-    cover_image: null, featured: false, published_at: '2026-02-15T08:00:00Z',
+    cover_image: null, featured: true, published_at: '2026-02-15T08:00:00Z',
     category: { name: '生态动态', slug: 'ecosystem' }, tags: [{ name: 'Skills', slug: 'skills' }],
     content: '<p>生态详情...</p>'
   },
@@ -238,6 +238,19 @@ export const mockEvents = [
     featured: true
   },
   {
+    id: 4, title: 'OpenClaw 北京企业闭门交流会', slug: 'beijing-enterprise-2026',
+    type: 'enterprise', status: 'upcoming',
+    start_time: '2026-03-20T14:00:00Z', end_time: '2026-03-20T18:00:00Z',
+    location: '北京望京 SOHO T1',
+    signup_deadline: '2026-03-15T23:59:59Z',
+    summary: '面向北京地区大型企业 AI 负责人的闭门交流会，深度探讨 OpenClaw 在金融、政务、制造领域的落地实践。',
+    agenda: '<h3>议程</h3><p>14:00 签到入场</p><p>14:30 OpenClaw 企业 AI 战略解读</p><p>15:30 标杆案例分享</p><p>16:30 圆桌讨论</p><p>17:30 自由交流</p>',
+    gallery: [],
+    recap_content: null,
+    cover_image: null,
+    featured: true
+  },
+  {
     id: 3, title: 'OpenClaw 深圳城市沙龙', slug: 'shenzhen-salon-2026',
     type: 'public', status: 'finished',
     start_time: '2026-01-20T14:00:00Z', end_time: '2026-01-20T18:00:00Z',
@@ -266,8 +279,8 @@ export const mockCases = [
   },
   {
     id: 3, title: '某制造企业 AI 质检系统：不良率降低 85%', slug: 'manufacturing-quality',
-    summary: '利用 OpenClaw 视觉分析能力构建的自动化质检系统，实现 24 小时无人值守，产品不良率大幅降低。',
-    featured: false, published_at: '2026-01-28T08:00:00Z',
+    summary: '利用 OpenClaw 视觉分析能力构建的自动化质检系统，实现 24 小时无人値守，产品不良率大幅降低。',
+    featured: true, published_at: '2026-01-28T08:00:00Z',
     category: { name: '制造', slug: 'manufacturing' }, tags: [{ name: '质检', slug: 'quality' }],
     content: '<p>案例详情...</p>'
   },

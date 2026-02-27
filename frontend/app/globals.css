@@ -8,12 +8,15 @@
    CSS 变量：主题系统
    ============================================================ */
 :root {
-  /* Header 高度变量（用于修复叠压问题）
-     64px (h-16) + iOS safe-area-inset-top */
+  /* Header 高度变量（用于修复叠压问题） */
   --header-height: calc(64px + env(safe-area-inset-top, 0px));
-
   /* 过渡时间 */
   --transition-theme: 300ms;
+  /* 统一 section 间距 */
+  --section-py-mobile: 1.5rem;  /* 24px — 紧凑移动端 */
+  --section-py-desktop: 4rem;   /* 64px */
+  --card-gap-mobile: 0.75rem;   /* 12px */
+  --card-gap-desktop: 1.5rem;   /* 24px */
 }
 
 /* ============================================================
@@ -50,42 +53,47 @@ html.dark {
 }
 
 /* ============================================================
-   浅色主题
+   浅色主题 — 高对比度版本（WCAG AA 合规）
    ============================================================ */
 html.light {
   color-scheme: light;
 
-  --color-bg: #f4f6f9;
-  --color-bg-secondary: #eef0f4;
-  --color-bg-card: rgba(255, 255, 255, 0.9);
-  --color-bg-card-hover: rgba(255, 255, 255, 1);
-  --color-border: rgba(0, 0, 0, 0.08);
-  --color-border-hover: rgba(0, 0, 0, 0.15);
+  /* 背景：浅灰而非纯白，更专业不刺眼 */
+  --color-bg: #F7F8FA;
+  --color-bg-secondary: #EEF0F5;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-hover: #F0F4FF;
+  --color-border: #E2E8F0;
+  --color-border-hover: #CBD5E1;
 
-  --color-text-primary: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
+  /* 文字：高对比度 */
+  --color-text-primary: #0F172A;    /* 近黑，主标题/正文 */
+  --color-text-secondary: #334155;  /* 深灰，副标题/摘要 */
+  --color-text-muted: #64748B;      /* 中灰，辅助信息 */
 
-  --color-input-bg: rgba(255, 255, 255, 0.9);
-  --color-input-border: #d1d5db;
-  --color-input-text: #0f172a;
-  --color-input-placeholder: #9ca3af;
+  /* 输入框 */
+  --color-input-bg: #FFFFFF;
+  --color-input-border: #CBD5E1;
+  --color-input-text: #0F172A;
+  --color-input-placeholder: #94A3B8;
 
-  --color-tag-bg: rgba(37, 99, 235, 0.08);
-  --color-tag-text: #1d4ed8;
-  --color-tag-border: rgba(37, 99, 235, 0.2);
+  /* 标签 */
+  --color-tag-bg: #EFF6FF;
+  --color-tag-text: #1D4ED8;
+  --color-tag-border: #BFDBFE;
 
-  --color-link: #2563eb;
-  --color-link-hover: #1d4ed8;
+  /* 链接 */
+  --color-link: #2563EB;
+  --color-link-hover: #1D4ED8;
 
-  --scrollbar-track: #e2e8f0;
-  --scrollbar-thumb: #3b82f6;
+  --scrollbar-track: #E2E8F0;
+  --scrollbar-thumb: #3B82F6;
 }
 
 /* ============================================================
    基础重置
    ============================================================ */
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
@@ -93,6 +101,8 @@ html.light {
 
 html {
   scroll-behavior: smooth;
+  /* 防止横向溢出 */
+  overflow-x: hidden;
 }
 
 body {
@@ -103,6 +113,9 @@ body {
   transition: background-color var(--transition-theme), color var(--transition-theme);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* 防止横向溢出 */
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* 深色主题 body 背景渐变 */
@@ -112,7 +125,15 @@ html.dark body {
 
 /* 浅色主题 body 背景 */
 html.light body {
-  background: linear-gradient(135deg, #f4f6f9 0%, #eef0f4 50%, #e8ecf4 100%);
+  background: #F7F8FA;
+}
+
+/* ============================================================
+   全站防溢出保护
+   ============================================================ */
+#__next, main {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* ============================================================
@@ -142,6 +163,29 @@ html.light body {
 /* 排除不需要过渡的动画元素 */
 .no-transition, .no-transition * {
   transition: none !important;
+}
+
+/* ============================================================
+   统一 Section 间距规范
+   ============================================================ */
+.section-wrapper {
+  padding-top: var(--section-py-mobile);
+  padding-bottom: var(--section-py-mobile);
+}
+@media (min-width: 768px) {
+  .section-wrapper {
+    padding-top: var(--section-py-desktop);
+    padding-bottom: var(--section-py-desktop);
+  }
+}
+
+.card-grid {
+  gap: var(--card-gap-mobile);
+}
+@media (min-width: 768px) {
+  .card-grid {
+    gap: var(--card-gap-desktop);
+  }
 }
 
 /* ============================================================
@@ -191,12 +235,12 @@ html.light body {
 .prose-dark th, .prose-dark td { border: 1px solid #1e293b; padding: 0.5rem 0.75rem; }
 .prose-dark th { background: #1e293b; font-weight: 600; }
 
-/* Prose 内容样式（浅色）*/
+/* Prose 内容样式（浅色）— 高对比度 */
 .prose-light {
-  color: #334155;
+  color: #1E293B;
 }
 .prose-light h1, .prose-light h2, .prose-light h3, .prose-light h4 {
-  color: #0f172a;
+  color: #0F172A;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   font-weight: 700;
@@ -209,32 +253,32 @@ html.light body {
 .prose-light ul, .prose-light ol { margin-left: 1.5rem; margin-bottom: 1rem; }
 .prose-light li { margin-bottom: 0.25rem; }
 .prose-light code {
-  background: #f1f5f9;
+  background: #F1F5F9;
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
   font-size: 0.875rem;
-  color: #7c3aed;
+  color: #6D28D9;
 }
 .prose-light pre {
-  background: #f8fafc;
+  background: #F8FAFC;
   padding: 1rem;
   border-radius: 8px;
   overflow-x: auto;
   margin-bottom: 1rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #E2E8F0;
 }
-.prose-light pre code { background: none; padding: 0; color: #334155; }
+.prose-light pre code { background: none; padding: 0; color: #1E293B; }
 .prose-light blockquote {
   border-left: 4px solid #2563eb;
   padding-left: 1rem;
-  color: #64748b;
+  color: #475569;
   font-style: italic;
   margin-bottom: 1rem;
 }
 .prose-light img { border-radius: 8px; max-width: 100%; }
 .prose-light table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
-.prose-light th, .prose-light td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; }
-.prose-light th { background: #f1f5f9; font-weight: 600; }
+.prose-light th, .prose-light td { border: 1px solid #E2E8F0; padding: 0.5rem 0.75rem; }
+.prose-light th { background: #F1F5F9; color: #0F172A; font-weight: 600; }
 
 /* ============================================================
    发光效果
@@ -257,7 +301,7 @@ html.light body {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 html.light .card-hover:hover {
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 /* ============================================================
@@ -270,8 +314,16 @@ html.light .card-hover:hover {
   background-clip: text;
 }
 
+/* 浅色主题渐变文字 */
+html.light .gradient-text {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ============================================================
-   玻璃态（深色）
+   玻璃态
    ============================================================ */
 .glass {
   background: rgba(255, 255, 255, 0.05);
@@ -281,10 +333,10 @@ html.light .card-hover:hover {
 }
 
 html.light .glass {
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.85);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid #E2E8F0;
 }
 
 /* ============================================================
@@ -296,7 +348,7 @@ html.light .glass {
   padding: 0.2rem 0.6rem;
   border-radius: 9999px;
   font-size: 0.7rem;
-  font-weight: 500;
+  font-weight: 600;
   background: var(--color-tag-bg);
   color: var(--color-tag-text);
   border: 1px solid var(--color-tag-border);
@@ -329,9 +381,7 @@ html.light .glass {
 }
 
 html.light .hero-gradient {
-  background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, rgba(244, 246, 249, 0) 60%),
-              radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.06) 0%, rgba(244, 246, 249, 0) 60%),
-              #f4f6f9;
+  background: linear-gradient(160deg, #EEF2FF 0%, #F7F8FA 40%, #F0F4FF 100%);
 }
 
 /* ============================================================
@@ -342,7 +392,6 @@ html.light .hero-gradient {
                     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
-
 html.light .grid-bg {
   background-image: linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
@@ -356,7 +405,7 @@ html.light .grid-bg {
   padding: 0.75rem 1.5rem;
   background: #2563eb;
   color: white;
-  font-weight: 500;
+  font-weight: 600;
   border-radius: 0.75rem;
   transition: all 0.2s;
   display: inline-flex;
@@ -365,8 +414,8 @@ html.light .grid-bg {
   cursor: pointer;
 }
 .btn-primary:hover {
-  background: #3b82f6;
-  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+  background: #1D4ED8;
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35);
 }
 
 .btn-secondary {
@@ -388,15 +437,14 @@ html.light .grid-bg {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.4);
 }
-
 html.light .btn-secondary {
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  color: #0f172a;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  color: #0F172A;
 }
 html.light .btn-secondary:hover {
-  background: rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 0, 0, 0.2);
+  background: #F1F5F9;
+  border-color: #94A3B8;
 }
 
 .btn-outline {
@@ -412,14 +460,15 @@ html.light .btn-secondary:hover {
   border-color: #3b82f6;
   color: #93c5fd;
 }
-
 html.light .btn-outline {
-  border-color: rgba(37, 99, 235, 0.4);
-  color: #2563eb;
+  border-color: #93C5FD;
+  color: #1D4ED8;
+  background: #EFF6FF;
 }
 html.light .btn-outline:hover {
-  border-color: #2563eb;
-  color: #1d4ed8;
+  border-color: #2563EB;
+  color: #1E40AF;
+  background: #DBEAFE;
 }
 
 /* ============================================================
@@ -434,6 +483,18 @@ html.light .btn-outline:hover {
 .card-dark:hover {
   background: var(--color-bg-card-hover);
   border-color: var(--color-border-hover);
+}
+
+/* 浅色主题卡片 */
+html.light .card-dark {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+html.light .card-dark:hover {
+  background: #F8FAFF;
+  border-color: #BFDBFE;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.08);
 }
 
 /* ============================================================
@@ -470,28 +531,144 @@ button, a, [role="button"] {
 }
 
 /* ============================================================
-   浅色主题下的 Hero 文字颜色覆盖
+   浅色主题下的 Hero 文字颜色覆盖（高对比度）
    ============================================================ */
 html.light .hero-text-primary {
-  color: #0f172a;
+  color: #0F172A;
 }
 html.light .hero-text-secondary {
-  color: #475569;
+  color: #334155;
 }
 html.light .hero-text-muted {
-  color: #64748b;
+  color: #475569;
 }
 
 /* ============================================================
    浅色主题下的 Section 背景
    ============================================================ */
 html.light .section-bg-alt {
-  background: rgba(0, 0, 0, 0.02);
+  background: #EEF0F5;
+}
+
+/* 浅色主题：卡片内文字强制高对比 */
+html.light .card-dark p,
+html.light .card-dark span:not(.tag-badge) {
+  color: #374151;
+}
+html.light .card-dark h2,
+html.light .card-dark h3 {
+  color: #111827;
 }
 
 /* ============================================================
    浅色主题下的统计数字颜色
    ============================================================ */
 html.light .stat-number {
-  color: #1d4ed8;
+  color: #1D4ED8;
+}
+
+/* ============================================================
+   浅色主题：通用文字颜色强制覆盖（防止组件内灰字灰底）
+   ============================================================ */
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #0F172A;
+}
+
+html.light p {
+  color: #334155;
+}
+
+html.light .text-gray-400,
+html.light .text-gray-500 {
+  color: #4B5563 !important;
+}
+
+html.light .text-gray-300 {
+  color: #374151 !important;
+}
+
+html.light .text-gray-600 {
+  color: #374151 !important;
+}
+
+html.light .text-white {
+  color: #111827 !important;
+}
+
+/* 浅色主题下的导航文字 */
+html.light nav a {
+  color: #334155;
+}
+
+/* 浅色主题下的 Footer 文字 */
+html.light footer p,
+html.light footer span {
+  color: #475569;
+}
+
+/* 浅色主题下的卡片文字 */
+html.light .card-title {
+  color: #0F172A;
+}
+html.light .card-summary {
+  color: #334155;
+}
+html.light .card-meta {
+  color: #64748B;
+}
+
+/* ============================================================
+   移动端全屏搜索覆盖层
+   ============================================================ */
+.mobile-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+html.dark .mobile-search-overlay {
+  background: rgba(10, 10, 15, 0.98);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+html.light .mobile-search-overlay {
+  background: rgba(247, 248, 250, 0.98);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* ============================================================
+   浅色主题下的 Section 标题
+   ============================================================ */
+html.light .section-title {
+  color: #0F172A;
+}
+html.light .section-subtitle {
+  color: #475569;
+}
+
+/* ============================================================
+   浅色主题：输入框
+   ============================================================ */
+html.light input::placeholder {
+  color: #94A3B8;
+}
+html.light input {
+  color: #0F172A;
+  background: #FFFFFF;
+  border-color: #CBD5E1;
+}
+html.light input:focus {
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
