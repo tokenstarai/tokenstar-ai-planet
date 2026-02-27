@@ -36,14 +36,20 @@ export function Footer() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
-          {/* Brand — 与顶部 Navbar Logo 完全一致 */}
+          {/* Brand — 与顶部 Navbar Logo 完全一致：图标 + TokenStar 单行 */}
           <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-4" aria-label="TokenStar 首页">
+            <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="TokenStar 首页">
               <LogoIcon size={32} idSuffix="footer" />
-              <span className={`font-bold text-base ${isDark ? 'text-white' : 'text-gray-900'}`}>TokenStar</span>
+              <span
+                className="font-bold tracking-tight leading-none select-none"
+                style={{ fontSize: '18px', letterSpacing: '-0.02em' }}
+              >
+                <span style={{ color: isDark ? '#F8FAFC' : '#0F172A' }}>Token</span>
+                <span style={{ color: '#3B82F6' }}>Star</span>
+              </span>
             </Link>
             <p className={`text-sm leading-relaxed mb-5 max-w-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              OpenClaw 中国生态门户网站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。
+              面向中国用户的 OpenClaw 生态资源导航站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。
             </p>
             <div className="flex items-center gap-2">
               {[
@@ -95,7 +101,7 @@ export function Footer() {
         {/* Bottom */}
         <div className={`border-t mt-8 sm:mt-10 pt-5 sm:pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 ${isDark ? 'border-white/10' : 'border-gray-200'}`}>
           <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
-            © 2026 TokenStar · AI星球. All rights reserved.
+            © 2026 TokenStar. All rights reserved.
           </p>
           <div className="flex items-center gap-3 sm:gap-4">
             {[

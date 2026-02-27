@@ -23,7 +23,7 @@ export default function SkillDetailPage({ params }: Props) {
   const related = mockSkills.filter(s => s.slug !== params.slug).slice(0, 3)
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">

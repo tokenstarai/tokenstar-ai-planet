@@ -12,7 +12,7 @@ export default function NewsPage() {
   const rest = mockNews.filter(n => !n.featured)
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       {/* Page Header */}
       <div className="page-header bg-gradient-to-b from-blue-900/20 to-transparent">
         <div className="max-w-7xl mx-auto px-4">

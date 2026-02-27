@@ -57,23 +57,68 @@ const typeLabels: Record<string, string> = {
   blog: 'Blog', case: '案例', hardware: '硬件', event: '活动',
 }
 
+/**
+ * LogoIcon：纯图标组件（32x32 蓝紫渐变方块 + 四角星 + 外环 + 中心核）
+ * 用于 Navbar 和 Footer，小尺寸下依然清晰可识别
+ */
 export function LogoIcon({ size = 32, idSuffix = 'a' }: { size?: number; idSuffix?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <rect width="32" height="32" rx="8" fill={`url(#lg1-${idSuffix})`}/>
-      <path d="M16 5 L17.8 12.2 L25 10.5 L20.2 16 L25 21.5 L17.8 19.8 L16 27 L14.2 19.8 L7 21.5 L11.8 16 L7 10.5 L14.2 12.2 Z" fill="white" opacity="0.95"/>
-      <circle cx="16" cy="16" r="3" fill={`url(#lg2-${idSuffix})`}/>
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      style={{ flexShrink: 0 }}
+    >
+      {/* 背景：蓝紫渐变圆角方块 */}
+      <rect width="32" height="32" rx="8" fill={`url(#lg1-${idSuffix})`} />
+      {/* 外环：Token 流通感 */}
+      <circle cx="16" cy="16" r="11.5" stroke="rgba(255,255,255,0.22)" strokeWidth="1.2" fill="none" />
+      {/* 四角星：Star 核心 */}
+      <path
+        d="M16 5.5 L17.6 12.4 L24.5 10.5 L19.8 16 L24.5 21.5 L17.6 19.6 L16 26.5 L14.4 19.6 L7.5 21.5 L12.2 16 L7.5 10.5 L14.4 12.4 Z"
+        fill="white"
+        opacity="0.95"
+      />
+      {/* 中心亮核 */}
+      <circle cx="16" cy="16" r="2.8" fill={`url(#lg2-${idSuffix})`} />
+      {/* 四角小点：AI 电路感 */}
+      <circle cx="7" cy="7" r="1.2" fill="rgba(255,255,255,0.42)" />
+      <circle cx="25" cy="7" r="1.2" fill="rgba(255,255,255,0.42)" />
+      <circle cx="7" cy="25" r="1.2" fill="rgba(255,255,255,0.28)" />
+      <circle cx="25" cy="25" r="1.2" fill="rgba(255,255,255,0.28)" />
       <defs>
         <linearGradient id={`lg1-${idSuffix}`} x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#2563eb"/>
-          <stop offset="100%" stopColor="#7c3aed"/>
+          <stop offset="0%" stopColor="#2563EB" />
+          <stop offset="100%" stopColor="#7C3AED" />
         </linearGradient>
         <linearGradient id={`lg2-${idSuffix}`} x1="13" y1="13" x2="19" y2="19" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#60a5fa"/>
-          <stop offset="100%" stopColor="#a78bfa"/>
+          <stop offset="0%" stopColor="#93C5FD" />
+          <stop offset="100%" stopColor="#C4B5FD" />
         </linearGradient>
       </defs>
     </svg>
+  )
+}
+
+/**
+ * LogoWordmark：图标 + "Token" + "Star"（Star 用蓝色高亮）
+ * 单行布局，无副标题，品牌感更强
+ */
+export function LogoWordmark({ isDark }: { isDark: boolean }) {
+  return (
+    <Link href="/" className="flex items-center gap-2.5 group shrink-0" aria-label="TokenStar 首页">
+      <LogoIcon size={32} idSuffix="nav" />
+      <span
+        className="font-bold tracking-tight leading-none select-none"
+        style={{ fontSize: '18px', letterSpacing: '-0.02em' }}
+      >
+        <span style={{ color: isDark ? '#F8FAFC' : '#0F172A' }}>Token</span>
+        <span style={{ color: '#3B82F6' }}>Star</span>
+      </span>
+    </Link>
   )
 }
 
@@ -266,8 +311,9 @@ export function Navbar() {
 
   useEffect(() => {
     if (searchQuery.length >= 2) {
-      setSearchResults(clientSearch(searchQuery))
-      setIsSearchOpen(true)
+      const results = clientSearch(searchQuery)
+      setSearchResults(results)
+      setIsSearchOpen(results.length > 0)
     } else {
       setSearchResults([])
       setIsSearchOpen(false)
@@ -299,14 +345,10 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link href="/" className="flex items-center gap-2 group shrink-0" aria-label="TokenStar 首页">
-              <LogoIcon size={32} idSuffix="nav" />
-              <div className="leading-none">
-                <span className={`font-bold text-base block transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>TokenStar</span>
-                <span className="text-xs text-blue-500 block -mt-0.5">AI星球</span>
-              </div>
-            </Link>
+            {/* Logo：图标 + TokenStar 单行，Star 蓝色高亮 */}
+            <LogoWordmark isDark={isDark} />
 
+            {/* 桌面导航 */}
             <div className="hidden lg:flex items-center gap-0.5">
               {navItems.map((item) => (
                 <div
@@ -349,6 +391,7 @@ export function Navbar() {
               ))}
             </div>
 
+            {/* 桌面搜索 + 主题切换 */}
             <div className="hidden md:flex items-center gap-2" ref={searchRef}>
               <div className="relative">
                 <form onSubmit={handleSearchSubmit}>
@@ -397,6 +440,7 @@ export function Navbar() {
               <ThemeToggleButton />
             </div>
 
+            {/* 移动端操作区 */}
             <div className="flex md:hidden items-center gap-1.5">
               <button
                 aria-label="搜索"
@@ -417,6 +461,7 @@ export function Navbar() {
           </div>
         </div>
 
+        {/* 移动端菜单 */}
         {isMenuOpen && (
           <div
             className={`lg:hidden border-t overflow-y-auto ${isDark ? 'bg-[#0a0a0f]/97 backdrop-blur-xl border-white/10' : 'bg-white/97 backdrop-blur-xl border-gray-200'}`}

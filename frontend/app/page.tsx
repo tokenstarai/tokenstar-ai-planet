@@ -59,7 +59,7 @@ export default function HomePage() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-blue-500/30 text-sm text-blue-400 mb-6 sm:mb-8">
             <Zap className="w-3.5 h-3.5 shrink-0" />
-            <span className="text-xs sm:text-sm">OpenClaw 中国生态门户 · 正式上线</span>
+            <span className="text-xs sm:text-sm">面向中国用户的 OpenClaw 生态资源导航站</span>
           </div>
 
           {/* Title */}
@@ -70,7 +70,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-base sm:text-xl dark:text-gray-300 text-gray-600 mb-3 sm:mb-4 max-w-2xl mx-auto leading-relaxed">
-            OpenClaw 中国生态门户，聚焦 AI Agent 新闻、教程、Skills、案例、硬件部署与培训活动
+            面向中国用户的 OpenClaw 生态资源导航站，聚焦 AI Agent 新闻、教程、Skills、案例、硬件部署与培训活动
           </p>
 
           <p className="text-sm sm:text-base dark:text-gray-400 text-gray-500 mb-8 sm:mb-10 max-w-xl mx-auto">

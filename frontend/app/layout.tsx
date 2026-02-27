@@ -6,10 +6,10 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 
 export const metadata: Metadata = {
   title: {
-    default: 'TokenStar · AI星球 | OpenClaw 中国生态门户',
-    template: '%s | TokenStar · AI星球',
+    default: 'TokenStar | 面向中国用户的 OpenClaw 生态资源导航站',
+    template: '%s | TokenStar',
   },
-  description: 'TokenStar AI星球是 OpenClaw 中国生态门户网站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。',
+  description: 'TokenStar 是面向中国用户的 OpenClaw 生态资源导航站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。',
   keywords: ['OpenClaw', 'AI Agent', 'TokenStar', 'AI星球', 'Skills', 'AI部署', '大模型'],
   authors: [{ name: 'TokenStar Team' }],
   creator: 'TokenStar',
@@ -29,14 +29,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'zh_CN',
     url: '/',
-    siteName: 'TokenStar · AI星球',
-    title: 'TokenStar · AI星球 | OpenClaw 中国生态门户',
-    description: 'OpenClaw 中国生态门户网站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。',
+    siteName: 'TokenStar',
+    title: 'TokenStar | 面向中国用户的 OpenClaw 生态资源导航站',
+    description: '面向中国用户的 OpenClaw 生态资源导航站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TokenStar · AI星球',
-    description: 'OpenClaw 中国生态门户网站',
+    title: 'TokenStar',
+    description: '面向中国用户的 OpenClaw 生态资源导航站',
   },
   robots: {
     index: true,

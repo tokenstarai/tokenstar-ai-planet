@@ -56,7 +56,7 @@ function SearchResults() {
   }, [query])
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="flex items-center gap-3 mb-8">
           <Search className="w-6 h-6 text-gray-400" />
@@ -122,7 +122,7 @@ function SearchResults() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen pt-20 flex items-center justify-center text-gray-400">加载中...</div>}>
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-gray-400">加载中...</div>}>
       <SearchResults />
     </Suspense>
   )

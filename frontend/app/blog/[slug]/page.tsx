@@ -24,7 +24,7 @@ export default function BlogDetailPage({ params }: Props) {
   const related = mockBlogs.filter(b => b.slug !== params.slug).slice(0, 3)
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="flex items-center gap-2 text-sm text-gray-500 mb-8">
           <Link href="/" className="hover:text-gray-300">首页</Link>

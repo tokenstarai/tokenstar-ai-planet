@@ -14,7 +14,7 @@ export default function CasesPage() {
   const rest = mockCases.filter(c => !c.featured)
 
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       <div className="page-header bg-gradient-to-b from-orange-900/20 to-transparent">
         <div className="max-w-7xl mx-auto px-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass border border-orange-500/30 text-xs text-orange-400 mb-4">

@@ -59,7 +59,7 @@ const advantages = [
 
 export default function OpenClawPage() {
   return (
-    <div className="min-h-screen pt-20">
+    <div className="min-h-screen">
       {/* Hero */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 hero-gradient opacity-50" />

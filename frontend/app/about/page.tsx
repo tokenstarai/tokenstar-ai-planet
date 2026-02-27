@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Mail, Phone, MapPin, Globe, Github, Send, CheckCircle, Users, Target, Heart } from 'lucide-react'
+import { useTheme } from '@/components/ThemeProvider'
 
 export default function AboutPage() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ export default function AboutPage() {
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [activeTab, setActiveTab] = useState<'about' | 'partner' | 'contact'>('about')
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -21,19 +24,20 @@ export default function AboutPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20">
-      <div className="page-header bg-gradient-to-b from-indigo-900/20 to-transparent">
+    <div className="min-h-screen">
+      {/* 页面 Header：深色保留渐变光晕，浅色透明无断层 */}
+      <div className={`page-header ${isDark ? 'bg-gradient-to-b from-indigo-900/20 to-transparent' : ''}`}>
         <div className="max-w-7xl mx-auto px-4">
-          <h1 className="text-4xl font-bold text-white mb-3">关于 TokenStar</h1>
-          <p className="text-gray-400 max-w-xl">
-            OpenClaw 中国生态门户，连接开发者、企业与 AI 未来。
+          <h1 className={`text-4xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>关于 TokenStar</h1>
+          <p className={`max-w-xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+            面向中国用户的 OpenClaw 生态资源导航站，连接开发者、企业与 AI 未来。
           </p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 pb-20">
         {/* Tabs */}
-        <div className="flex items-center gap-1 mb-10 glass rounded-xl p-1 w-fit">
+        <div className={`flex items-center gap-1 mb-10 rounded-xl p-1 w-fit ${isDark ? 'glass' : 'bg-gray-100 border border-gray-200'}`}>
           {[
             { key: 'about', label: '关于我们' },
             { key: 'partner', label: '合作伙伴' },
@@ -45,7 +49,9 @@ export default function AboutPage() {
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-all ${
                 activeTab === tab.key
                   ? 'bg-blue-600 text-white'
-                  : 'text-gray-400 hover:text-white'
+                  : isDark
+                    ? 'text-gray-400 hover:text-white'
+                    : 'text-gray-500 hover:text-gray-900'
               }`}
             >
               {tab.label}
@@ -57,10 +63,10 @@ export default function AboutPage() {
         {activeTab === 'about' && (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">我们是谁</h2>
-              <div className="space-y-4 text-gray-300 leading-relaxed">
+              <h2 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>我们是谁</h2>
+              <div className={`space-y-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 <p>
-                  TokenStar AI星球 是 OpenClaw 在中国的官方生态门户网站，致力于为中国开发者和企业提供最完整、最权威的 OpenClaw 资源与服务。
+                  TokenStar 是面向中国用户的 OpenClaw 生态资源导航站，致力于为中国开发者和企业提供最完整的 OpenClaw 资源与服务。
                 </p>
                 <p>
                   我们聚焦于 OpenClaw 新闻资讯、技术教程、Skills 生态、企业案例、硬件部署方案与培训活动，帮助更多人了解、学习和使用 OpenClaw，推动 AI Agent 技术在中国的普及与落地。
@@ -76,17 +82,24 @@ export default function AboutPage() {
                   { icon: Target, value: '200+', label: '企业客户' },
                   { icon: Heart, value: '500+', label: 'Skills 生态' },
                 ].map(stat => (
-                  <div key={stat.label} className="glass rounded-xl p-4 text-center border border-white/5">
-                    <stat.icon className="w-5 h-5 text-blue-400 mx-auto mb-2" />
-                    <div className="text-xl font-bold text-white">{stat.value}</div>
-                    <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
+                  <div
+                    key={stat.label}
+                    className={`rounded-xl p-4 text-center ${
+                      isDark
+                        ? 'glass border border-white/5'
+                        : 'bg-white border border-gray-200 shadow-sm'
+                    }`}
+                  >
+                    <stat.icon className="w-5 h-5 text-blue-500 mx-auto mb-2" />
+                    <div className={`text-xl font-bold ${isDark ? 'text-white' : 'text-gray-900'}`}>{stat.value}</div>
+                    <div className={`text-xs mt-1 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>{stat.label}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">我们的使命</h2>
+              <h2 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>我们的使命</h2>
               <div className="space-y-4">
                 {[
                   {
@@ -102,9 +115,16 @@ export default function AboutPage() {
                     description: '提供完整的企业级解决方案，从技术选型到落地实施，全程陪伴企业 AI 转型之路。',
                   },
                 ].map(item => (
-                  <div key={item.title} className="glass rounded-xl p-5 border border-white/5">
-                    <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
-                    <p className="text-sm text-gray-400 leading-relaxed">{item.description}</p>
+                  <div
+                    key={item.title}
+                    className={`rounded-xl p-5 ${
+                      isDark
+                        ? 'glass border border-white/5'
+                        : 'bg-white border border-gray-200 shadow-sm'
+                    }`}
+                  >
+                    <h3 className={`text-base font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{item.title}</h3>
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{item.description}</p>
                   </div>
                 ))}
               </div>
@@ -116,8 +136,8 @@ export default function AboutPage() {
         {activeTab === 'partner' && (
           <div>
             <div className="max-w-3xl mb-12">
-              <h2 className="text-2xl font-bold text-white mb-4">合作伙伴计划</h2>
-              <p className="text-gray-400 leading-relaxed">
+              <h2 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>合作伙伴计划</h2>
+              <p className={`leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
                 我们诚邀各类合作伙伴加入 TokenStar 生态，共同推动 OpenClaw 在中国的发展。
                 无论您是技术服务商、硬件厂商、培训机构还是行业解决方案提供商，都欢迎与我们合作。
               </p>
@@ -141,13 +161,20 @@ export default function AboutPage() {
                   benefits: ['内容联合出品', '流量导入支持', '品牌曝光机会', '社区推广资源'],
                 },
               ].map(partner => (
-                <div key={partner.title} className="glass rounded-xl p-6 border border-white/5 hover:border-blue-500/30 transition-all">
-                  <h3 className="text-base font-semibold text-white mb-3">{partner.title}</h3>
-                  <p className="text-sm text-gray-400 mb-4 leading-relaxed">{partner.description}</p>
+                <div
+                  key={partner.title}
+                  className={`rounded-xl p-6 transition-all ${
+                    isDark
+                      ? 'glass border border-white/5 hover:border-blue-500/30'
+                      : 'bg-white border border-gray-200 shadow-sm hover:border-blue-300 hover:shadow-md'
+                  }`}
+                >
+                  <h3 className={`text-base font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>{partner.title}</h3>
+                  <p className={`text-sm mb-4 leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{partner.description}</p>
                   <ul className="space-y-2">
                     {partner.benefits.map(b => (
-                      <li key={b} className="flex items-center gap-2 text-xs text-gray-300">
-                        <CheckCircle className="w-3.5 h-3.5 text-green-400 flex-shrink-0" />
+                      <li key={b} className={`flex items-center gap-2 text-xs ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
+                        <CheckCircle className="w-3.5 h-3.5 text-green-500 flex-shrink-0" />
                         {b}
                       </li>
                     ))}
@@ -156,9 +183,9 @@ export default function AboutPage() {
               ))}
             </div>
 
-            <div className="glass rounded-xl p-6 border border-blue-500/20 text-center">
-              <h3 className="text-lg font-semibold text-white mb-3">有意向合作？</h3>
-              <p className="text-gray-400 text-sm mb-4">请通过以下方式联系我们的商务团队，我们将在 1-2 个工作日内回复。</p>
+            <div className={`rounded-xl p-6 text-center ${isDark ? 'glass border border-blue-500/20' : 'bg-blue-50 border border-blue-200'}`}>
+              <h3 className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>有意向合作？</h3>
+              <p className={`text-sm mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>请通过以下方式联系我们的商务团队，我们将在 1-2 个工作日内回复。</p>
               <button
                 onClick={() => setActiveTab('contact')}
                 className="btn-primary inline-flex items-center gap-2"
@@ -175,7 +202,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Info */}
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">联系方式</h2>
+              <h2 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>联系方式</h2>
               <div className="space-y-4 mb-8">
                 {[
                   { icon: Mail, label: '商务合作', value: 'business@tokenstar.ai' },
@@ -184,29 +211,44 @@ export default function AboutPage() {
                   { icon: MapPin, label: '公司地址', value: '北京市朝阳区望京 SOHO T1 2801' },
                   { icon: Globe, label: '官方网站', value: 'www.tokenstar.ai' },
                 ].map(item => (
-                  <div key={item.label} className="flex items-center gap-4 glass rounded-xl p-4 border border-white/5">
-                    <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-5 h-5 text-blue-400" />
+                  <div
+                    key={item.label}
+                    className={`flex items-center gap-4 rounded-xl p-4 ${
+                      isDark
+                        ? 'glass border border-white/5'
+                        : 'bg-white border border-gray-200 shadow-sm'
+                    }`}
+                  >
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
+                      isDark ? 'bg-blue-500/20' : 'bg-blue-50'
+                    }`}>
+                      <item.icon className="w-5 h-5 text-blue-500" />
                     </div>
                     <div>
-                      <div className="text-xs text-gray-500">{item.label}</div>
-                      <div className="text-sm text-gray-200">{item.value}</div>
+                      {/* 标签：中灰，辅助信息 */}
+                      <div className={`text-xs contact-label ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>
+                        {item.label}
+                      </div>
+                      {/* 值字段：高对比度，浅色主题下近黑色 */}
+                      <div className={`text-sm font-medium contact-value ${isDark ? 'text-gray-100' : 'text-gray-900'}`}>
+                        {item.value}
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="glass rounded-xl p-5 border border-white/5">
-                <h3 className="text-sm font-semibold text-white mb-3">关注我们</h3>
-                <div className="flex items-center gap-3">
+              <div className={`rounded-xl p-5 ${isDark ? 'glass border border-white/5' : 'bg-white border border-gray-200 shadow-sm'}`}>
+                <h3 className={`text-sm font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>关注我们</h3>
+                <div className="flex items-center gap-4">
                   {[
                     { label: '微信公众号', value: 'TokenStarAI' },
                     { label: '微博', value: '@TokenStar_AI' },
                     { label: '知乎', value: 'TokenStar' },
                   ].map(social => (
                     <div key={social.label} className="text-center">
-                      <div className="text-xs text-gray-500">{social.label}</div>
-                      <div className="text-xs text-blue-400">{social.value}</div>
+                      <div className={`text-xs ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>{social.label}</div>
+                      <div className="text-xs text-blue-500 font-medium">{social.value}</div>
                     </div>
                   ))}
                 </div>
@@ -215,14 +257,14 @@ export default function AboutPage() {
 
             {/* Contact Form */}
             <div>
-              <h2 className="text-2xl font-bold text-white mb-6">发送消息</h2>
+              <h2 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>发送消息</h2>
               {submitted ? (
-                <div className="glass rounded-2xl p-10 border border-green-500/20 text-center">
-                  <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="w-8 h-8 text-green-400" />
+                <div className={`rounded-2xl p-10 text-center ${isDark ? 'glass border border-green-500/20' : 'bg-green-50 border border-green-200'}`}>
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 ${isDark ? 'bg-green-500/20' : 'bg-green-100'}`}>
+                    <CheckCircle className="w-8 h-8 text-green-500" />
                   </div>
-                  <h3 className="text-white font-semibold mb-2">消息已发送！</h3>
-                  <p className="text-sm text-gray-400">感谢您的联系，我们将在 1-2 个工作日内回复您。</p>
+                  <h3 className={`font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>消息已发送！</h3>
+                  <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>感谢您的联系，我们将在 1-2 个工作日内回复您。</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -232,8 +274,8 @@ export default function AboutPage() {
                       { name: 'email', label: '邮箱', type: 'email', required: true, placeholder: '您的邮箱' },
                     ].map(field => (
                       <div key={field.name}>
-                        <label className="block text-xs text-gray-400 mb-1">
-                          {field.label}{field.required && <span className="text-red-400 ml-0.5">*</span>}
+                        <label className={`block text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                          {field.label}{field.required && <span className="text-red-500 ml-0.5">*</span>}
                         </label>
                         <input
                           type={field.type}
@@ -241,7 +283,11 @@ export default function AboutPage() {
                           placeholder={field.placeholder}
                           value={(formData as any)[field.name]}
                           onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
-                          className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                          className={`w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-colors ${
+                            isDark
+                              ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-blue-500/50'
+                              : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:border-blue-400'
+                          }`}
                         />
                       </div>
                     ))}
@@ -252,8 +298,8 @@ export default function AboutPage() {
                     { name: 'subject', label: '主题', type: 'text', required: true, placeholder: '请简述您的需求' },
                   ].map(field => (
                     <div key={field.name}>
-                      <label className="block text-xs text-gray-400 mb-1">
-                        {field.label}{field.required && <span className="text-red-400 ml-0.5">*</span>}
+                      <label className={`block text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {field.label}{field.required && <span className="text-red-500 ml-0.5">*</span>}
                       </label>
                       <input
                         type={field.type}
@@ -261,14 +307,18 @@ export default function AboutPage() {
                         placeholder={field.placeholder}
                         value={(formData as any)[field.name]}
                         onChange={e => setFormData(prev => ({ ...prev, [field.name]: e.target.value }))}
-                        className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors"
+                        className={`w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-colors ${
+                          isDark
+                            ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-blue-500/50'
+                            : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:border-blue-400'
+                        }`}
                       />
                     </div>
                   ))}
 
                   <div>
-                    <label className="block text-xs text-gray-400 mb-1">
-                      消息内容<span className="text-red-400 ml-0.5">*</span>
+                    <label className={`block text-xs mb-1 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+                      消息内容<span className="text-red-500 ml-0.5">*</span>
                     </label>
                     <textarea
                       required
@@ -276,7 +326,11 @@ export default function AboutPage() {
                       value={formData.message}
                       onChange={e => setFormData(prev => ({ ...prev, message: e.target.value }))}
                       rows={5}
-                      className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-sm text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 transition-colors resize-none"
+                      className={`w-full px-3 py-2 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/40 transition-colors resize-none ${
+                        isDark
+                          ? 'bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-blue-500/50'
+                          : 'bg-white border border-gray-300 text-gray-900 placeholder-gray-400 focus:border-blue-400'
+                      }`}
                     />
                   </div>
 
