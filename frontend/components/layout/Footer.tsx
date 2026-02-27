@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Zap, Github, Twitter, Mail, MessageCircle } from 'lucide-react'
+import { Github, Twitter, Mail, MessageCircle } from 'lucide-react'
 
 const footerLinks = {
   '产品': [
@@ -22,67 +22,76 @@ const footerLinks = {
   ],
 }
 
+function LogoIcon() {
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect width="32" height="32" rx="8" fill="url(#footerGrad1)"/>
+      <path d="M16 5 L17.8 12.2 L25 10.5 L20.2 16 L25 21.5 L17.8 19.8 L16 27 L14.2 19.8 L7 21.5 L11.8 16 L7 10.5 L14.2 12.2 Z" fill="white" opacity="0.95"/>
+      <circle cx="16" cy="16" r="3" fill="url(#footerGrad2)"/>
+      <defs>
+        <linearGradient id="footerGrad1" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#2563eb"/>
+          <stop offset="100%" stopColor="#7c3aed"/>
+        </linearGradient>
+        <linearGradient id="footerGrad2" x1="13" y1="13" x2="19" y2="19" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stopColor="#60a5fa"/>
+          <stop offset="100%" stopColor="#a78bfa"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  )
+}
+
 export function Footer() {
   return (
-    <footer className="border-t border-white/10 bg-dark-900/80 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+    <footer className="dark:border-white/10 border-gray-200 border-t dark:bg-[#0a0a0f]/80 bg-white/80 backdrop-blur-sm"
+      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <Zap className="w-4 h-4 text-white" />
-              </div>
+          <div className="col-span-2 lg:col-span-2">
+            <Link href="/" className="flex items-center gap-2 mb-4" aria-label="TokenStar 首页">
+              <LogoIcon />
               <div>
-                <span className="font-bold text-white text-sm leading-tight block">TokenStar</span>
-                <span className="text-xs text-blue-400 leading-tight block">AI星球</span>
+                <span className="font-bold dark:text-white text-gray-900 text-sm leading-tight block">TokenStar</span>
+                <span className="text-xs text-blue-500 leading-tight block">AI星球</span>
               </div>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-xs">
+            <p className="text-sm dark:text-gray-400 text-gray-500 leading-relaxed mb-5 max-w-xs">
               OpenClaw 中国生态门户网站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。
             </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="https://github.com/openclaw"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/20 transition-all"
-              >
-                <Github className="w-4 h-4" />
-              </a>
-              <a
-                href="https://twitter.com/tokenstar_ai"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/20 transition-all"
-              >
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a
-                href="mailto:contact@tokenstar.ai"
-                className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/20 transition-all"
-              >
-                <Mail className="w-4 h-4" />
-              </a>
-              <a
-                href="#wechat"
-                className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/20 transition-all"
-              >
-                <MessageCircle className="w-4 h-4" />
-              </a>
+            <div className="flex items-center gap-2">
+              {[
+                { href: 'https://github.com/openclaw', icon: Github, label: 'GitHub' },
+                { href: 'https://twitter.com/tokenstar_ai', icon: Twitter, label: 'Twitter' },
+                { href: 'mailto:contact@tokenstar.ai', icon: Mail, label: 'Email' },
+                { href: '#wechat', icon: MessageCircle, label: 'WeChat' },
+              ].map(({ href, icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith('http') ? '_blank' : undefined}
+                  rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  aria-label={label}
+                  className="w-8 h-8 rounded-lg dark:bg-white/10 bg-gray-100 flex items-center justify-center dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 dark:hover:bg-white/20 hover:bg-gray-200 transition-all"
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
             </div>
           </div>
 
           {/* Links */}
           {Object.entries(footerLinks).map(([title, links]) => (
             <div key={title}>
-              <h3 className="text-sm font-semibold text-white mb-4">{title}</h3>
+              <h3 className="text-sm font-semibold dark:text-white text-gray-900 mb-3 sm:mb-4">{title}</h3>
               <ul className="space-y-2">
                 {links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-sm text-gray-400 hover:text-white transition-colors"
+                      className="text-sm dark:text-gray-400 text-gray-500 dark:hover:text-white hover:text-gray-900 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -94,20 +103,24 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="border-t border-white/10 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-500">
+        <div className="dark:border-white/10 border-gray-200 border-t mt-8 sm:mt-10 pt-5 sm:pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
+          <p className="text-xs dark:text-gray-500 text-gray-400">
             © 2026 TokenStar · AI星球. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
-            <Link href="/privacy" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
-              隐私政策
-            </Link>
-            <Link href="/terms" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
-              服务条款
-            </Link>
-            <Link href="/sitemap.xml" className="text-xs text-gray-500 hover:text-gray-300 transition-colors">
-              站点地图
-            </Link>
+          <div className="flex items-center gap-3 sm:gap-4">
+            {[
+              { href: '/privacy', label: '隐私政策' },
+              { href: '/terms', label: '服务条款' },
+              { href: '/sitemap.xml', label: '站点地图' },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-xs dark:text-gray-500 text-gray-400 dark:hover:text-gray-300 hover:text-gray-600 transition-colors"
+              >
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

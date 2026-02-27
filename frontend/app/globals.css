@@ -4,12 +4,87 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
+/* ============================================================
+   CSS 变量：主题系统
+   ============================================================ */
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 10, 10, 15;
-  --background-end-rgb: 22, 33, 62;
+  /* Header 高度变量（用于修复叠压问题）
+     64px (h-16) + iOS safe-area-inset-top */
+  --header-height: calc(64px + env(safe-area-inset-top, 0px));
+
+  /* 过渡时间 */
+  --transition-theme: 300ms;
 }
 
+/* ============================================================
+   深色主题（默认）
+   ============================================================ */
+html.dark {
+  color-scheme: dark;
+
+  --color-bg: #0a0a0f;
+  --color-bg-secondary: #111118;
+  --color-bg-card: rgba(255, 255, 255, 0.04);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.07);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-hover: rgba(255, 255, 255, 0.15);
+
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+
+  --color-input-bg: rgba(255, 255, 255, 0.08);
+  --color-input-border: rgba(255, 255, 255, 0.15);
+  --color-input-text: #f8fafc;
+  --color-input-placeholder: #64748b;
+
+  --color-tag-bg: rgba(37, 99, 235, 0.2);
+  --color-tag-text: #93c5fd;
+  --color-tag-border: rgba(37, 99, 235, 0.3);
+
+  --color-link: #60a5fa;
+  --color-link-hover: #93c5fd;
+
+  --scrollbar-track: #111118;
+  --scrollbar-thumb: #2563eb;
+}
+
+/* ============================================================
+   浅色主题
+   ============================================================ */
+html.light {
+  color-scheme: light;
+
+  --color-bg: #f4f6f9;
+  --color-bg-secondary: #eef0f4;
+  --color-bg-card: rgba(255, 255, 255, 0.9);
+  --color-bg-card-hover: rgba(255, 255, 255, 1);
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.15);
+
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94a3b8;
+
+  --color-input-bg: rgba(255, 255, 255, 0.9);
+  --color-input-border: #d1d5db;
+  --color-input-text: #0f172a;
+  --color-input-placeholder: #9ca3af;
+
+  --color-tag-bg: rgba(37, 99, 235, 0.08);
+  --color-tag-text: #1d4ed8;
+  --color-tag-border: rgba(37, 99, 235, 0.2);
+
+  --color-link: #2563eb;
+  --color-link-hover: #1d4ed8;
+
+  --scrollbar-track: #e2e8f0;
+  --scrollbar-thumb: #3b82f6;
+}
+
+/* ============================================================
+   基础重置
+   ============================================================ */
 * {
   box-sizing: border-box;
   padding: 0;
@@ -21,25 +96,57 @@ html {
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(135deg, #0a0a0f 0%, #111118 50%, #16213e 100%);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
   min-height: 100vh;
   font-family: 'Inter', system-ui, sans-serif;
+  transition: background-color var(--transition-theme), color var(--transition-theme);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom scrollbar */
+/* 深色主题 body 背景渐变 */
+html.dark body {
+  background: linear-gradient(135deg, #0a0a0f 0%, #111118 50%, #16213e 100%);
+}
+
+/* 浅色主题 body 背景 */
+html.light body {
+  background: linear-gradient(135deg, #f4f6f9 0%, #eef0f4 50%, #e8ecf4 100%);
+}
+
+/* ============================================================
+   滚动条
+   ============================================================ */
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #111118;
+  background: var(--scrollbar-track);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2563eb;
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }
 
-/* Prose styles for rich content */
+/* ============================================================
+   主题过渡（所有元素）
+   ============================================================ */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: var(--transition-theme);
+  transition-timing-function: ease;
+}
+
+/* 排除不需要过渡的动画元素 */
+.no-transition, .no-transition * {
+  transition: none !important;
+}
+
+/* ============================================================
+   Prose 内容样式（深色）
+   ============================================================ */
 .prose-dark {
   color: #e2e8f0;
 }
@@ -52,21 +159,10 @@ body {
 .prose-dark h1 { font-size: 2rem; }
 .prose-dark h2 { font-size: 1.5rem; }
 .prose-dark h3 { font-size: 1.25rem; }
-.prose-dark p {
-  margin-bottom: 1rem;
-  line-height: 1.8;
-}
-.prose-dark a {
-  color: #60a5fa;
-  text-decoration: underline;
-}
-.prose-dark ul, .prose-dark ol {
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
-}
-.prose-dark li {
-  margin-bottom: 0.25rem;
-}
+.prose-dark p { margin-bottom: 1rem; line-height: 1.8; }
+.prose-dark a { color: #60a5fa; text-decoration: underline; }
+.prose-dark ul, .prose-dark ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+.prose-dark li { margin-bottom: 0.25rem; }
 .prose-dark code {
   background: #1e293b;
   padding: 0.2rem 0.4rem;
@@ -82,11 +178,7 @@ body {
   margin-bottom: 1rem;
   border: 1px solid #1e293b;
 }
-.prose-dark pre code {
-  background: none;
-  padding: 0;
-  color: #e2e8f0;
-}
+.prose-dark pre code { background: none; padding: 0; color: #e2e8f0; }
 .prose-dark blockquote {
   border-left: 4px solid #2563eb;
   padding-left: 1rem;
@@ -94,25 +186,59 @@ body {
   font-style: italic;
   margin-bottom: 1rem;
 }
-.prose-dark img {
-  border-radius: 8px;
-  max-width: 100%;
+.prose-dark img { border-radius: 8px; max-width: 100%; }
+.prose-dark table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+.prose-dark th, .prose-dark td { border: 1px solid #1e293b; padding: 0.5rem 0.75rem; }
+.prose-dark th { background: #1e293b; font-weight: 600; }
+
+/* Prose 内容样式（浅色）*/
+.prose-light {
+  color: #334155;
 }
-.prose-dark table {
-  width: 100%;
-  border-collapse: collapse;
+.prose-light h1, .prose-light h2, .prose-light h3, .prose-light h4 {
+  color: #0f172a;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+}
+.prose-light h1 { font-size: 2rem; }
+.prose-light h2 { font-size: 1.5rem; }
+.prose-light h3 { font-size: 1.25rem; }
+.prose-light p { margin-bottom: 1rem; line-height: 1.8; }
+.prose-light a { color: #2563eb; text-decoration: underline; }
+.prose-light ul, .prose-light ol { margin-left: 1.5rem; margin-bottom: 1rem; }
+.prose-light li { margin-bottom: 0.25rem; }
+.prose-light code {
+  background: #f1f5f9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  color: #7c3aed;
+}
+.prose-light pre {
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+}
+.prose-light pre code { background: none; padding: 0; color: #334155; }
+.prose-light blockquote {
+  border-left: 4px solid #2563eb;
+  padding-left: 1rem;
+  color: #64748b;
+  font-style: italic;
   margin-bottom: 1rem;
 }
-.prose-dark th, .prose-dark td {
-  border: 1px solid #1e293b;
-  padding: 0.5rem 0.75rem;
-}
-.prose-dark th {
-  background: #1e293b;
-  font-weight: 600;
-}
+.prose-light img { border-radius: 8px; max-width: 100%; }
+.prose-light table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+.prose-light th, .prose-light td { border: 1px solid #e2e8f0; padding: 0.5rem 0.75rem; }
+.prose-light th { background: #f1f5f9; font-weight: 600; }
 
-/* Glow effects */
+/* ============================================================
+   发光效果
+   ============================================================ */
 .glow-blue {
   box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
 }
@@ -120,16 +246,23 @@ body {
   box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
 }
 
-/* Card hover effect */
+/* ============================================================
+   卡片悬停效果
+   ============================================================ */
 .card-hover {
   transition: all 0.3s ease;
 }
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+html.light .card-hover:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Gradient text */
+/* ============================================================
+   渐变文字
+   ============================================================ */
 .gradient-text {
   background: linear-gradient(135deg, #60a5fa, #a78bfa);
   -webkit-background-clip: text;
@@ -137,27 +270,42 @@ body {
   background-clip: text;
 }
 
-/* Glass morphism */
+/* ============================================================
+   玻璃态（深色）
+   ============================================================ */
 .glass {
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Tag badge */
+html.light .glass {
+  background: rgba(255, 255, 255, 0.75);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================================
+   标签徽章
+   ============================================================ */
 .tag-badge {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.75rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 9999px;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  background: rgba(37, 99, 235, 0.2);
-  color: #93c5fd;
-  border: 1px solid rgba(37, 99, 235, 0.3);
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  border: 1px solid var(--color-tag-border);
+  white-space: nowrap;
 }
 
-/* Line clamp utilities */
+/* ============================================================
+   文字截断
+   ============================================================ */
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -171,21 +319,39 @@ body {
   overflow: hidden;
 }
 
-/* Hero gradient */
+/* ============================================================
+   Hero 渐变背景
+   ============================================================ */
 .hero-gradient {
   background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.15) 0%, rgba(10, 10, 15, 0) 60%),
               radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1) 0%, rgba(10, 10, 15, 0) 60%),
               #0a0a0f;
 }
 
-/* Grid background */
+html.light .hero-gradient {
+  background: radial-gradient(ellipse at top, rgba(59, 130, 246, 0.08) 0%, rgba(244, 246, 249, 0) 60%),
+              radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.06) 0%, rgba(244, 246, 249, 0) 60%),
+              #f4f6f9;
+}
+
+/* ============================================================
+   网格背景
+   ============================================================ */
 .grid-bg {
   background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                     linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* Buttons */
+html.light .grid-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ============================================================
+   按钮样式（双主题）
+   ============================================================ */
 .btn-primary {
   padding: 0.75rem 1.5rem;
   background: #2563eb;
@@ -196,16 +362,19 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 }
 .btn-primary:hover {
   background: #3b82f6;
   box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
 }
+
 .btn-secondary {
   padding: 0.75rem 1.5rem;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: white;
   font-weight: 500;
   border-radius: 0.75rem;
@@ -213,11 +382,23 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 }
 .btn-secondary:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.4);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
 }
+
+html.light .btn-secondary {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  color: #0f172a;
+}
+html.light .btn-secondary:hover {
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
 .btn-outline {
   padding: 0.5rem 1rem;
   border: 1px solid rgba(59, 130, 246, 0.5);
@@ -225,17 +406,92 @@ body {
   border-radius: 0.5rem;
   transition: all 0.2s;
   font-size: 0.875rem;
+  cursor: pointer;
 }
 .btn-outline:hover {
   border-color: #3b82f6;
   color: #93c5fd;
 }
 
-/* Animate pulse slow */
+html.light .btn-outline {
+  border-color: rgba(37, 99, 235, 0.4);
+  color: #2563eb;
+}
+html.light .btn-outline:hover {
+  border-color: #2563eb;
+  color: #1d4ed8;
+}
+
+/* ============================================================
+   卡片样式（双主题）
+   ============================================================ */
+.card-dark {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+.card-dark:hover {
+  background: var(--color-bg-card-hover);
+  border-color: var(--color-border-hover);
+}
+
+/* ============================================================
+   动画
+   ============================================================ */
 @keyframes pulse-slow {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 0.8; }
 }
 .animate-pulse-slow {
   animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* ============================================================
+   移动端优化
+   ============================================================ */
+/* 触控区域最小 44x44 */
+button, a, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 防止移动端文字缩放 */
+@media screen and (max-width: 768px) {
+  input, textarea, select {
+    font-size: 16px; /* 防止 iOS Safari 自动缩放 */
+  }
+}
+
+/* 移动端 Hero 区域文字大小适配 */
+@media screen and (max-width: 640px) {
+  .hero-title-responsive {
+    font-size: clamp(2.5rem, 10vw, 4rem);
+  }
+}
+
+/* ============================================================
+   浅色主题下的 Hero 文字颜色覆盖
+   ============================================================ */
+html.light .hero-text-primary {
+  color: #0f172a;
+}
+html.light .hero-text-secondary {
+  color: #475569;
+}
+html.light .hero-text-muted {
+  color: #64748b;
+}
+
+/* ============================================================
+   浅色主题下的 Section 背景
+   ============================================================ */
+html.light .section-bg-alt {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+/* ============================================================
+   浅色主题下的统计数字颜色
+   ============================================================ */
+html.light .stat-number {
+  color: #1d4ed8;
 }
