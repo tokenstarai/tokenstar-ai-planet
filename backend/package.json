@@ -1,0 +1,34 @@
+{
+  "name": "tokenstar-backend",
+  "version": "1.0.0",
+  "description": "TokenStar AI星球 - Payload CMS Backend",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node --loader ts-node/esm src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "seed": "node --loader ts-node/esm src/seed.ts",
+    "payload": "payload"
+  },
+  "dependencies": {
+    "payload": "3.77.0",
+    "@payloadcms/db-postgres": "3.77.0",
+    "@payloadcms/richtext-lexical": "3.77.0",
+    "@payloadcms/next": "3.77.0",
+    "@payloadcms/ui": "3.77.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "next": "15.3.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "sharp": "^0.33.4",
+    "json2csv": "^6.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}

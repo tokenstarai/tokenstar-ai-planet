@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # PostgreSQL 数据库
+  postgres:
+    image: postgres:16-alpine
+    container_name: tokenstar_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tokenstar_db
+      POSTGRES_USER: strapi_user
+      POSTGRES_PASSWORD: strapi_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U strapi_user -d tokenstar_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Payload CMS 后端
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: tokenstar_backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://strapi_user:strapi_password@postgres:5432/tokenstar_db
+      PAYLOAD_SECRET: ${PAYLOAD_SECRET:-tokenstar_secret_change_me}
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    volumes:
+      - backend_media:/app/media
+
+  # Next.js 前端
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: tokenstar_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_PAYLOAD_URL: http://localhost:3000
+      NEXT_PUBLIC_SITE_URL: http://localhost:3001
+    ports:
+      - "3001:3001"
+
+volumes:
+  postgres_data:
+  backend_media:
