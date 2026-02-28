@@ -4,6 +4,7 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ContentCard } from '@/components/ui/ContentCard'
 import { mockNews, mockSkills, mockHardware, mockEvents, mockBlogs, mockCases } from '@/lib/mock-data'
 import { formatDate, getEventStatusLabel, getEventStatusColor } from '@/lib/api'
+import { InteractiveParticleBackground } from '@/components/backgrounds/InteractiveParticleBackground'
 
 const coreCapabilities = [
   {
@@ -47,15 +48,18 @@ export default function HomePage() {
           所以这里不需要额外的 padding-top，直接从内容区顶部开始
       */}
       <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center justify-center overflow-hidden">
-        {/* Background */}
+        {/* Background layers */}
         <div className="absolute inset-0 hero-gradient" />
-        <div className="absolute inset-0 grid-bg opacity-30" />
+        {/* Interactive particle canvas - z-index:1, below glow and content */}
+        <InteractiveParticleBackground />
 
-        {/* Glow effects */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        {/* Glow effects - z-index:2 */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-blue-500/15 rounded-full blur-3xl animate-pulse-slow" style={{ zIndex: 2 }} />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500/15 rounded-full blur-3xl animate-pulse-slow" style={{ zIndex: 2, animationDelay: '1s' }} />
+        {/* Overlay to ensure text readability */}
+        <div className="absolute inset-0 hero-overlay" style={{ zIndex: 3 }} />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center py-10 sm:py-14">
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 text-center py-10 sm:py-14" style={{ zIndex: 10 }}>
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-blue-500/30 text-sm text-blue-400 mb-6 sm:mb-8">
             <Zap className="w-3.5 h-3.5 shrink-0" />
@@ -122,7 +126,7 @@ export default function HomePage() {
       <section className="py-8 sm:py-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold dark:text-white text-gray-900 mb-3">OpenClaw 核心能力</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold dark:text-white text-gray-900 mb-3 section-fade-in">OpenClaw 核心能力</h2>
             <p className="dark:text-gray-400 text-gray-500 text-sm sm:text-base">企业级 AI Agent 平台，赋能各行各业智能化转型</p>
           </div>
 

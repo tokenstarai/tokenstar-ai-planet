@@ -12,7 +12,7 @@ export function SectionHeader({ title, subtitle, viewAllHref, viewAllLabel = 'æŸ
   return (
     <div className="flex items-end justify-between mb-6 sm:mb-8">
       <div>
-        <h2 className="text-xl sm:text-2xl font-bold dark:text-white text-gray-900">{title}</h2>
+        <h2 className="text-xl sm:text-2xl font-bold dark:text-white text-gray-900 section-fade-in">{title}</h2>
         {subtitle && <p className="dark:text-gray-400 text-gray-500 mt-1 text-xs sm:text-sm">{subtitle}</p>}
       </div>
       {viewAllHref && (

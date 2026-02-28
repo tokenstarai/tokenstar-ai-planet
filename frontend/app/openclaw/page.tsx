@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Zap, Brain, Shield, Globe, Layers, Code, ArrowRight, CheckCircle, Star } from 'lucide-react'
+import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 
 export const metadata: Metadata = {
   title: 'OpenClaw 介绍',
@@ -63,8 +64,11 @@ export default function OpenClawPage() {
       {/* Hero */}
       <section className="relative py-10 sm:py-12 px-4 overflow-hidden">
         <div className="absolute inset-0 hero-gradient opacity-50" />
-        <div className="absolute inset-0 grid-bg opacity-20" />
-        <div className="relative max-w-5xl mx-auto text-center">
+        {/* Subtle animated grid background */}
+        <SubtleGridBackground intensity="strong" />
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 hero-overlay" style={{ zIndex: 4 }} />
+        <div className="relative max-w-5xl mx-auto text-center" style={{ zIndex: 10 }}>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-blue-500/30 text-sm text-blue-400 mb-8">
             <Zap className="w-3.5 h-3.5" />
             新一代企业级 AI Agent 平台
