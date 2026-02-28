@@ -3,6 +3,8 @@ import './globals.css'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { PWAUpdateToast } from '@/components/pwa/PWAUpdateToast'
+import { DynamicThemeColor } from '@/components/pwa/DynamicThemeColor'
 
 export const metadata: Metadata = {
   title: {
@@ -15,6 +17,7 @@ export const metadata: Metadata = {
   creator: 'TokenStar',
   publisher: 'TokenStar',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  manifest: '/manifest.webmanifest',
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -56,8 +59,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: 'cover', // 支持 iOS 刘海屏 safe-area
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0f' },
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0B1220' },
+    { media: '(prefers-color-scheme: light)', color: '#F4F6FA' },
   ],
 }
 
@@ -71,7 +74,23 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* 防止主题闪烁的内联脚本 */}
+
+        {/* PWA Manifest */}
+        <link rel="manifest" href="/manifest.webmanifest" />
+
+        {/* iOS PWA 专项适配 */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="TokenStar" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+        {/* Android / Windows PWA */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="application-name" content="TokenStar" />
+        <meta name="msapplication-TileColor" content="#0B1220" />
+        <meta name="msapplication-TileImage" content="/icons/icon-192.png" />
+
+        {/* 防止主题闪烁的内联脚本（同步更新 theme-color meta） */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -87,6 +106,16 @@ export default function RootLayout({
                     theme = (hour >= 6 && hour < 18) ? 'light' : 'dark';
                   }
                   document.documentElement.classList.add(theme);
+                  // 同步更新 theme-color meta（PWA 状态栏颜色）
+                  try {
+                    var tcMeta = document.querySelector('meta[name="theme-color"]');
+                    if (!tcMeta) {
+                      tcMeta = document.createElement('meta');
+                      tcMeta.setAttribute('name', 'theme-color');
+                      document.head.appendChild(tcMeta);
+                    }
+                    tcMeta.setAttribute('content', theme === 'dark' ? '#0B1220' : '#F4F6FA');
+                  } catch(e2) {}
                 } catch(e) {
                   document.documentElement.classList.add('dark');
                 }
@@ -97,6 +126,10 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex flex-col transition-colors duration-300">
         <ThemeProvider>
+          {/* 动态 theme-color：跟随用户主题切换实时更新 meta */}
+          <DynamicThemeColor />
+          {/* PWA 更新提示 Toast */}
+          <PWAUpdateToast />
           <Navbar />
           {/*
             修复叠压：header 高度 = 64px (h-16) + safe-area-inset-top
