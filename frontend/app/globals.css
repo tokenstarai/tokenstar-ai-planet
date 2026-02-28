@@ -12,11 +12,11 @@
   --header-height: calc(64px + env(safe-area-inset-top, 0px));
   /* 过渡时间 */
   --transition-theme: 300ms;
-  /* 统一 section 间距 */
-  --section-py-mobile: 1.5rem;  /* 24px — 紧凑移动端 */
-  --section-py-desktop: 4rem;   /* 64px */
-  --card-gap-mobile: 0.75rem;   /* 12px */
-  --card-gap-desktop: 1.5rem;   /* 24px */
+  /* 统一 section 间距（收紧版：移动 20px / 桌面 40px） */
+  --section-py-mobile: 1.25rem;  /* 20px — 紧凑移动端 */
+  --section-py-desktop: 2.5rem;  /* 40px — 桌面端，大气不松散 */
+  --card-gap-mobile: 0.75rem;    /* 12px */
+  --card-gap-desktop: 1.25rem;   /* 20px */
 }
 
 /* ============================================================
@@ -198,11 +198,11 @@ html.light body {
    深色：保留彩色渐变光晕；浅色：无色块，纯背景色延续
    ============================================================ */
 .page-header {
-  padding: 2.5rem 1rem 2rem;
+  padding: 1.75rem 1rem 1.5rem;
 }
 @media (min-width: 768px) {
   .page-header {
-    padding: 3.5rem 1.5rem 2.5rem;
+    padding: 2.5rem 1.5rem 2rem;
   }
 }
 
@@ -766,4 +766,208 @@ html.light .mobile-search-overlay {
   background: rgba(247, 248, 250, 0.98);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
+}
+
+/* ============================================================
+   全站间距收紧：section 标题区域 + 卡片内部 padding
+   ============================================================ */
+/* 收紧 section 标题下方间距 */
+.section-header {
+  margin-bottom: 1.5rem; /* 24px，替代原来的 mb-8/mb-10/mb-12 */
+}
+@media (min-width: 768px) {
+  .section-header {
+    margin-bottom: 2rem; /* 32px */
+  }
+}
+
+/* 收紧卡片内部 padding */
+.card-compact {
+  padding: 1rem; /* 16px 移动端 */
+}
+@media (min-width: 768px) {
+  .card-compact {
+    padding: 1.25rem; /* 20px 桌面端 */
+  }
+}
+
+/* 全局：Tailwind 大间距类在全站的收紧映射（通过 CSS 覆盖） */
+/* 注意：只覆盖 section 级别的 py，不影响按钮/输入框等组件内部 */
+
+/* ============================================================
+   法律页面（/privacy、/terms）专用排版样式
+   ============================================================ */
+
+/* 外层容器 */
+.prose-legal {
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem; /* 15px */
+  line-height: 1.75;
+}
+
+/* 引言段落 */
+.prose-legal .lead {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid #3B82F6;
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: rgba(59, 130, 246, 0.06);
+}
+html.light .prose-legal .lead {
+  background: #EFF6FF;
+  color: #334155;
+}
+
+/* 每个 section 块 */
+.legal-section {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.legal-section:last-of-type {
+  border-bottom: none;
+}
+
+/* 二级标题 */
+.prose-legal h2 {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.875rem;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.prose-legal h2::before {
+  content: '';
+  display: inline-block;
+  width: 3px;
+  height: 1.125rem;
+  background: #3B82F6;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* 三级标题 */
+.prose-legal h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 段落 */
+.prose-legal p {
+  margin-bottom: 0.75rem;
+  color: var(--color-text-secondary);
+}
+
+/* 列表 */
+.prose-legal ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0.75rem;
+  space-y: 0.375rem;
+}
+.prose-legal ul li {
+  position: relative;
+  padding-left: 1.25rem;
+  margin-bottom: 0.375rem;
+  color: var(--color-text-secondary);
+}
+.prose-legal ul li::before {
+  content: '·';
+  position: absolute;
+  left: 0.25rem;
+  color: #3B82F6;
+  font-weight: bold;
+}
+
+/* 引用块 */
+.prose-legal blockquote {
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem;
+  border-left: 3px solid rgba(59, 130, 246, 0.4);
+  border-radius: 0 0.375rem 0.375rem 0;
+  background: rgba(59, 130, 246, 0.04);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+html.light .prose-legal blockquote {
+  background: #F8FAFF;
+  color: #475569;
+}
+
+/* 联系信息卡片 */
+.contact-card {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  margin-top: 0.75rem;
+}
+.contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.contact-row:last-child {
+  border-bottom: none;
+}
+.contact-row:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02);
+}
+html.light .contact-row:nth-child(even) {
+  background: #F8FAFC;
+}
+.contact-label-text {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  min-width: 7rem;
+  flex-shrink: 0;
+  padding-top: 0.0625rem;
+}
+.contact-value-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+html.light .contact-value-text {
+  color: #0F172A !important;
+}
+.contact-link {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.contact-link:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+/* 页脚导航 */
+.legal-footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+.legal-nav-link {
+  font-size: 0.875rem;
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.legal-nav-link:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
 }

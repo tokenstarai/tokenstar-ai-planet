@@ -36,7 +36,7 @@ export default function KnowledgePage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-20">
+      <div className="max-w-7xl mx-auto px-4 pb-12">
         {/* Category Filter */}
         <div className="flex items-center gap-2 mb-10 flex-wrap">
           {categories.map(cat => (

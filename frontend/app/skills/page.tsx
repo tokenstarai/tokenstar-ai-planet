@@ -41,7 +41,7 @@ export default function SkillsPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-20">
+      <div className="max-w-7xl mx-auto px-4 pb-12">
         {/* Featured Skills */}
         {featured.length > 0 && (
           <div className="mb-12">

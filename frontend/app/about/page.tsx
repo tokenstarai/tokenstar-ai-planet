@@ -35,7 +35,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-20">
+      <div className="max-w-7xl mx-auto px-4 pb-12">
         {/* Tabs */}
         <div className={`flex items-center gap-1 mb-10 rounded-xl p-1 w-fit ${isDark ? 'glass' : 'bg-gray-100 border border-gray-200'}`}>
           {[
@@ -207,8 +207,8 @@ export default function AboutPage() {
                 {[
                   { icon: Mail, label: '商务合作', value: 'business@tokenstar.ai' },
                   { icon: Mail, label: '技术支持', value: 'support@tokenstar.ai' },
-                  { icon: Phone, label: '联系电话', value: '400-888-STAR' },
-                  { icon: MapPin, label: '公司地址', value: '北京市朝阳区望京 SOHO T1 2801' },
+                  { icon: Phone, label: '联系电话', value: '400-692-1123' },
+                  { icon: MapPin, label: '公司地址', value: '北京市朝阳区新源南路6号京城大厦36楼' },
                   { icon: Globe, label: '官方网站', value: 'www.tokenstar.ai' },
                 ].map(item => (
                   <div

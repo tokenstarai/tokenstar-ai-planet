@@ -61,7 +61,7 @@ export default function OpenClawPage() {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="relative py-20 px-4 overflow-hidden">
+      <section className="relative py-10 sm:py-12 px-4 overflow-hidden">
         <div className="absolute inset-0 hero-gradient opacity-50" />
         <div className="absolute inset-0 grid-bg opacity-20" />
         <div className="relative max-w-5xl mx-auto text-center">
@@ -89,7 +89,7 @@ export default function OpenClawPage() {
       </section>
 
       {/* Features */}
-      <section className="py-20 px-4">
+      <section className="py-8 sm:py-10 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-3">核心功能</h2>
@@ -110,7 +110,7 @@ export default function OpenClawPage() {
       </section>
 
       {/* Architecture */}
-      <section className="py-20 px-4 bg-gradient-to-b from-transparent to-dark-800/30">
+      <section className="py-8 sm:py-10 px-4 bg-gradient-to-b from-transparent to-dark-800/30">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-white mb-3">技术架构</h2>
@@ -142,7 +142,7 @@ export default function OpenClawPage() {
       </section>
 
       {/* Advantages */}
-      <section className="py-20 px-4">
+      <section className="py-8 sm:py-10 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -184,7 +184,7 @@ export default function OpenClawPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-4">
+      <section className="py-8 sm:py-10 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">开始您的 AI 之旅</h2>
           <p className="text-gray-400 mb-8">

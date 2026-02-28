@@ -55,7 +55,7 @@ export default function HomePage() {
         <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse-slow" />
         <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center py-16 sm:py-20">
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center py-10 sm:py-14">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-blue-500/30 text-sm text-blue-400 mb-6 sm:mb-8">
             <Zap className="w-3.5 h-3.5 shrink-0" />
@@ -96,7 +96,7 @@ export default function HomePage() {
           </div>
 
           {/* Stats */}
-          <div className="flex items-center justify-center gap-6 sm:gap-8 mt-12 sm:mt-16 flex-wrap">
+          <div className="flex items-center justify-center gap-6 sm:gap-8 mt-8 sm:mt-10 flex-wrap">
             {[
               { value: '500+', label: 'Skills 技能包' },
               { value: '10,000+', label: '开发者社区' },
@@ -119,7 +119,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== Core Capabilities ===== */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-8 sm:py-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold dark:text-white text-gray-900 mb-3">OpenClaw 核心能力</h2>
@@ -144,7 +144,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== Featured News ===== */}
-      <section className="py-14 sm:py-16 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
+      <section className="py-7 sm:py-9 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             title="热门新闻"
@@ -164,7 +164,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== Featured Skills ===== */}
-      <section className="py-14 sm:py-16 px-4 sm:px-6">
+      <section className="py-7 sm:py-9 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             title="精选 Skills"
@@ -191,7 +191,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== Featured Cases ===== */}
-      <section className="py-14 sm:py-16 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
+      <section className="py-7 sm:py-9 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             title="精选案例"
@@ -212,7 +212,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== Hardware Section ===== */}
-      <section className="py-14 sm:py-16 px-4 sm:px-6">
+      <section className="py-7 sm:py-9 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             title="推荐硬件 & 云方案"
@@ -260,7 +260,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== Events Section ===== */}
-      <section className="py-14 sm:py-16 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
+      <section className="py-7 sm:py-9 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             title="最新培训活动"
@@ -300,7 +300,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== Blog Section ===== */}
-      <section className="py-14 sm:py-16 px-4 sm:px-6">
+      <section className="py-7 sm:py-9 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <SectionHeader
             title="最新 Blog"
@@ -321,7 +321,7 @@ export default function HomePage() {
       </section>
 
       {/* ===== CTA Banner ===== */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6">
+      <section className="py-8 sm:py-10 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <div className="glass rounded-2xl p-8 sm:p-10 text-center dark:border-blue-500/20 border-blue-200/50 border relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10" />

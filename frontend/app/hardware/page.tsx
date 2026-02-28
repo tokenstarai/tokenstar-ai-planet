@@ -27,7 +27,7 @@ export default function HardwarePage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-20">
+      <div className="max-w-7xl mx-auto px-4 pb-12">
         {featured.length > 0 && (
           <div className="mb-12">
             <h2 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
