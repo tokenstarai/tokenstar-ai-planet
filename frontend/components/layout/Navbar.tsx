@@ -261,13 +261,18 @@ function NavDropdown({
         aria-hidden={!isOpen}
         role="menu"
       >
+        {/* 面板：统一 min-w-[260px]，边框更细，阴影轻量，圆角 12px */}
         <div
-          className={`w-44 rounded-xl border shadow-xl overflow-hidden ${
+          className={`min-w-[260px] rounded-xl border overflow-hidden ${
             isDark
-              ? 'bg-[#111118]/97 backdrop-blur-xl border-white/10 shadow-black/40'
-              : 'bg-white border-gray-200 shadow-lg shadow-gray-200/60'
+              ? 'bg-[#13131a] backdrop-blur-xl border-neutral-700/60 shadow-xl shadow-black/50'
+              : 'bg-white border-neutral-200 shadow-lg shadow-neutral-200/70'
           }`}
         >
+          {/* 面板顶部细分隔线（视觉锚点） */}
+          <div className={`h-px mx-3 mt-2 mb-1 ${
+            isDark ? 'bg-neutral-700/50' : 'bg-neutral-100'
+          }`} />
           {item.children.map((child) => {
             const isChildActive = pathname === child.href
             return (
@@ -276,20 +281,23 @@ function NavDropdown({
                 href={child.href}
                 role="menuitem"
                 onClick={() => { setIsOpen(false); onClose() }}
-                className={`flex items-center px-4 py-2.5 text-sm transition-all min-h-[40px] ${
+                className={`flex items-center w-full px-4 py-2.5 text-sm transition-colors duration-[130ms] min-h-[44px] ${
                   isChildActive
                     ? isDark
-                      ? 'text-white bg-blue-600/30 border-l-2 border-blue-500'
-                      : 'text-blue-700 bg-blue-50 border-l-2 border-blue-500'
+                      ? 'text-white font-semibold bg-blue-600/25 border-l-2 border-blue-500 pl-[14px]'
+                      : 'text-blue-700 font-semibold bg-blue-50/80 border-l-2 border-blue-500 pl-[14px]'
                     : isDark
-                      ? 'text-gray-300 hover:text-white hover:bg-white/10'
-                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                      ? 'text-neutral-300 hover:text-white hover:bg-white/[0.08]'
+                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
                 }`}
               >
                 {child.label}
               </Link>
             )
           })}
+          <div className={`h-px mx-3 mt-1 mb-2 ${
+            isDark ? 'bg-neutral-700/50' : 'bg-neutral-100'
+          }`} />
         </div>
       </div>
     </div>
