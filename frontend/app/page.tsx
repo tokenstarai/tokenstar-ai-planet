@@ -18,9 +18,9 @@ const enterpriseScenarios = [
 ]
 
 const deploymentOptions = [
-  { icon: HardDrive, title: '私有硬件部署', description: '数据完全不出域，满足金融、政务等高安全要求，开箱即用。', badge: '推荐', badgeColor: 'bg-blue-500/20 text-blue-400 border-blue-500/30', href: '/deployment#hardware' },
-  { icon: Cloud, title: '云端部署', description: '零硬件投入，按需付费，5 分钟快速接入，适合初创与 PoC 验证。', badge: '快速', badgeColor: 'bg-green-500/20 text-green-400 border-green-500/30', href: '/deployment#cloud' },
-  { icon: Server, title: '混合部署', description: '核心数据本地，弹性算力上云，兼顾安全与成本的最优解。', badge: '灵活', badgeColor: 'bg-purple-500/20 text-purple-400 border-purple-500/30', href: '/deployment#hybrid' },
+  { icon: HardDrive, title: 'Box Pro 私有硬件', description: '专为企业设计的 OpenClaw 一体机，S/M/L 三款覆盖 10-500 人团队，数据完全不出域，开箱即用，含 1 年上门运维。', badge: '推荐', badgeColor: 'bg-blue-500/20 text-blue-400 border-blue-500/30', href: '/deployment#hardware' },
+  { icon: Cloud, title: 'Cloud 云端托管', description: '零硬件投入，按需付费，5 分钟快速接入。Starter 适合 PoC 验证，Pro 支持多部门协作与弹性扩容。', badge: '快速', badgeColor: 'bg-green-500/20 text-green-400 border-green-500/30', href: '/deployment#cloud' },
+  { icon: Server, title: 'Workstation 轻量终端', description: '基于 iPhone 15 Pro / Mac mini M4 的轻量化方案，适合个人高管与小团队，随时随地调用企业 Agent。', badge: '轻量', badgeColor: 'bg-purple-500/20 text-purple-400 border-purple-500/30', href: '/deployment#workstation' },
 ]
 
 const trainingOptions = [
@@ -119,7 +119,7 @@ export default function HomePage() {
       {/* 4. 部署方式 */}
       <section className={`py-12 sm:py-16 ${isDark ? 'bg-slate-900/50' : 'bg-slate-50'}`}>
         <div className="max-w-6xl mx-auto px-4">
-          <SectionHeader title="灵活部署，按需选择" subtitle="私有硬件、云端托管、混合架构，满足不同安全与成本需求" />
+          <SectionHeader title="三种部署路径，按需选择" subtitle="Box Pro 私有硬件 · Cloud 云端托管 · Workstation 轻量终端，覆盖 10 人到 500 人团队" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {deploymentOptions.map(o => (
               <Link key={o.title} href={o.href} className={`group rounded-2xl p-6 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10' : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-md'}`}>
