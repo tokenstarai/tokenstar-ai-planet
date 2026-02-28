@@ -8,26 +8,35 @@ import { mockNews, mockSkills, mockKnowledge, mockBlogs, mockCases, mockHardware
 
 const navItems = [
   { label: '首页', href: '/' },
-  { label: 'OpenClaw', href: '/openclaw' },
   {
-    label: '内容',
-    href: '#',
+    label: 'OpenClaw 生态',
+    href: '/ecosystem',
     children: [
-      { label: '新闻中心', href: '/news' },
+      { label: 'OpenClaw 介绍', href: '/openclaw' },
+      { label: '生态动态', href: '/ecosystem' },
+      { label: 'Skills 市场', href: '/skills' },
       { label: '知识库', href: '/knowledge' },
+    ],
+  },
+  {
+    label: '企业应用场景',
+    href: '/scenarios',
+    children: [
+      { label: '应用场景总览', href: '/scenarios' },
+      { label: '成功案例', href: '/cases' },
+    ],
+  },
+  { label: '硬件 & 云部署', href: '/deployment' },
+  { label: '企业培训', href: '/training' },
+  {
+    label: 'AI 管理指南',
+    href: '/guide',
+    children: [
+      { label: '管理指南', href: '/guide' },
+      { label: '新闻中心', href: '/news' },
       { label: 'Blog', href: '/blog' },
     ],
   },
-  {
-    label: '生态',
-    href: '#',
-    children: [
-      { label: 'Skills 市场', href: '/skills' },
-      { label: '案例中心', href: '/cases' },
-    ],
-  },
-  { label: '硬件 & 云', href: '/hardware' },
-  { label: '培训活动', href: '/events' },
   { label: '关于我们', href: '/about' },
 ]
 

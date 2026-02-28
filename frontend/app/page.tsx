@@ -1,353 +1,207 @@
+'use client'
 import Link from 'next/link'
-import { ArrowRight, Zap, Brain, Shield, Layers, Code, Globe, Star, Calendar, MapPin, ExternalLink, Package } from 'lucide-react'
+import { ArrowRight, Zap, Brain, Shield, Layers, Globe, Star, Building2, TrendingUp, Users, BarChart3, Target, Server, Cloud, HardDrive, GraduationCap, Headphones, ChevronRight } from 'lucide-react'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ContentCard } from '@/components/ui/ContentCard'
-import { mockNews, mockSkills, mockHardware, mockEvents, mockBlogs, mockCases } from '@/lib/mock-data'
-import { formatDate, getEventStatusLabel, getEventStatusColor } from '@/lib/api'
+import { mockNews, mockSkills } from '@/lib/mock-data'
+import { formatDate } from '@/lib/api'
 import { InteractiveParticleBackground } from '@/components/backgrounds/InteractiveParticleBackground'
+import { useTheme } from '@/components/ThemeProvider'
 
-const coreCapabilities = [
-  {
-    icon: Brain,
-    title: '多模态推理',
-    description: '视觉、语音、文本三模态融合，支持复杂场景的跨模态理解与生成。',
-    color: 'from-blue-500 to-cyan-500',
-  },
-  {
-    icon: Layers,
-    title: 'Skills 生态',
-    description: '500+ 开箱即用技能包，覆盖 20+ 行业场景，一键安装，即插即用。',
-    color: 'from-purple-500 to-pink-500',
-  },
-  {
-    icon: Shield,
-    title: '企业级安全',
-    description: '私有化部署，数据不出域，满足金融、政务等高安全级别场景需求。',
-    color: 'from-green-500 to-emerald-500',
-  },
-  {
-    icon: Globe,
-    title: '开放生态',
-    description: '兼容主流 AI 框架，支持 100+ 工具集成，构建开放的 AI Agent 生态。',
-    color: 'from-orange-500 to-red-500',
-  },
+const enterpriseScenarios = [
+  { icon: TrendingUp, title: '销售管理 Agent', description: '自动追踪销售漏斗、生成拜访报告、预测成交概率，让销售总监实时掌握全局。', color: 'from-blue-500 to-cyan-500', href: '/scenarios#sales' },
+  { icon: BarChart3, title: '财务分析 Agent', description: '实时汇总多维财务数据，自动生成管理报表，异常预警秒级响应。', color: 'from-green-500 to-emerald-500', href: '/scenarios#finance' },
+  { icon: Globe, title: '市场洞察 Agent', description: '7×24 小时监控竞品动态、行业资讯，自动生成竞争分析简报。', color: 'from-purple-500 to-violet-500', href: '/scenarios#market' },
+  { icon: Target, title: 'CEO 战略 Agent', description: '聚合内外部数据，辅助战略决策，将复杂信息转化为清晰的行动建议。', color: 'from-orange-500 to-red-500', href: '/scenarios#ceo' },
+  { icon: Users, title: 'HR 管理 Agent', description: '智能简历筛选、绩效分析、员工关怀提醒，让 HR 聚焦高价值工作。', color: 'from-pink-500 to-rose-500', href: '/scenarios#hr' },
+  { icon: Building2, title: '运营管理 Agent', description: '跨部门流程自动化，项目进度追踪，异常事项自动升级，提升组织执行力。', color: 'from-yellow-500 to-amber-500', href: '/scenarios#ops' },
+]
+
+const deploymentOptions = [
+  { icon: HardDrive, title: '私有硬件部署', description: '数据完全不出域，满足金融、政务等高安全要求，开箱即用。', badge: '推荐', badgeColor: 'bg-blue-500/20 text-blue-400 border-blue-500/30', href: '/deployment#hardware' },
+  { icon: Cloud, title: '云端部署', description: '零硬件投入，按需付费，5 分钟快速接入，适合初创与 PoC 验证。', badge: '快速', badgeColor: 'bg-green-500/20 text-green-400 border-green-500/30', href: '/deployment#cloud' },
+  { icon: Server, title: '混合部署', description: '核心数据本地，弹性算力上云，兼顾安全与成本的最优解。', badge: '灵活', badgeColor: 'bg-purple-500/20 text-purple-400 border-purple-500/30', href: '/deployment#hybrid' },
+]
+
+const trainingOptions = [
+  { icon: Brain, title: '管理层认知课程', description: 'AI Agent 时代的企业战略思维，帮助管理者理解并把握 AI 转型机遇。', duration: '1 天', href: '/training#executive' },
+  { icon: GraduationCap, title: '企业实战营', description: '3 天密集训练，从零到一掌握 OpenClaw 企业级部署与应用开发。', duration: '3 天', href: '/training#bootcamp' },
+  { icon: Headphones, title: '定制部署支持', description: '专属技术顾问团队，提供从需求分析到上线运维的全程陪跑服务。', duration: '持续', href: '/training#support' },
 ]
 
 export default function HomePage() {
+  const { isDark } = useTheme()
   const featuredNews = mockNews.filter(n => n.featured).slice(0, 3)
   const featuredSkills = mockSkills.filter(s => s.featured).slice(0, 4)
-  const featuredHardware = mockHardware.filter(h => h.featured).slice(0, 3)
-  const upcomingEvents = mockEvents.filter(e => e.status !== 'finished').slice(0, 3)
-  const latestBlogs = mockBlogs.slice(0, 3)
-  const featuredCases = mockCases.filter(c => c.featured).slice(0, 3)
 
   return (
     <div className="min-h-screen">
-      {/* ===== Hero Section =====
-          注意：layout.tsx 中的 <main> 已经有 padding-top: var(--header-height)
-          所以这里不需要额外的 padding-top，直接从内容区顶部开始
-      */}
+
+      {/* 1. Hero */}
       <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center justify-center overflow-hidden">
-        {/* Background layers */}
-        <div className="absolute inset-0 hero-gradient" />
-        {/* Interactive particle canvas - z-index:1, below glow and content */}
-        <InteractiveParticleBackground />
-
-        {/* Glow effects - z-index:2 */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-blue-500/15 rounded-full blur-3xl animate-pulse-slow" style={{ zIndex: 2 }} />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-purple-500/15 rounded-full blur-3xl animate-pulse-slow" style={{ zIndex: 2, animationDelay: '1s' }} />
-        {/* Overlay to ensure text readability */}
-        <div className="absolute inset-0 hero-overlay" style={{ zIndex: 3 }} />
-
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 text-center py-10 sm:py-14" style={{ zIndex: 10 }}>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-blue-500/30 text-sm text-blue-400 mb-6 sm:mb-8">
-            <Zap className="w-3.5 h-3.5 shrink-0" />
-            <span className="text-xs sm:text-sm">面向中国用户的 OpenClaw 生态资源导航站</span>
+        <InteractiveParticleBackground particleOpacity={0.4} lineOpacity={0.08} />
+        <div className="hero-overlay absolute inset-0 pointer-events-none" style={{ zIndex: 3 }} />
+        <div className="relative max-w-5xl mx-auto px-4 text-center py-12" style={{ zIndex: 10 }}>
+          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium border mb-6 ${isDark ? 'bg-blue-500/10 text-blue-300 border-blue-500/30' : 'bg-blue-50 text-blue-700 border-blue-200'}`}>
+            <Zap className="w-3.5 h-3.5" />
+            OpenClaw 企业应用与生态中心
           </div>
-
-          {/* Title */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-5 sm:mb-6 leading-tight">
-            <span className="gradient-text">TokenStar</span>
-            <br />
-            <span className="dark:text-white text-gray-900">AI星球</span>
+          <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
+            让 OpenClaw 成为你的<br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">企业超级管理 Agent</span>
           </h1>
-
-          <p className="text-base sm:text-xl dark:text-gray-300 text-gray-600 mb-3 sm:mb-4 max-w-2xl mx-auto leading-relaxed">
-            面向中国用户的 OpenClaw 生态资源导航站，聚焦 AI Agent 新闻、教程、Skills、案例、硬件部署与培训活动
+          <p className={`text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            进入 Agent &amp; Skill 时代，用 AI 提升企业执行力与决策力。<br />
+            从销售到战略，每个管理场景都有专属 Agent 支撑。
           </p>
-
-          <p className="text-sm sm:text-base dark:text-gray-400 text-gray-500 mb-8 sm:mb-10 max-w-xl mx-auto">
-            与 10,000+ 开发者一起，探索 AI Agent 的无限可能
-          </p>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-            <Link
-              href="/openclaw"
-              className="btn-primary flex items-center gap-2 group w-full sm:w-auto justify-center"
-            >
-              了解 OpenClaw
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/scenarios" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-base transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
+              查看企业应用场景 <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link
-              href="/skills"
-              className="btn-secondary flex items-center gap-2 w-full sm:w-auto justify-center"
-            >
-              <Package className="w-4 h-4" />
-              浏览 Skills 市场
+            <Link href="/deployment" className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-all border ${isDark ? 'border-white/20 text-white hover:bg-white/8' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}>
+              查看部署方案 <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
+          <div className={`mt-14 grid grid-cols-3 gap-6 max-w-lg mx-auto text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
+            {[{ value: '500+', label: 'Skills 生态' }, { value: '20+', label: '行业场景' }, { value: '98.7%', label: 'RAG 精度' }].map(s => (
+              <div key={s.label}>
+                <div className={`text-2xl font-bold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{s.value}</div>
+                <div className="text-sm">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          {/* Stats */}
-          <div className="flex items-center justify-center gap-6 sm:gap-8 mt-8 sm:mt-10 flex-wrap">
+      {/* 2. Agent & Skill 时代说明 */}
+      <section className={`py-12 sm:py-16 ${isDark ? 'bg-slate-900/50' : 'bg-slate-50'}`}>
+        <div className="max-w-6xl mx-auto px-4">
+          <SectionHeader title="进入 Agent & Skill 时代" subtitle="理解 AI 转型的核心概念，把握企业升级的战略机遇" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {[
-              { value: '500+', label: 'Skills 技能包' },
-              { value: '10,000+', label: '开发者社区' },
-              { value: '200+', label: '企业客户' },
-              { value: '20+', label: '行业覆盖' },
-            ].map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-xl sm:text-2xl font-bold gradient-text">{stat.value}</div>
-                <div className="text-xs dark:text-gray-500 text-gray-500 mt-1">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 dark:text-gray-500 text-gray-400">
-          <span className="text-xs">向下滚动</span>
-          <div className="w-px h-6 sm:h-8 bg-gradient-to-b from-gray-500 to-transparent" />
-        </div>
-      </section>
-
-      {/* ===== Core Capabilities ===== */}
-      <section className="py-8 sm:py-10 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold dark:text-white text-gray-900 mb-3 section-fade-in">OpenClaw 核心能力</h2>
-            <p className="dark:text-gray-400 text-gray-500 text-sm sm:text-base">企业级 AI Agent 平台，赋能各行各业智能化转型</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {coreCapabilities.map((cap) => (
-              <div
-                key={cap.title}
-                className="glass rounded-xl p-5 sm:p-6 card-hover dark:border-white/5 border-black/5 border hover:border-blue-500/30 text-center"
-              >
-                <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${cap.color} flex items-center justify-center mx-auto mb-4`}>
-                  <cap.icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <h3 className="text-sm sm:text-base font-semibold dark:text-white text-gray-900 mb-2">{cap.title}</h3>
-                <p className="text-xs sm:text-sm dark:text-gray-400 text-gray-500 leading-relaxed">{cap.description}</p>
+              { icon: Brain, title: '什么是 Agent', color: 'text-blue-400', desc: 'Agent 是能够自主感知环境、制定计划、调用工具并执行任务的 AI 系统。它不只是回答问题，而是真正"做事"——替你完成复杂的多步骤业务流程。' },
+              { icon: Layers, title: '什么是 Skill', color: 'text-purple-400', desc: 'Skill 是 Agent 的能力模块，如同企业员工的专业技能。安装一个 Skill，Agent 即获得对应能力——搜索、代码执行、数据分析、CRM 对接……500+ 开箱即用。' },
+              { icon: Building2, title: '为何企业必须进入 Agent 时代', color: 'text-green-400', desc: '传统 RPA 只能处理规则化流程，而 Agent 能理解意图、应对变化。率先部署 Agent 的企业将在执行效率和决策质量上建立难以追赶的竞争优势。' },
+            ].map(item => (
+              <div key={item.title} className={`rounded-2xl p-6 border transition-all hover:shadow-md ${isDark ? 'bg-slate-800/60 border-white/8' : 'bg-white border-gray-200'}`}>
+                <item.icon className={`w-8 h-8 ${item.color} mb-4`} />
+                <h3 className={`text-lg font-semibold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>{item.title}</h3>
+                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== Featured News ===== */}
-      <section className="py-7 sm:py-9 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            title="热门新闻"
-            subtitle="OpenClaw 生态最新动态"
-            viewAllHref="/news"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            {featuredNews.map((item) => (
-              <ContentCard
-                key={item.id}
-                {...item}
-                href={`/news/${item.slug}`}
-              />
+      {/* 3. 企业应用场景 */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <SectionHeader title="企业应用场景" subtitle="覆盖管理全链路，每个岗位都有专属 Agent 支撑" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+            {enterpriseScenarios.map(s => (
+              <Link key={s.title} href={s.href} className={`group rounded-2xl p-6 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10' : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-md'}`}>
+                <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${s.color} mb-4`}><s.icon className="w-5 h-5 text-white" /></div>
+                <h3 className={`text-base font-semibold mb-2 group-hover:text-blue-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>{s.title}</h3>
+                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{s.description}</p>
+                <div className={`mt-4 flex items-center gap-1 text-xs font-medium ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>了解详情 <ArrowRight className="w-3 h-3" /></div>
+              </Link>
             ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link href="/scenarios" className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border font-medium text-sm transition-all ${isDark ? 'border-white/20 text-gray-300 hover:bg-white/8' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}>
+              查看全部应用场景 <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ===== Featured Skills ===== */}
-      <section className="py-7 sm:py-9 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            title="精选 Skills"
-            subtitle="开箱即用的 AI 技能包"
-            viewAllHref="/skills"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {featuredSkills.map((skill) => (
-              <ContentCard
-                key={skill.id}
-                {...skill}
-                href={`/skills/${skill.slug}`}
-                badge={`v${skill.version}`}
-                extra={
-                  <div className="flex items-center gap-2">
-                    <Code className="w-3.5 h-3.5 text-blue-400" />
-                    <span className="text-xs text-blue-400 font-mono">{skill.version}</span>
-                  </div>
-                }
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== Featured Cases ===== */}
-      <section className="py-7 sm:py-9 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            title="精选案例"
-            subtitle="真实企业落地实践"
-            viewAllHref="/cases"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            {featuredCases.map((item) => (
-              <ContentCard
-                key={item.id}
-                {...item}
-                href={`/cases/${item.slug}`}
-                badge={item.category?.name}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== Hardware Section ===== */}
-      <section className="py-7 sm:py-9 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            title="推荐硬件 & 云方案"
-            subtitle="从边缘到云端，全场景 AI 部署"
-            viewAllHref="/hardware"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            {featuredHardware.map((hw) => (
-              <div
-                key={hw.id}
-                className="glass rounded-xl p-4 sm:p-5 card-hover dark:border-white/5 border-black/5 border hover:border-blue-500/30 flex flex-col"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <span className="tag-badge">硬件方案</span>
-                  {hw.featured && (
-                    <span className="flex items-center gap-1 text-xs text-yellow-400">
-                      <Star className="w-3 h-3 fill-current" />
-                      推荐
-                    </span>
-                  )}
+      {/* 4. 部署方式 */}
+      <section className={`py-12 sm:py-16 ${isDark ? 'bg-slate-900/50' : 'bg-slate-50'}`}>
+        <div className="max-w-6xl mx-auto px-4">
+          <SectionHeader title="灵活部署，按需选择" subtitle="私有硬件、云端托管、混合架构，满足不同安全与成本需求" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+            {deploymentOptions.map(o => (
+              <Link key={o.title} href={o.href} className={`group rounded-2xl p-6 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10' : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-md'}`}>
+                <div className="flex items-start justify-between mb-4">
+                  <o.icon className={`w-7 h-7 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${o.badgeColor}`}>{o.badge}</span>
                 </div>
-                <h3 className="text-sm sm:text-base font-semibold dark:text-white text-gray-900 mb-2">{hw.title}</h3>
-                <p className="text-xs sm:text-sm dark:text-gray-400 text-gray-500 line-clamp-2 mb-4 flex-1">{hw.summary}</p>
-                <div className="flex items-center gap-2 sm:gap-3 mt-auto pt-3 dark:border-white/5 border-black/5 border-t">
-                  <Link
-                    href={`/hardware/${hw.slug}`}
-                    className="flex-1 text-center py-2 rounded-lg text-xs sm:text-sm dark:text-gray-300 text-gray-600 dark:border-white/10 border-gray-200 border dark:hover:border-white/30 hover:border-gray-400 transition-all"
-                  >
-                    查看详情
-                  </Link>
-                  <a
-                    href={hw.buy_link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 text-center py-2 rounded-lg text-xs sm:text-sm bg-blue-600 hover:bg-blue-500 text-white transition-all flex items-center justify-center gap-1"
-                  >
-                    立即购买
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== Events Section ===== */}
-      <section className="py-7 sm:py-9 px-4 sm:px-6 dark:bg-gradient-to-b dark:from-transparent dark:to-dark-800/50">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            title="最新培训活动"
-            subtitle="线上线下活动，持续学习成长"
-            viewAllHref="/events"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            {upcomingEvents.map((event) => (
-              <Link key={event.id} href={`/events/${event.slug}`} className="group block">
-                <div className="glass rounded-xl p-4 sm:p-5 card-hover dark:border-white/5 border-black/5 border hover:border-blue-500/30">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="tag-badge">
-                      {event.type === 'bootcamp' ? '训练营' : event.type === 'enterprise' ? '企业专场' : '公开活动'}
-                    </span>
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs border ${getEventStatusColor(event.status)}`}>
-                      {getEventStatusLabel(event.status)}
-                    </span>
-                  </div>
-                  <h3 className="text-sm sm:text-base font-semibold dark:text-white text-gray-900 group-hover:text-blue-500 transition-colors mb-3 line-clamp-2">
-                    {event.title}
-                  </h3>
-                  <div className="space-y-1.5">
-                    <div className="flex items-center gap-2 text-xs dark:text-gray-400 text-gray-500">
-                      <Calendar className="w-3.5 h-3.5 shrink-0" />
-                      <span>{formatDate(event.start_time)}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs dark:text-gray-400 text-gray-500">
-                      <MapPin className="w-3.5 h-3.5 shrink-0" />
-                      <span>{event.location}</span>
-                    </div>
-                  </div>
-                </div>
+                <h3 className={`text-base font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{o.title}</h3>
+                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{o.description}</p>
+                <div className={`mt-4 flex items-center gap-1 text-xs font-medium ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>查看方案 <ArrowRight className="w-3 h-3" /></div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== Blog Section ===== */}
-      <section className="py-7 sm:py-9 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            title="最新 Blog"
-            subtitle="技术洞察与行业观察"
-            viewAllHref="/blog"
-          />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-            {latestBlogs.map((item) => (
-              <ContentCard
-                key={item.id}
-                {...item}
-                href={`/blog/${item.slug}`}
-                badge={item.category?.name}
-              />
+      {/* 5. 企业培训 */}
+      <section className="py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <SectionHeader title="企业培训支持" subtitle="从认知到落地，全程陪伴企业完成 AI 转型" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+            {trainingOptions.map(o => (
+              <Link key={o.title} href={o.href} className={`group rounded-2xl p-6 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10' : 'bg-white border-gray-200 hover:border-purple-300 hover:shadow-md'}`}>
+                <div className="flex items-start justify-between mb-4">
+                  <o.icon className={`w-7 h-7 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${isDark ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' : 'bg-purple-50 text-purple-700 border-purple-200'}`}>{o.duration}</span>
+                </div>
+                <h3 className={`text-base font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{o.title}</h3>
+                <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{o.description}</p>
+                <div className={`mt-4 flex items-center gap-1 text-xs font-medium ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>了解详情 <ArrowRight className="w-3 h-3" /></div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== CTA Banner ===== */}
-      <section className="py-8 sm:py-10 px-4 sm:px-6">
-        <div className="max-w-4xl mx-auto">
-          <div className="glass rounded-2xl p-8 sm:p-10 text-center dark:border-blue-500/20 border-blue-200/50 border relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10" />
-            <div className="relative z-10">
-              <h2 className="text-2xl sm:text-3xl font-bold dark:text-white text-gray-900 mb-4">准备好开始了吗？</h2>
-              <p className="dark:text-gray-300 text-gray-600 mb-6 sm:mb-8 max-w-xl mx-auto text-sm sm:text-base">
-                加入 TokenStar AI星球社区，与全球开发者一起探索 OpenClaw 的无限可能。
-              </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-                <Link href="/openclaw" className="btn-primary flex items-center gap-2 group w-full sm:w-auto justify-center">
-                  开始探索
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-                <Link href="/events" className="btn-secondary flex items-center gap-2 w-full sm:w-auto justify-center">
-                  <Calendar className="w-4 h-4" />
-                  参加培训活动
-                </Link>
-              </div>
+      {/* 6. OpenClaw 生态动态 */}
+      <section className={`py-12 sm:py-16 ${isDark ? 'bg-slate-900/50' : 'bg-slate-50'}`}>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-end justify-between mb-8">
+            <SectionHeader title="OpenClaw 生态动态" subtitle="最新产品更新、技术进展与生态资讯" className="mb-0" />
+            <Link href="/ecosystem" className={`hidden sm:flex items-center gap-1 text-sm font-medium ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-500'}`}>
+              查看全部 <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+            {featuredNews.map(item => (
+              <ContentCard key={item.id} title={item.title} summary={item.summary} href={`/news/${item.slug}`} category={item.category?.name} date={formatDate(item.published_at)} featured={item.featured} />
+            ))}
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {featuredSkills.map(skill => (
+              <Link key={skill.id} href={`/skills/${skill.slug}`} className={`group rounded-xl p-4 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-green-500/30' : 'bg-white border-gray-200 hover:border-green-300'}`}>
+                <div className="flex items-center justify-between mb-2">
+                  <span className={`text-xs font-mono px-2 py-0.5 rounded border ${isDark ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-green-50 text-green-700 border-green-200'}`}>v{skill.version}</span>
+                  {skill.featured && <Star className="w-3.5 h-3.5 text-yellow-400" />}
+                </div>
+                <h4 className={`text-sm font-semibold mb-1 group-hover:text-green-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>{skill.title}</h4>
+                <p className={`text-xs leading-relaxed line-clamp-2 ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>{skill.summary}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. 咨询 CTA */}
+      <section className="py-14 sm:py-20">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <div className={`rounded-3xl p-10 border ${isDark ? 'bg-gradient-to-br from-blue-900/30 to-slate-800/60 border-blue-500/20' : 'bg-gradient-to-br from-blue-50 to-slate-50 border-blue-200'}`}>
+            <h2 className={`text-2xl sm:text-3xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>准备好让 AI 升级你的企业管理了吗？</h2>
+            <p className={`text-base mb-8 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>预约企业 AI 咨询，我们的专家团队将为你定制专属的 OpenClaw 落地方案。</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/about#contact" className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-base transition-all shadow-lg shadow-blue-500/25">
+                预约企业 AI 咨询 <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/scenarios" className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-semibold text-base transition-all border ${isDark ? 'border-white/20 text-white hover:bg-white/8' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}>
+                浏览应用场景
+              </Link>
             </div>
           </div>
         </div>
       </section>
+
     </div>
   )
 }

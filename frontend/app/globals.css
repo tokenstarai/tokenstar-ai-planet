@@ -1054,3 +1054,21 @@ html.light .btn-primary:hover {
     display: none !important;
   }
 }
+
+/* ==========================================
+   2.0 Business Visual Upgrade
+   ========================================== */
+html.dark .glass:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+}
+html.light .glass:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.06);
+}
+.stat-number { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+html.dark .stat-number { color: #F1F5F9; }
+html.light .stat-number { color: #0F172A; }
+.tag-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 9999px; font-size: 0.7rem; font-weight: 500; border: 1px solid; }
+html.dark .tag-badge { background: rgba(59,130,246,0.12); color: #93C5FD; border-color: rgba(59,130,246,0.25); }
+html.light .tag-badge { background: rgba(59,130,246,0.08); color: #2563EB; border-color: rgba(59,130,246,0.2); }
+html.dark nav a[aria-current=page] { color: #60A5FA; font-weight: 600; }
+html.light nav a[aria-current=page] { color: #2563EB; font-weight: 600; }

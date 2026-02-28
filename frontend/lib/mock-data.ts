@@ -143,6 +143,7 @@ export const mockHardware = [
     summary: '企业级 AI 推理一体机，搭载 NVIDIA A100 40GB，支持 OpenClaw 全系列模型本地部署，开箱即用。',
     scenario: '适用于金融、医疗、政务等对数据安全要求极高的企业客户，支持完全离线运行。',
     buy_link: 'https://shop.tokenstar.ai/products/openclaw-box-pro', featured: true,
+    target_company_size: '50-500人', estimated_cost_range: '¥28,000 - ¥35,000', roi_estimate: '6-12个月回收投资', deployment_time: '1-2个工作日',
     selling_points: [
       { title: '高性能推理', description: 'A100 40GB 显存，支持 70B 参数模型实时推理' },
       { title: '开箱即用', description: '预装 OpenClaw 全套软件，30 分钟完成部署' },
@@ -156,6 +157,7 @@ export const mockHardware = [
     summary: '轻量级 AI 推理盒子，搭载 NVIDIA RTX 4090，适合中小企业和开发者本地部署 OpenClaw 7B/13B 模型。',
     scenario: '适合中小企业、高校研究机构和个人开发者，性价比极高的本地 AI 部署方案。',
     buy_link: 'https://shop.tokenstar.ai/products/openclaw-mini', featured: true,
+    target_company_size: '10-100人', estimated_cost_range: '¥8,800 - ¥12,000', roi_estimate: '3-6个月回收投资', deployment_time: '半天',
     selling_points: [
       { title: '高性价比', description: 'RTX 4090 24GB，支持 13B 模型流畅推理' },
       { title: '体积小巧', description: '迷你机箱设计，桌面级部署' },
@@ -169,6 +171,7 @@ export const mockHardware = [
     summary: '阿里云托管版 OpenClaw，按需付费，无需硬件投入，5 分钟快速接入，适合初创团队和 PoC 验证。',
     scenario: '适合初创企业、快速验证场景，无需前期硬件投入，按 API 调用量付费。',
     buy_link: 'https://cloud.tokenstar.ai/starter', featured: true,
+    target_company_size: '1-50人', estimated_cost_range: '¥299/月起', roi_estimate: '1-3个月回收投资', deployment_time: '5分钟',
     selling_points: [
       { title: '零硬件投入', description: '云端托管，无需购买服务器' },
       { title: '按需付费', description: '按 API 调用量计费，灵活控制成本' },
@@ -182,6 +185,7 @@ export const mockHardware = [
     summary: '大规模 AI 推理集群方案，支持横向扩展至 100+ 节点，适合大型企业和云服务商构建 AI 基础设施。',
     scenario: '适合大型企业、运营商和云服务商，构建高可用、高并发的 AI 推理基础设施。',
     buy_link: 'https://shop.tokenstar.ai/products/cluster-enterprise', featured: false,
+    target_company_size: '1000人以上', estimated_cost_range: '¥500,000+', roi_estimate: '12-24个月回收投资', deployment_time: '7-14个工作日',
     selling_points: [
       { title: '弹性扩展', description: '支持 10-1000 节点弹性扩缩容' },
       { title: '高可用', description: '99.99% SLA，自动故障转移' },
@@ -195,6 +199,7 @@ export const mockHardware = [
     summary: '基于华为昇腾 910B 的国产 AI 推理方案，完全自主可控，满足信创要求，性能媲美 A100。',
     scenario: '适合政府、央企、军工等对国产化有严格要求的客户，完全满足信创采购标准。',
     buy_link: 'https://shop.tokenstar.ai/products/openclaw-ascend', featured: false,
+    target_company_size: '政府/央企', estimated_cost_range: '¥150,000 - ¥200,000', roi_estimate: '12-18个月回收投资', deployment_time: '3-5个工作日',
     selling_points: [
       { title: '完全国产化', description: '昇腾 910B 芯片，满足信创要求' },
       { title: '高性能', description: '性能媲美 NVIDIA A100，推理速度快' },
@@ -208,6 +213,7 @@ export const mockHardware = [
     summary: '专为边缘计算场景设计的轻量级推理设备，支持断网离线运行，适合工厂、医院、零售等场景。',
     scenario: '适合工厂车间、医院科室、零售门店等边缘场景，无需网络连接即可本地推理。',
     buy_link: 'https://shop.tokenstar.ai/products/openclaw-edge', featured: false,
+    target_company_size: '各类规模', estimated_cost_range: '¥15,000 - ¥20,000', roi_estimate: '6-9个月回收投资', deployment_time: '1个工作日',
     selling_points: [
       { title: '断网可用', description: '完全离线运行，不依赖网络' },
       { title: '工业级可靠', description: '宽温设计，IP65 防护等级' },
@@ -225,6 +231,7 @@ export const mockEvents = [
     start_time: '2026-03-15T09:00:00Z', end_time: '2026-03-15T18:00:00Z',
     location: '北京国家会议中心', signup_deadline: '2026-03-10T23:59:59Z',
     summary: '年度最大规模 AI 开发者盛会，汇聚 50+ 技术专家，共探 AI Agent 未来发展趋势。',
+    target_role: '开发者/技术负责人/产品经理', enterprise_level: '全规模',
     agenda: '<h3>上午场</h3><p>09:00 - 开幕式与主题演讲<br>10:00 - OpenClaw 2.0 技术深度解析<br>11:00 - Skills 生态建设分享</p><h3>下午场</h3><p>14:00 - 企业实践案例分享<br>16:00 - 开发者工作坊<br>17:30 - 颁奖典礼</p>',
     featured: true
   },
@@ -234,6 +241,7 @@ export const mockEvents = [
     start_time: '2026-04-01T09:00:00Z', end_time: '2026-04-03T18:00:00Z',
     location: '上海张江 AI 园区', signup_deadline: '2026-03-25T23:59:59Z',
     summary: '三天密集训练营，从零到一掌握 OpenClaw 企业级应用开发，含实战项目与专家辅导。',
+    target_role: '技术开发者/IT经理', enterprise_level: '中小型企业',
     agenda: '<h3>Day 1</h3><p>OpenClaw 基础与架构<br>Skills 开发实战</p><h3>Day 2</h3><p>企业知识库搭建<br>多 Agent 协作</p><h3>Day 3</h3><p>项目实战<br>成果展示与答辩</p>',
     featured: true
   },
@@ -244,6 +252,7 @@ export const mockEvents = [
     location: '北京望京 SOHO T1',
     signup_deadline: '2026-03-15T23:59:59Z',
     summary: '面向北京地区大型企业 AI 负责人的闭门交流会，深度探讨 OpenClaw 在金融、政务、制造领域的落地实践。',
+    target_role: 'CEO/CTO/AI负责人', enterprise_level: '大型企业',
     agenda: '<h3>议程</h3><p>14:00 签到入场</p><p>14:30 OpenClaw 企业 AI 战略解读</p><p>15:30 标杆案例分享</p><p>16:30 圆桌讨论</p><p>17:30 自由交流</p>',
     gallery: [],
     recap_content: null,
@@ -256,6 +265,7 @@ export const mockEvents = [
     start_time: '2026-01-20T14:00:00Z', end_time: '2026-01-20T18:00:00Z',
     location: '深圳南山科技园', signup_deadline: '2026-01-18T23:59:59Z',
     summary: '深圳城市开发者沙龙，聚焦 AI Agent 在硬件与 IoT 场景的创新应用，已圆满结束。',
+    target_role: '开发者/硬件工程师', enterprise_level: '全规模',
     agenda: '<h3>议程</h3><p>14:00 - 签到<br>14:30 - 主题分享<br>16:00 - 圆桌讨论<br>17:30 - 自由交流</p>',
     recap_content: '<p>本次沙龙吸引了 200+ 开发者参与，分享了 5 个精彩案例...</p>',
     featured: false

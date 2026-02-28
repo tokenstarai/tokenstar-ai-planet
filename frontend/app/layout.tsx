@@ -8,11 +8,11 @@ import { DynamicThemeColor } from '@/components/pwa/DynamicThemeColor'
 
 export const metadata: Metadata = {
   title: {
-    default: 'TokenStar | 面向中国用户的 OpenClaw 生态资源导航站',
+    default: 'TokenStar · OpenClaw 企业应用与部署中心',
     template: '%s | TokenStar',
   },
-  description: 'TokenStar 是面向中国用户的 OpenClaw 生态资源导航站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。',
-  keywords: ['OpenClaw', 'AI Agent', 'TokenStar', 'AI星球', 'Skills', 'AI部署', '大模型'],
+  description: '帮助企业在 Agent & Skill 时代部署 OpenClaw 超级智能体，实现企业管理升级。提供企业应用场景、硬件部署方案、企业培训与 AI 管理指南。',
+  keywords: ['OpenClaw', 'AI Agent', 'TokenStar', '企业AI', 'AI部署', '企业管理', 'AI转型', 'Skills', '大模型'],
   authors: [{ name: 'TokenStar Team' }],
   creator: 'TokenStar',
   publisher: 'TokenStar',
@@ -33,13 +33,13 @@ export const metadata: Metadata = {
     locale: 'zh_CN',
     url: '/',
     siteName: 'TokenStar',
-    title: 'TokenStar | 面向中国用户的 OpenClaw 生态资源导航站',
-    description: '面向中国用户的 OpenClaw 生态资源导航站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。',
+    title: 'TokenStar · OpenClaw 企业应用与部署中心',
+    description: '帮助企业在 Agent & Skill 时代部署 OpenClaw 超级智能体，实现企业管理升级。',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TokenStar',
-    description: '面向中国用户的 OpenClaw 生态资源导航站',
+    title: 'TokenStar · OpenClaw 企业应用与部署中心',
+    description: '帮助企业在 Agent & Skill 时代部署 OpenClaw 超级智能体，实现企业管理升级。',
   },
   robots: {
     index: true,
