@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { Search, Menu, X, ChevronDown, Sun, Moon, ArrowLeft } from 'lucide-react'
@@ -68,7 +68,6 @@ const typeLabels: Record<string, string> = {
 
 /**
  * LogoIcon：纯图标组件（32x32 蓝紫渐变方块 + 四角星 + 外环 + 中心核）
- * 用于 Navbar 和 Footer，小尺寸下依然清晰可识别
  */
 export function LogoIcon({ size = 32, idSuffix = 'a' }: { size?: number; idSuffix?: string }) {
   return (
@@ -81,19 +80,14 @@ export function LogoIcon({ size = 32, idSuffix = 'a' }: { size?: number; idSuffi
       aria-hidden="true"
       style={{ flexShrink: 0 }}
     >
-      {/* 背景：蓝紫渐变圆角方块 */}
       <rect width="32" height="32" rx="8" fill={`url(#lg1-${idSuffix})`} />
-      {/* 外环：Token 流通感 */}
       <circle cx="16" cy="16" r="11.5" stroke="rgba(255,255,255,0.22)" strokeWidth="1.2" fill="none" />
-      {/* 四角星：Star 核心 */}
       <path
         d="M16 5.5 L17.6 12.4 L24.5 10.5 L19.8 16 L24.5 21.5 L17.6 19.6 L16 26.5 L14.4 19.6 L7.5 21.5 L12.2 16 L7.5 10.5 L14.4 12.4 Z"
         fill="white"
         opacity="0.95"
       />
-      {/* 中心亮核 */}
       <circle cx="16" cy="16" r="2.8" fill={`url(#lg2-${idSuffix})`} />
-      {/* 四角小点：AI 电路感 */}
       <circle cx="7" cy="7" r="1.2" fill="rgba(255,255,255,0.42)" />
       <circle cx="25" cy="7" r="1.2" fill="rgba(255,255,255,0.42)" />
       <circle cx="7" cy="25" r="1.2" fill="rgba(255,255,255,0.28)" />
@@ -114,7 +108,6 @@ export function LogoIcon({ size = 32, idSuffix = 'a' }: { size?: number; idSuffi
 
 /**
  * LogoWordmark：图标 + "Token" + "Star"（Star 用蓝色高亮）
- * 单行布局，无副标题，品牌感更强
  */
 export function LogoWordmark({ isDark }: { isDark: boolean }) {
   return (
@@ -146,6 +139,160 @@ function ThemeToggleButton({ className = '' }: { className?: string }) {
     >
       {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
     </button>
+  )
+}
+
+/**
+ * NavDropdown：带下拉菜单的导航项
+ *
+ * 交互策略：
+ * - onMouseEnter 容器：立即打开，取消关闭计时器
+ * - onMouseLeave 容器：延迟 200ms 关闭（鼠标重新进入时取消）
+ * - 下拉面板与触发按钮属于同一容器，无缝隙问题
+ * - 下拉面板顶部有 8px 透明 padding 作为 hover bridge，防止鼠标经过间隙时丢失 hover
+ * - ESC 键关闭
+ * - 点击页面其他地方关闭（由父组件的 document mousedown 处理）
+ * - focus-within 保持键盘可访问性
+ */
+function NavDropdown({
+  item,
+  isDark,
+  pathname,
+  onClose,
+}: {
+  item: typeof navItems[number]
+  isDark: boolean
+  pathname: string
+  onClose: () => void
+}) {
+  const [isOpen, setIsOpen] = useState(false)
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const cancelClose = useCallback(() => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+  }, [])
+
+  const scheduleClose = useCallback(() => {
+    cancelClose()
+    closeTimerRef.current = setTimeout(() => {
+      setIsOpen(false)
+    }, 200)
+  }, [cancelClose])
+
+  const open = useCallback(() => {
+    cancelClose()
+    setIsOpen(true)
+  }, [cancelClose])
+
+  // ESC 关闭
+  useEffect(() => {
+    if (!isOpen) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false)
+        // 焦点返回触发按钮
+        const btn = containerRef.current?.querySelector('button') as HTMLElement | null
+        btn?.focus()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [isOpen])
+
+  // 清理计时器
+  useEffect(() => () => { cancelClose() }, [cancelClose])
+
+  // 路由变化时关闭
+  useEffect(() => { setIsOpen(false) }, [pathname])
+
+  if (!item.children) return null
+
+  const isActive = item.children.some(child => child.href === pathname) || pathname === item.href
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative"
+      onMouseEnter={open}
+      onMouseLeave={scheduleClose}
+    >
+      {/* 触发按钮 */}
+      <button
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen(prev => !prev)}
+        onFocus={() => { /* focus-within 由容器处理 */ }}
+        className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm transition-all duration-150 ${
+          isActive
+            ? isDark
+              ? 'text-white bg-blue-600/25 border border-blue-500/25'
+              : 'text-blue-700 bg-blue-50 border border-blue-200'
+            : isOpen
+              ? isDark
+                ? 'text-white bg-white/12'
+                : 'text-gray-900 bg-gray-100'
+              : isDark
+                ? 'text-gray-300 hover:text-white hover:bg-white/10'
+                : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+        }`}
+      >
+        {item.label}
+        <ChevronDown
+          className={`w-3 h-3 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+        />
+      </button>
+
+      {/* 下拉面板
+          - pt-2 作为透明 hover bridge，防止鼠标经过 mt-0 间隙时丢失 hover
+          - 面板本身从 pt-2 内的 div 开始，视觉上紧贴按钮
+          - prefers-reduced-motion 下无动画
+      */}
+      <div
+        className={`absolute top-full left-0 pt-2 z-50 transition-all duration-150 ease-out
+          ${isOpen
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 -translate-y-1 pointer-events-none'
+          }
+          motion-reduce:transition-none`}
+        aria-hidden={!isOpen}
+        role="menu"
+      >
+        <div
+          className={`w-44 rounded-xl border shadow-xl overflow-hidden ${
+            isDark
+              ? 'bg-[#111118]/97 backdrop-blur-xl border-white/10 shadow-black/40'
+              : 'bg-white border-gray-200 shadow-lg shadow-gray-200/60'
+          }`}
+        >
+          {item.children.map((child) => {
+            const isChildActive = pathname === child.href
+            return (
+              <Link
+                key={child.href}
+                href={child.href}
+                role="menuitem"
+                onClick={() => { setIsOpen(false); onClose() }}
+                className={`flex items-center px-4 py-2.5 text-sm transition-all min-h-[40px] ${
+                  isChildActive
+                    ? isDark
+                      ? 'text-white bg-blue-600/30 border-l-2 border-blue-500'
+                      : 'text-blue-700 bg-blue-50 border-l-2 border-blue-500'
+                    : isDark
+                      ? 'text-gray-300 hover:text-white hover:bg-white/10'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
+              >
+                {child.label}
+              </Link>
+            )
+          })}
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -262,7 +409,7 @@ function MobileSearchOverlay({ isOpen, onClose, isDark }: { isOpen: boolean; onC
             <div className={`py-8 text-center ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>
               <Search className="w-10 h-10 mx-auto mb-3 opacity-30" />
               <p className="text-sm">输入关键词开始搜索</p>
-              <p className="text-xs mt-1 opacity-60">支持新闻、知识库、Skills、案例等</p>
+              <p className="text-xs mt-1 opacity-60">支持新闻、Skills、知识库、案例等</p>
             </div>
           )}
         </div>
@@ -277,7 +424,6 @@ export function Navbar() {
   const [searchResults, setSearchResults] = useState<any[]>([])
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false)
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [isScrolled, setIsScrolled] = useState(false)
   const searchRef = useRef<HTMLDivElement>(null)
   const router = useRouter()
@@ -354,49 +500,33 @@ export function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo：图标 + TokenStar 单行，Star 蓝色高亮 */}
+            {/* Logo */}
             <LogoWordmark isDark={isDark} />
 
             {/* 桌面导航 */}
             <div className="hidden lg:flex items-center gap-0.5">
               {navItems.map((item) => (
-                <div
-                  key={item.label}
-                  className="relative"
-                  onMouseEnter={() => item.children && setActiveDropdown(item.label)}
-                  onMouseLeave={() => setActiveDropdown(null)}
-                >
-                  {item.children ? (
-                    <button className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm transition-all ${isDark ? 'text-gray-300 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'}`}>
-                      {item.label}
-                      <ChevronDown className="w-3 h-3" />
-                    </button>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={`px-3 py-2 rounded-lg text-sm transition-all ${
-                        pathname === item.href
-                          ? isDark ? 'text-white bg-blue-600/30 border border-blue-500/30' : 'text-blue-700 bg-blue-50 border border-blue-200'
-                          : isDark ? 'text-gray-300 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
-                  {item.children && activeDropdown === item.label && (
-                    <div className={`absolute top-full left-0 mt-1 w-40 rounded-xl border shadow-xl overflow-hidden z-50 ${isDark ? 'bg-[#111118]/95 backdrop-blur-xl border-white/10' : 'bg-white border-gray-200 shadow-lg'}`}>
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className={`block px-4 py-2.5 text-sm transition-all ${isDark ? 'text-gray-300 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'}`}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                item.children ? (
+                  <NavDropdown
+                    key={item.label}
+                    item={item}
+                    isDark={isDark}
+                    pathname={pathname}
+                    onClose={() => {}}
+                  />
+                ) : (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`px-3 py-2 rounded-lg text-sm transition-all duration-150 ${
+                      pathname === item.href
+                        ? isDark ? 'text-white bg-blue-600/25 border border-blue-500/25' : 'text-blue-700 bg-blue-50 border border-blue-200'
+                        : isDark ? 'text-gray-300 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                )
               ))}
             </div>
 
@@ -470,7 +600,7 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* 移动端菜单 */}
+        {/* 移动端菜单（不受 NavDropdown 影响，逻辑独立） */}
         {isMenuOpen && (
           <div
             className={`lg:hidden border-t overflow-y-auto ${isDark ? 'bg-[#0a0a0f]/97 backdrop-blur-xl border-white/10' : 'bg-white/97 backdrop-blur-xl border-gray-200'}`}
