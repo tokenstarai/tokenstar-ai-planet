@@ -56,10 +56,10 @@ export function ROICalculator() {
         <TrendingUp className="w-5 h-5 dark:text-yellow-400 text-yellow-600" />
         <h2 className="text-xl font-bold dark:text-white text-gray-900">ROI 投资回报测算</h2>
       </div>
-      <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">输入企业基本信息，估算 AI 部署的投资回报周期与年度净收益。</p>
+      <p className="dark:text-gray-400 text-gray-600 text-sm mb-6">输入企业基本信息，估算 AI 部署的投资回报周期与年度净收益。</p>
 
       <div className="glass rounded-2xl border dark:border-yellow-500/20 border-yellow-200 overflow-hidden">
-        <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x dark:divide-white/8 divide-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x dark:divide-white/8 divide-gray-200">
 
           {/* 左侧：输入区 */}
           <div className="p-6">
@@ -67,7 +67,7 @@ export function ROICalculator() {
 
             {/* 部署方案选择 */}
             <div className="mb-5">
-              <label className="block text-xs dark:text-gray-400 text-gray-500 mb-2">选择部署方案</label>
+              <label className="block text-xs dark:text-gray-400 text-gray-600 mb-2">选择部署方案</label>
               <div className="grid grid-cols-3 gap-2">
                 {(['cloud', 'box-s', 'box-m'] as const).map(type => (
                   <button
@@ -76,7 +76,7 @@ export function ROICalculator() {
                     className={`py-2 px-3 rounded-lg text-xs font-medium transition-all border ${
                       deploymentType === type
                         ? 'bg-blue-600 border-blue-600 text-white'
-                        : 'dark:border-white/15 border-gray-200 dark:text-gray-400 text-gray-600 dark:hover:border-white/30 hover:border-gray-300'
+                        : 'dark:border-white/15 border-gray-300 dark:text-gray-400 text-gray-600 dark:hover:border-white/30 hover:border-gray-400'
                     }`}
                   >
                     {deploymentCosts[type].name}
@@ -88,7 +88,7 @@ export function ROICalculator() {
             {/* 员工数量 */}
             <div className="mb-5">
               <div className="flex items-center justify-between mb-2">
-                <label className="text-xs dark:text-gray-400 text-gray-500 flex items-center gap-1">
+                <label className="text-xs dark:text-gray-400 text-gray-600 flex items-center gap-1">
                   <Users className="w-3.5 h-3.5" /> 使用 AI 的员工数量
                 </label>
                 <span className="text-sm font-semibold dark:text-white text-gray-900">{employees} 人</span>
@@ -98,11 +98,11 @@ export function ROICalculator() {
                 value={employees}
                 onChange={e => setEmployees(Number(e.target.value))}
                 className="w-full h-1.5 rounded-full appearance-none cursor-pointer
-                  dark:bg-white/10 bg-gray-200
+                  dark:bg-white/10 bg-gray-300
                   [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
                   [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:cursor-pointer"
               />
-              <div className="flex justify-between text-xs dark:text-gray-600 text-gray-400 mt-1">
+              <div className="flex justify-between text-xs dark:text-gray-500 text-gray-500 mt-1">
                 <span>10</span><span>500</span><span>1000</span>
               </div>
             </div>
@@ -110,7 +110,7 @@ export function ROICalculator() {
             {/* 平均月薪 */}
             <div className="mb-5">
               <div className="flex items-center justify-between mb-2">
-                <label className="text-xs dark:text-gray-400 text-gray-500 flex items-center gap-1">
+                <label className="text-xs dark:text-gray-400 text-gray-600 flex items-center gap-1">
                   <DollarSign className="w-3.5 h-3.5" /> 员工平均月薪（元）
                 </label>
                 <span className="text-sm font-semibold dark:text-white text-gray-900">¥{avgSalary.toLocaleString()}</span>
@@ -120,11 +120,11 @@ export function ROICalculator() {
                 value={avgSalary}
                 onChange={e => setAvgSalary(Number(e.target.value))}
                 className="w-full h-1.5 rounded-full appearance-none cursor-pointer
-                  dark:bg-white/10 bg-gray-200
+                  dark:bg-white/10 bg-gray-300
                   [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
                   [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:cursor-pointer"
               />
-              <div className="flex justify-between text-xs dark:text-gray-600 text-gray-400 mt-1">
+              <div className="flex justify-between text-xs dark:text-gray-500 text-gray-500 mt-1">
                 <span>¥5,000</span><span>¥25,000</span><span>¥50,000</span>
               </div>
             </div>
@@ -132,7 +132,7 @@ export function ROICalculator() {
             {/* AI 效率提升 */}
             <div className="mb-2">
               <div className="flex items-center justify-between mb-2">
-                <label className="text-xs dark:text-gray-400 text-gray-500 flex items-center gap-1">
+                <label className="text-xs dark:text-gray-400 text-gray-600 flex items-center gap-1">
                   <Clock className="w-3.5 h-3.5" /> 预期效率提升比例
                 </label>
                 <span className="text-sm font-semibold dark:text-white text-gray-900">{aiEfficiency}%</span>
@@ -142,47 +142,79 @@ export function ROICalculator() {
                 value={aiEfficiency}
                 onChange={e => setAiEfficiency(Number(e.target.value))}
                 className="w-full h-1.5 rounded-full appearance-none cursor-pointer
-                  dark:bg-white/10 bg-gray-200
+                  dark:bg-white/10 bg-gray-300
                   [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
                   [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-blue-500 [&::-webkit-slider-thumb]:cursor-pointer"
               />
-              <div className="flex justify-between text-xs dark:text-gray-600 text-gray-400 mt-1">
+              <div className="flex justify-between text-xs dark:text-gray-500 text-gray-500 mt-1">
                 <span>5%</span><span>25%</span><span>50%</span>
               </div>
-              <p className="text-xs dark:text-gray-600 text-gray-400 mt-1.5">行业平均 15–25%，保守估算建议选 15%</p>
+              <p className="text-xs dark:text-gray-500 text-gray-500 mt-1.5">行业平均 15–25%，保守估算建议选 15%</p>
             </div>
           </div>
 
           {/* 右侧：结果区 */}
-          <div className="p-6 dark:bg-white/2 bg-gray-50/50">
+          {/* 
+            Light mode color strategy:
+            - Panel bg: bg-gray-50 (solid, no transparency bleed)
+            - Card bg: bg-white with border-gray-200 (clean white cards)
+            - Label text: text-gray-500 (contrast ~4.6:1 on white)
+            - Sub-label text: text-gray-500 (contrast ~4.6:1)
+            - Saving number: text-emerald-700 (contrast ~5.2:1 on white)
+            - Cost number: text-gray-900 (contrast ~16:1 on white)
+            - Net benefit positive: text-blue-700 (contrast ~5.5:1 on white)
+            - Net benefit negative: text-red-700 (contrast ~5.8:1 on white)
+            - Payback months: text-amber-700 (contrast ~5.0:1 on white, replaces unreadable yellow-600)
+          */}
+          <div className="p-6 dark:bg-white/2 bg-gray-50">
             <h3 className="text-sm font-semibold dark:text-white text-gray-900 mb-5">测算结果</h3>
 
             <div className="grid grid-cols-2 gap-3 mb-5">
+              {/* 年度人力节省 */}
               <div className="dark:bg-white/5 bg-white rounded-xl p-4 border dark:border-white/8 border-gray-200">
-                <div className="text-xs dark:text-gray-500 text-gray-400 mb-1">年度人力节省</div>
-                <div className="text-xl font-bold dark:text-green-400 text-green-600">{formatMoney(roi.annualSaving)}</div>
-                <div className="text-xs dark:text-gray-600 text-gray-400 mt-0.5">月均 {formatMoney(roi.monthlySaving)}</div>
+                <div className="text-xs dark:text-gray-500 text-gray-500 mb-1">年度人力节省</div>
+                <div className="text-xl font-bold dark:text-emerald-400 text-emerald-700">
+                  {formatMoney(roi.annualSaving)}
+                </div>
+                <div className="text-xs dark:text-gray-500 text-gray-500 mt-0.5">
+                  月均 {formatMoney(roi.monthlySaving)}
+                </div>
               </div>
+
+              {/* 年度部署成本 */}
               <div className="dark:bg-white/5 bg-white rounded-xl p-4 border dark:border-white/8 border-gray-200">
-                <div className="text-xs dark:text-gray-500 text-gray-400 mb-1">年度部署成本</div>
-                <div className="text-xl font-bold dark:text-white text-gray-900">{formatMoney(roi.annualDeploymentCost)}</div>
-                <div className="text-xs dark:text-gray-600 text-gray-400 mt-0.5">
+                <div className="text-xs dark:text-gray-500 text-gray-500 mb-1">年度部署成本</div>
+                <div className="text-xl font-bold dark:text-white text-gray-900">
+                  {formatMoney(roi.annualDeploymentCost)}
+                </div>
+                <div className="text-xs dark:text-gray-500 text-gray-500 mt-0.5">
                   {deploymentType === 'cloud' ? '按月订阅' : '3年折旧'}
                 </div>
               </div>
+
+              {/* 年度净收益 */}
               <div className="dark:bg-white/5 bg-white rounded-xl p-4 border dark:border-white/8 border-gray-200">
-                <div className="text-xs dark:text-gray-500 text-gray-400 mb-1">年度净收益</div>
-                <div className={`text-xl font-bold ${roi.netBenefit > 0 ? 'dark:text-blue-400 text-blue-600' : 'dark:text-red-400 text-red-600'}`}>
+                <div className="text-xs dark:text-gray-500 text-gray-500 mb-1">年度净收益</div>
+                <div className={`text-xl font-bold ${
+                  roi.netBenefit > 0
+                    ? 'dark:text-blue-400 text-blue-700'
+                    : 'dark:text-red-400 text-red-700'
+                }`}>
                   {roi.netBenefit > 0 ? '+' : ''}{formatMoney(roi.netBenefit)}
                 </div>
-                <div className="text-xs dark:text-gray-600 text-gray-400 mt-0.5">ROI {roi.roiPercent}%</div>
+                <div className="text-xs dark:text-gray-500 text-gray-500 mt-0.5">
+                  ROI {roi.roiPercent}%
+                </div>
               </div>
+
+              {/* 投资回收周期 */}
               <div className="dark:bg-white/5 bg-white rounded-xl p-4 border dark:border-white/8 border-gray-200">
-                <div className="text-xs dark:text-gray-500 text-gray-400 mb-1">投资回收周期</div>
-                <div className="text-xl font-bold dark:text-yellow-400 text-yellow-600">
+                <div className="text-xs dark:text-gray-500 text-gray-500 mb-1">投资回收周期</div>
+                {/* amber-700 replaces yellow-600: contrast ratio ~5.0:1 on white vs ~2.1:1 for yellow-600 */}
+                <div className="text-xl font-bold dark:text-yellow-400 text-amber-700">
                   {roi.paybackMonths > 0 ? `${roi.paybackMonths} 个月` : '—'}
                 </div>
-                <div className="text-xs dark:text-gray-600 text-gray-400 mt-0.5">
+                <div className="text-xs dark:text-gray-500 text-gray-500 mt-0.5">
                   {roi.paybackMonths > 0 && roi.paybackMonths <= 12 ? '优秀' : roi.paybackMonths <= 24 ? '良好' : '偏长'}
                 </div>
               </div>
@@ -190,19 +222,21 @@ export function ROICalculator() {
 
             {/* 进度条 */}
             <div className="space-y-2">
-              <div className="flex items-center justify-between text-xs dark:text-gray-400 text-gray-500">
+              <div className="flex items-center justify-between text-xs dark:text-gray-400 text-gray-600">
                 <span>收益 vs 成本比</span>
-                <span>{roi.roiPercent > 0 ? `+${roi.roiPercent}%` : `${roi.roiPercent}%`}</span>
+                <span className="font-medium dark:text-gray-300 text-gray-700">
+                  {roi.roiPercent > 0 ? `+${roi.roiPercent}%` : `${roi.roiPercent}%`}
+                </span>
               </div>
               <div className="h-2 rounded-full dark:bg-white/8 bg-gray-200 overflow-hidden">
                 <div
-                  className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-blue-500 to-green-500"
+                  className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-blue-500 to-emerald-500"
                   style={{ width: `${Math.min(100, Math.max(0, (roi.annualSaving / (roi.annualSaving + roi.annualDeploymentCost)) * 100))}%` }}
                 />
               </div>
             </div>
 
-            <p className="text-xs dark:text-gray-600 text-gray-400 mt-4">
+            <p className="text-xs dark:text-gray-500 text-gray-500 mt-4">
               * 以上为估算数据，实际效果因企业规模、行业、使用深度而异。建议联系顾问获取精准评估。
             </p>
 
