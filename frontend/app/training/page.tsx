@@ -180,7 +180,7 @@ export default function TrainingPage() {
                     <span className={`text-xs px-2 py-0.5 rounded-full ${getEventStatusColor(event.status)}`}>
                       {getEventStatusLabel(event.status)}
                     </span>
-                    <span className="text-xs dark:text-gray-500 text-gray-400">{event.event_type}</span>
+                    <span className="text-xs dark:text-gray-500 text-gray-400">{event.type}</span>
                   </div>
                   <h3 className="text-sm font-semibold dark:text-white text-gray-900 mb-2 group-hover:text-purple-400 transition-colors line-clamp-2">
                     {event.title}

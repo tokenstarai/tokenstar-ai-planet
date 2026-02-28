@@ -30,7 +30,8 @@ const trainingOptions = [
 ]
 
 export default function HomePage() {
-  const { isDark } = useTheme()
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
   const featuredNews = mockNews.filter(n => n.featured).slice(0, 3)
   const featuredSkills = mockSkills.filter(s => s.featured).slice(0, 4)
 
@@ -39,7 +40,7 @@ export default function HomePage() {
 
       {/* 1. Hero */}
       <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center justify-center overflow-hidden">
-        <InteractiveParticleBackground particleOpacity={0.4} lineOpacity={0.08} />
+        <InteractiveParticleBackground />
         <div className="hero-overlay absolute inset-0 pointer-events-none" style={{ zIndex: 3 }} />
         <div className="relative max-w-5xl mx-auto px-4 text-center py-12" style={{ zIndex: 10 }}>
           <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium border mb-6 ${isDark ? 'bg-blue-500/10 text-blue-300 border-blue-500/30' : 'bg-blue-50 text-blue-700 border-blue-200'}`}>
@@ -159,14 +160,14 @@ export default function HomePage() {
       <section className={`py-12 sm:py-16 ${isDark ? 'bg-slate-900/50' : 'bg-slate-50'}`}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-end justify-between mb-8">
-            <SectionHeader title="OpenClaw 生态动态" subtitle="最新产品更新、技术进展与生态资讯" className="mb-0" />
+            <SectionHeader title="OpenClaw 生态动态" subtitle="最新产品更新、技术进展与生态资讯" />
             <Link href="/ecosystem" className={`hidden sm:flex items-center gap-1 text-sm font-medium ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-500'}`}>
               查看全部 <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
             {featuredNews.map(item => (
-              <ContentCard key={item.id} title={item.title} summary={item.summary} href={`/news/${item.slug}`} category={item.category?.name} date={formatDate(item.published_at)} featured={item.featured} />
+              <ContentCard key={item.id} slug={item.slug} title={item.title} summary={item.summary} href={`/news/${item.slug}`} published_at={item.published_at} featured={item.featured} />
             ))}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
