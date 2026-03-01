@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowRight, Server, Cloud, Smartphone, CheckCircle, Shield, Zap, Users, HelpCircle } from 'lucide-react'
+import Image from 'next/image'
+import { ArrowRight, Server, Cloud, Smartphone, CheckCircle, Shield, Zap, Users, HelpCircle, Lock, GitBranch, Database, Network, FileText, Download } from 'lucide-react'
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 import { ROICalculator } from '@/components/deployment/ROICalculator'
 import { ConsultationForm } from '@/components/deployment/ConsultationForm'
@@ -8,7 +9,7 @@ import { DeploymentRecommendation } from '@/components/deployment/DeploymentReco
 
 export const metadata: Metadata = {
   title: '部署与安全 - TokenStar',
-  description: '三种企业级部署路径，让企业在 1–3 天内拥有可运行的超级管理智能体系统。Box Pro 私有化部署、Cloud 云端部署、Workstation 智能终端。',
+  description: 'OpenCLAW + Antigravity 企业级私有化部署与安全架构方案。涵盖三种部署模式、安全权限模型、系统集成框架与标准交付流程。',
 }
 
 // ─── Box Pro 产品数据 ────────────────────────────────────────────────────────
@@ -167,6 +168,128 @@ const faqs = [
   { q: '数据安全如何保障？', a: '私有化部署方案数据完全不出企业内网；云端方案采用端到端加密传输，符合等保 2.0 三级要求。' },
 ]
 
+// ─── 五大挑战 ─────────────────────────────────────────────────────────────────
+const challenges = [
+  { icon: Lock, color: 'text-red-400', bg: 'dark:bg-red-500/10 bg-red-50', border: 'dark:border-red-500/30 border-red-200', title: '数据主权与合规', desc: '企业核心数据不能上传公有云，需满足等保 2.0、行业监管要求，数据全程留在内网。' },
+  { icon: Shield, color: 'text-orange-400', bg: 'dark:bg-orange-500/10 bg-orange-50', border: 'dark:border-orange-500/30 border-orange-200', title: '权限边界与审计', desc: '不同部门、角色对 AI 能力的访问权限必须精细管控，所有操作需留存可查审计日志。' },
+  { icon: Network, color: 'text-yellow-400', bg: 'dark:bg-yellow-500/10 bg-yellow-50', border: 'dark:border-yellow-500/30 border-yellow-200', title: '系统集成复杂度', desc: '需与 OA、CRM、ERP、知识库等多个企业系统打通，接口标准不统一，集成成本高。' },
+  { icon: GitBranch, color: 'text-blue-400', bg: 'dark:bg-blue-500/10 bg-blue-50', border: 'dark:border-blue-500/30 border-blue-200', title: 'Agent 编排与稳定性', desc: '多 Agent 协同工作流在企业环境中需保证高可用，任务失败需有回滚与告警机制。' },
+  { icon: Database, color: 'text-purple-400', bg: 'dark:bg-purple-500/10 bg-purple-50', border: 'dark:border-purple-500/30 border-purple-200', title: '模型选型与成本控制', desc: '公有云大模型 API 成本高且存在数据泄露风险，企业需要可控的本地推理方案。' },
+]
+
+// ─── 安全权限模型 ──────────────────────────────────────────────────────────────
+const securityLayers = [
+  {
+    layer: 'L1',
+    title: '网络边界层',
+    color: 'border-red-500/40 dark:bg-red-500/5',
+    badge: 'bg-red-500/15 text-red-400 border-red-500/30',
+    items: ['WAF / 防火墙隔离', 'DMZ 区域划分', '内外网流量分离', 'DDoS 防护'],
+  },
+  {
+    layer: 'L2',
+    title: '接入认证层',
+    color: 'border-orange-500/40 dark:bg-orange-500/5',
+    badge: 'bg-orange-500/15 text-orange-400 border-orange-500/30',
+    items: ['SSO / LDAP / AD 集成', 'OIDC / OAuth2 支持', 'MFA 多因素认证', 'API Key 签名验证'],
+  },
+  {
+    layer: 'L3',
+    title: 'API 网关层',
+    color: 'border-yellow-500/40 dark:bg-yellow-500/5',
+    badge: 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30',
+    items: ['请求鉴权与限流', 'Token 配额管理', '请求签名校验', '访问日志采集'],
+  },
+  {
+    layer: 'L4',
+    title: 'Agent 权限层',
+    color: 'border-blue-500/40 dark:bg-blue-500/5',
+    badge: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
+    items: ['RBAC 角色权限控制', '部门级数据隔离', 'Skills 调用白名单', '敏感操作二次确认'],
+  },
+  {
+    layer: 'L5',
+    title: '数据安全层',
+    color: 'border-purple-500/40 dark:bg-purple-500/5',
+    badge: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
+    items: ['传输加密（TLS 1.3）', '存储加密（AES-256）', '数据脱敏处理', '敏感字段过滤'],
+  },
+  {
+    layer: 'L6',
+    title: '审计合规层',
+    color: 'border-green-500/40 dark:bg-green-500/5',
+    badge: 'bg-green-500/15 text-green-400 border-green-500/30',
+    items: ['全链路操作日志', '不可篡改审计存储', '合规报告自动生成', '等保 2.0 三级支持'],
+  },
+]
+
+// ─── 系统集成框架 ──────────────────────────────────────────────────────────────
+const integrations = [
+  { category: '身份与权限', icon: Lock, color: 'text-blue-400', items: ['Active Directory', 'LDAP', 'OIDC/OAuth2', '企业微信/钉钉'] },
+  { category: '业务系统', icon: GitBranch, color: 'text-green-400', items: ['OA / 审批系统', 'CRM / 工单', 'ERP / 财务', '项目管理工具'] },
+  { category: '数据与知识', icon: Database, color: 'text-purple-400', items: ['MySQL / PostgreSQL', '企业知识库', '文档管理系统', '数据仓库 / BI'] },
+  { category: '通知与协作', icon: Network, color: 'text-orange-400', items: ['企业微信机器人', '钉钉 Webhook', '邮件通知', 'Slack / Teams'] },
+]
+
+// ─── 标准交付流程 ──────────────────────────────────────────────────────────────
+const deliverySteps = [
+  { step: '01', title: '需求评估', duration: '1–2 天', desc: '架构师与企业技术负责人对接，评估规模、安全要求、集成需求，输出《部署评估报告》。', color: 'dark:border-blue-500/40 border-blue-300' },
+  { step: '02', title: '方案设计', duration: '2–3 天', desc: '输出《系统架构设计文档》，包含网络拓扑、权限模型、集成接口清单、硬件选型建议。', color: 'dark:border-blue-500/40 border-blue-300' },
+  { step: '03', title: '环境准备', duration: '1–2 天', desc: '企业侧准备服务器/网络环境，TokenStar 工程师提供《环境准备 Checklist》并远程指导。', color: 'dark:border-blue-500/40 border-blue-300' },
+  { step: '04', title: '系统部署', duration: '1–3 天', desc: '安装 OpenCLAW + Antigravity，配置 SSO、权限策略、Skills 预装，完成基础联调。', color: 'dark:border-blue-500/40 border-blue-300' },
+  { step: '05', title: '集成调试', duration: '2–5 天', desc: '完成与企业 OA/CRM/ERP/知识库的接口对接，进行端到端功能验证与压力测试。', color: 'dark:border-blue-500/40 border-blue-300' },
+  { step: '06', title: '验收上线', duration: '1 天', desc: '完成《系统验收报告》签署，交付运维手册，启动正式运营，进入技术支持服务周期。', color: 'dark:border-green-500/40 border-green-300' },
+]
+
+// ─── 三种部署模式对比 ──────────────────────────────────────────────────────────
+const deploymentModes = [
+  {
+    id: 'private',
+    icon: Server,
+    color: 'text-green-400',
+    bg: 'dark:bg-green-500/10 bg-green-50',
+    border: 'dark:border-green-500/30 border-green-200',
+    title: '私有化内网部署',
+    sub: 'Box Pro 系列',
+    anchor: '#hardware',
+    badge: '最高安全',
+    badgeColor: 'bg-green-500/15 text-green-400 border-green-500/30',
+    pros: ['数据完全不出内网', '等保 2.0 三级合规', '无网络依赖，离线可用', '一次采购，长期使用'],
+    cons: ['初始投入较高', '需要企业自行运维'],
+    suitable: '金融、医疗、政务、制造业核心系统',
+  },
+  {
+    id: 'cloud',
+    icon: Cloud,
+    color: 'text-blue-400',
+    bg: 'dark:bg-blue-500/10 bg-blue-50',
+    border: 'dark:border-blue-500/30 border-blue-200',
+    title: '云端托管部署',
+    sub: 'Cloud 系列',
+    anchor: '#cloud',
+    badge: '快速上线',
+    badgeColor: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
+    pros: ['1 天内完成部署', '无硬件采购压力', '弹性扩容，按需付费', '专业运维团队保障'],
+    cons: ['数据在云端（加密存储）', '长期成本高于私有化'],
+    suitable: '互联网企业、快速试点、中小企业',
+  },
+  {
+    id: 'hybrid',
+    icon: Smartphone,
+    color: 'text-purple-400',
+    bg: 'dark:bg-purple-500/10 bg-purple-50',
+    border: 'dark:border-purple-500/30 border-purple-200',
+    title: '混合终端部署',
+    sub: 'Workstation 系列',
+    anchor: '#workstation',
+    badge: '灵活扩展',
+    badgeColor: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
+    pros: ['核心数据本地处理', '员工终端随时可用', '与私有化方案协同', '低成本快速覆盖'],
+    cons: ['算力相对有限', '适合轻量任务场景'],
+    suitable: '管理层、销售团队、外勤人员随时调用',
+  },
+]
+
 export default function DeploymentPage() {
   return (
     <div className="min-h-screen">
@@ -177,15 +300,35 @@ export default function DeploymentPage() {
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-4
             dark:bg-blue-500/15 dark:text-blue-400 dark:border dark:border-blue-500/30
             bg-blue-50 text-blue-600 border border-blue-200">
-            <Server className="w-3.5 h-3.5" />
+            <Shield className="w-3.5 h-3.5" />
             部署与安全
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-4 leading-tight">
-            部署与安全
+            企业级部署与安全架构方案
           </h1>
-          <p className="text-base sm:text-lg dark:text-gray-300 text-gray-600 max-w-2xl mx-auto">
-            三种企业级部署路径，让企业在 1–3 天内拥有可运行的超级管理智能体系统。
+          <p className="text-base sm:text-lg dark:text-gray-300 text-gray-600 max-w-3xl mx-auto mb-2">
+            OpenCLAW + Antigravity 私有化实施平台 — 专注企业级私有化部署、安全架构设计与系统集成落地。
           </p>
+          <p className="text-sm dark:text-gray-400 text-gray-500 max-w-2xl mx-auto">
+            从需求评估到验收上线，TokenStar 提供端到端的技术实施支持，确保 AI 系统安全、合规、可持续运行。
+          </p>
+          {/* 白皮书下载 */}
+          <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href="/downloads/openclaw-antigravity-deployment-security-v1.pdf"
+              download
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border dark:border-blue-500/40 border-blue-300 dark:text-blue-400 text-blue-600 dark:hover:bg-blue-500/10 hover:bg-blue-50 text-sm font-medium transition-all"
+            >
+              <Download className="w-4 h-4" />
+              下载部署架构白皮书（即将发布）
+            </a>
+            <a
+              href="#consultation-form"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold transition-all"
+            >
+              预约架构评估 <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -194,17 +337,235 @@ export default function DeploymentPage() {
         {/* ── 个性化建议模块（来自 /cases 参数跳转）── */}
         <DeploymentRecommendation />
 
-        {/* ── 模块一：部署路径总览 ── */}
+        {/* ══ 新增模块一：企业部署五大核心挑战 ══ */}
         <section className="mb-14">
-          <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">三种部署路径</h2>
-          <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">根据企业规模、安全要求与预算，选择最适合的部署方式。</p>
+          <div className="mb-6">
+            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">企业 AI 部署的五大核心挑战</h2>
+            <p className="dark:text-gray-400 text-gray-500 text-sm">TokenStar 的实施方案针对性解决这五类问题，确保 AI 系统在企业环境中安全、合规、稳定运行。</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            {challenges.map((c) => (
+              <div key={c.title} className={`glass rounded-xl p-5 border ${c.border} flex flex-col gap-3`}>
+                <div className={`w-10 h-10 rounded-lg ${c.bg} flex items-center justify-center shrink-0`}>
+                  <c.icon className={`w-5 h-5 ${c.color}`} />
+                </div>
+                <div>
+                  <h3 className="font-semibold dark:text-white text-gray-900 text-sm mb-1">{c.title}</h3>
+                  <p className="text-xs dark:text-gray-400 text-gray-500 leading-relaxed">{c.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ══ 新增模块二：企业部署参考架构图 ══ */}
+        <section className="mb-14">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">企业级参考架构</h2>
+            <p className="dark:text-gray-400 text-gray-500 text-sm">以下架构图展示 OpenCLAW + Antigravity 在企业内网环境中的标准部署拓扑，适用于私有化部署场景。</p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* 架构图 A */}
+            <div className="glass rounded-2xl border dark:border-white/8 border-gray-200 overflow-hidden">
+              <div className="p-4 border-b dark:border-white/8 border-gray-100">
+                <h3 className="font-semibold dark:text-white text-gray-900 text-sm mb-1">系统能力分层架构</h3>
+                <p className="text-xs dark:text-gray-400 text-gray-500">从终端接入到数据集成的完整五层架构，展示各组件职责与数据流向。</p>
+              </div>
+              <div className="p-4 dark:bg-white/2 bg-gray-50">
+                <Image
+                  src="/images/arch-a-enterprise-deployment.png"
+                  alt="OpenCLAW + Antigravity 企业级系统能力分层架构图"
+                  width={800}
+                  height={500}
+                  className="w-full h-auto rounded-lg"
+                  unoptimized
+                />
+              </div>
+            </div>
+            {/* 架构图 B */}
+            <div className="glass rounded-2xl border dark:border-white/8 border-gray-200 overflow-hidden">
+              <div className="p-4 border-b dark:border-white/8 border-gray-100">
+                <h3 className="font-semibold dark:text-white text-gray-900 text-sm mb-1">网络安全分区架构</h3>
+                <p className="text-xs dark:text-gray-400 text-gray-500">企业内网安全分区设计，展示办公网、DMZ、业务区、算力区与数据区的隔离边界。</p>
+              </div>
+              <div className="p-4 dark:bg-white/2 bg-gray-50">
+                <Image
+                  src="/images/arch-b-network-zones.png"
+                  alt="OpenCLAW + Antigravity 企业网络安全分区架构图"
+                  width={800}
+                  height={500}
+                  className="w-full h-auto rounded-lg"
+                  unoptimized
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ══ 新增模块三：三种部署模式对比 ══ */}
+        <section className="mb-14">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">三种部署模式</h2>
+            <p className="dark:text-gray-400 text-gray-500 text-sm">根据企业规模、安全要求与预算，选择最适合的部署方式。</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {deploymentModes.map((mode) => (
+              <div key={mode.id} className={`glass rounded-2xl border ${mode.border} flex flex-col overflow-hidden`}>
+                <div className="p-5 border-b dark:border-white/8 border-gray-100">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className={`w-10 h-10 rounded-lg ${mode.bg} flex items-center justify-center`}>
+                      <mode.icon className={`w-5 h-5 ${mode.color}`} />
+                    </div>
+                    <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${mode.badgeColor}`}>{mode.badge}</span>
+                  </div>
+                  <h3 className="font-bold dark:text-white text-gray-900 mb-0.5">{mode.title}</h3>
+                  <p className="text-xs dark:text-gray-500 text-gray-400">{mode.sub}</p>
+                </div>
+                <div className="p-5 flex-1 space-y-4">
+                  <div>
+                    <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">优势</div>
+                    <ul className="space-y-1">
+                      {mode.pros.map(p => (
+                        <li key={p} className="flex items-start gap-1.5 text-xs dark:text-gray-300 text-gray-600">
+                          <CheckCircle className="w-3 h-3 dark:text-green-400 text-green-500 shrink-0 mt-0.5" />
+                          {p}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">注意事项</div>
+                    <ul className="space-y-1">
+                      {mode.cons.map(c => (
+                        <li key={c} className="flex items-start gap-1.5 text-xs dark:text-gray-400 text-gray-500">
+                          <span className="w-3 h-3 shrink-0 mt-0.5 text-center leading-3">·</span>
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="pt-1">
+                    <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-1">适用场景</div>
+                    <p className="text-xs dark:text-gray-400 text-gray-500">{mode.suitable}</p>
+                  </div>
+                </div>
+                <div className="p-5 pt-0">
+                  <a href={mode.anchor} className={`block w-full text-center py-2.5 rounded-xl text-xs font-semibold transition-all border ${mode.border} dark:text-white text-gray-700 dark:hover:bg-white/5 hover:bg-gray-50`}>
+                    查看详细方案 <ArrowRight className="w-3 h-3 inline ml-1" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ══ 新增模块四：安全权限模型 ══ */}
+        <section className="mb-14">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">六层安全权限模型</h2>
+            <p className="dark:text-gray-400 text-gray-500 text-sm">TokenStar 标准实施方案内置六层安全防护，从网络边界到审计合规，全链路保障企业数据安全。</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {securityLayers.map((layer) => (
+              <div key={layer.layer} className={`glass rounded-xl border ${layer.color} p-5`}>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className={`text-xs px-2.5 py-1 rounded-full border font-mono font-bold ${layer.badge}`}>{layer.layer}</span>
+                  <h3 className="font-semibold dark:text-white text-gray-900 text-sm">{layer.title}</h3>
+                </div>
+                <ul className="space-y-1.5">
+                  {layer.items.map(item => (
+                    <li key={item} className="flex items-center gap-1.5 text-xs dark:text-gray-300 text-gray-600">
+                      <CheckCircle className="w-3 h-3 dark:text-green-400 text-green-500 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ══ 新增模块五：系统集成框架 ══ */}
+        <section className="mb-14">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">企业系统集成框架</h2>
+            <p className="dark:text-gray-400 text-gray-500 text-sm">Antigravity Skills Runtime 提供标准化连接器，支持与企业现有系统无缝集成，无需重构现有 IT 架构。</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {integrations.map((integ) => (
+              <div key={integ.category} className="glass rounded-xl border dark:border-white/8 border-gray-200 p-5">
+                <div className="flex items-center gap-2 mb-3">
+                  <integ.icon className={`w-4 h-4 ${integ.color}`} />
+                  <h3 className="font-semibold dark:text-white text-gray-900 text-sm">{integ.category}</h3>
+                </div>
+                <ul className="space-y-1.5">
+                  {integ.items.map(item => (
+                    <li key={item} className="flex items-center gap-1.5 text-xs dark:text-gray-300 text-gray-600">
+                      <CheckCircle className="w-3 h-3 dark:text-blue-400 text-blue-500 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ══ 新增模块六：标准交付流程 ══ */}
+        <section className="mb-14">
+          <div className="mb-6">
+            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">标准交付流程</h2>
+            <p className="dark:text-gray-400 text-gray-500 text-sm">TokenStar 标准实施周期为 7–15 个工作日（视集成复杂度），每个阶段均有文档交付物。</p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {deliverySteps.map((step, idx) => (
+              <div key={step.step} className={`glass rounded-xl border ${step.color} p-5 relative`}>
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl font-black dark:text-white/20 text-gray-200 leading-none shrink-0">{step.step}</span>
+                  <div className="flex-1">
+                    <div className="flex items-center justify-between mb-1">
+                      <h3 className="font-semibold dark:text-white text-gray-900 text-sm">{step.title}</h3>
+                      <span className="text-xs dark:text-gray-500 text-gray-400 shrink-0 ml-2">{step.duration}</span>
+                    </div>
+                    <p className="text-xs dark:text-gray-400 text-gray-500 leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+                {idx < deliverySteps.length - 1 && (
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-4 h-4 flex items-center justify-center lg:hidden">
+                    <ArrowRight className="w-3 h-3 rotate-90 dark:text-gray-600 text-gray-300" />
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          {/* 交付文档列表 */}
+          <div className="mt-5 glass rounded-xl border dark:border-white/8 border-gray-200 p-5">
+            <div className="flex items-center gap-2 mb-3">
+              <FileText className="w-4 h-4 dark:text-gray-400 text-gray-500" />
+              <span className="text-sm font-semibold dark:text-white text-gray-900">标准交付文档清单</span>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+              {['部署评估报告', '系统架构设计文档', '环境准备 Checklist', '接口对接说明书', '系统验收报告', '运维操作手册'].map(doc => (
+                <div key={doc} className="flex items-center gap-1.5 text-xs dark:text-gray-300 text-gray-600">
+                  <CheckCircle className="w-3 h-3 dark:text-green-400 text-green-500 shrink-0" />
+                  {doc}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── 原有模块：部署路径总览 ── */}
+        <section className="mb-14">
+          <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">选择您的部署产品</h2>
+          <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">以下为各部署模式的具体产品配置与报价，点击查看详情。</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { icon: Server, color: 'text-green-400', bg: 'dark:bg-green-500/10 bg-green-50', border: 'dark:border-green-500/30 border-green-200', title: '私有化部署', sub: 'OpenClaw Box Pro', desc: '适合对数据安全要求高、计划长期使用 AI 的企业。' },
-              { icon: Cloud, color: 'text-blue-400', bg: 'dark:bg-blue-500/10 bg-blue-50', border: 'dark:border-blue-500/30 border-blue-200', title: '云端部署', sub: 'OpenClaw Cloud', desc: '适合希望快速上线、轻资产试点的企业。' },
-              { icon: Smartphone, color: 'text-purple-400', bg: 'dark:bg-purple-500/10 bg-purple-50', border: 'dark:border-purple-500/30 border-purple-200', title: '员工智能终端', sub: 'OpenClaw Workstation', desc: '为管理层与业务人员提供随时可用的智能助手终端。' },
+              { icon: Server, color: 'text-green-400', bg: 'dark:bg-green-500/10 bg-green-50', border: 'dark:border-green-500/30 border-green-200', title: '私有化部署', sub: 'OpenClaw Box Pro', desc: '适合对数据安全要求高、计划长期使用 AI 的企业。', anchor: '#hardware' },
+              { icon: Cloud, color: 'text-blue-400', bg: 'dark:bg-blue-500/10 bg-blue-50', border: 'dark:border-blue-500/30 border-blue-200', title: '云端部署', sub: 'OpenClaw Cloud', desc: '适合希望快速上线、轻资产试点的企业。', anchor: '#cloud' },
+              { icon: Smartphone, color: 'text-purple-400', bg: 'dark:bg-purple-500/10 bg-purple-50', border: 'dark:border-purple-500/30 border-purple-200', title: '员工智能终端', sub: 'OpenClaw Workstation', desc: '为管理层与业务人员提供随时可用的智能助手终端。', anchor: '#workstation' },
             ].map((item) => (
-              <div key={item.title} className={`glass rounded-xl p-5 border ${item.border} flex flex-col gap-3`}>
+              <a key={item.title} href={item.anchor} className={`glass rounded-xl p-5 border ${item.border} flex flex-col gap-3 hover:opacity-80 transition-opacity`}>
                 <div className={`w-10 h-10 rounded-lg ${item.bg} flex items-center justify-center`}>
                   <item.icon className={`w-5 h-5 ${item.color}`} />
                 </div>
@@ -213,12 +574,12 @@ export default function DeploymentPage() {
                   <h3 className="font-semibold dark:text-white text-gray-900">{item.title}</h3>
                 </div>
                 <p className="text-sm dark:text-gray-400 text-gray-500">{item.desc}</p>
-              </div>
+              </a>
             ))}
           </div>
         </section>
 
-        {/* ── 模块二：Box Pro 产品体系 ── */}
+        {/* ── Box Pro 产品体系 ── */}
         <section id="hardware" className="mb-14">
           <div className="flex items-center gap-3 mb-2">
             <Server className="w-5 h-5 dark:text-green-400 text-green-600" />
@@ -229,7 +590,6 @@ export default function DeploymentPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {boxProProducts.map((product) => (
               <div key={product.id} className={`glass rounded-2xl border ${product.color} flex flex-col overflow-hidden`}>
-                {/* 产品头部 */}
                 <div className="p-5 border-b dark:border-white/8 border-gray-100">
                   <div className="flex items-center justify-between mb-3">
                     <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${product.badgeColor}`}>{product.badge}</span>
@@ -242,8 +602,6 @@ export default function DeploymentPage() {
                     <div className="text-xs dark:text-gray-500 text-gray-400">{product.priceNote}</div>
                   </div>
                 </div>
-
-                {/* 推荐场景 */}
                 <div className="p-5 border-b dark:border-white/8 border-gray-100">
                   <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">推荐应用场景</div>
                   <div className="flex flex-wrap gap-1.5">
@@ -252,8 +610,6 @@ export default function DeploymentPage() {
                     ))}
                   </div>
                 </div>
-
-                {/* 硬件配置 */}
                 <div className="p-5 border-b dark:border-white/8 border-gray-100">
                   <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-3">硬件配置</div>
                   <div className="space-y-1.5">
@@ -265,8 +621,6 @@ export default function DeploymentPage() {
                     ))}
                   </div>
                 </div>
-
-                {/* 软件预装 */}
                 <div className="p-5 border-b dark:border-white/8 border-gray-100">
                   <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">软件预装</div>
                   <ul className="space-y-1">
@@ -278,8 +632,6 @@ export default function DeploymentPage() {
                     ))}
                   </ul>
                 </div>
-
-                {/* 服务内容 */}
                 <div className="p-5 flex-1">
                   <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">服务内容</div>
                   <ul className="space-y-1">
@@ -291,8 +643,6 @@ export default function DeploymentPage() {
                     ))}
                   </ul>
                 </div>
-
-                {/* CTA */}
                 <div className="p-5 pt-0">
                   <a href="#consultation-form" className={`block w-full text-center py-2.5 rounded-xl text-sm font-semibold text-white transition-all ${product.ctaStyle}`}>
                     {product.cta}
@@ -303,7 +653,7 @@ export default function DeploymentPage() {
           </div>
         </section>
 
-        {/* ── 模块三：Cloud 方案 ── */}
+        {/* ── Cloud 方案 ── */}
         <section id="cloud" className="mb-14">
           <div className="flex items-center gap-3 mb-2">
             <Cloud className="w-5 h-5 dark:text-blue-400 text-blue-600" />
@@ -358,8 +708,8 @@ export default function DeploymentPage() {
           </div>
         </section>
 
-        {/* ── 模块四：Workstation 终端 ── */}
-        <section className="mb-14">
+        {/* ── Workstation 终端 ── */}
+        <section id="workstation" className="mb-14">
           <div className="flex items-center gap-3 mb-2">
             <Smartphone className="w-5 h-5 dark:text-purple-400 text-purple-600" />
             <h2 className="text-xl font-bold dark:text-white text-gray-900">OpenClaw Workstation 终端</h2>
@@ -417,7 +767,7 @@ export default function DeploymentPage() {
           </div>
         </section>
 
-        {/* ── 模块五：统一服务承诺 ── */}
+        {/* ── 统一服务承诺 ── */}
         <section className="mb-14">
           <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">所有产品统一服务承诺</h2>
           <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">无论您选择哪种部署方式，以下服务均包含在内。</p>
@@ -436,15 +786,15 @@ export default function DeploymentPage() {
           </div>
         </section>
 
-        {/* ── 模块六：ROI 测算（客户端组件） ── */}
+        {/* ── ROI 测算 ── */}
         <div id="roi">
-        <ROICalculator />
+          <ROICalculator />
         </div>
 
-        {/* ── 模块七：咨询表单（客户端组件） ── */}
+        {/* ── 咨询表单 ── */}
         <ConsultationForm />
 
-        {/* ── 模块八：FAQ ── */}
+        {/* ── FAQ ── */}
         <section className="mb-14">
           <div className="flex items-center gap-3 mb-6">
             <HelpCircle className="w-5 h-5 dark:text-gray-400 text-gray-500" />
@@ -460,19 +810,27 @@ export default function DeploymentPage() {
           </div>
         </section>
 
-        {/* ── 底部强 CTA ── */}
+        {/* ── 底部强 CTA（三按钮版）── */}
         <section>
           <div className="glass rounded-2xl border dark:border-blue-500/20 border-blue-200 p-8 text-center">
             <h2 className="text-2xl font-bold dark:text-white text-gray-900 mb-3">开启企业智能化升级</h2>
             <p className="dark:text-gray-400 text-gray-500 text-sm mb-6 max-w-xl mx-auto">
-              专业技术顾问为您量身定制部署方案，从选型到上线全程支持。
+              专业架构师为您量身定制部署方案，从选型到上线全程支持，确保安全合规、快速落地。
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a href="#consultation-form" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all">
                 预约企业部署评估 <ArrowRight className="w-4 h-4" />
               </a>
-              <Link href="/about" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border dark:border-white/20 border-gray-300 dark:text-white text-gray-700 dark:hover:bg-white/5 hover:bg-gray-50 font-semibold text-sm transition-all">
-                联系我们
+              <a
+                href="/downloads/openclaw-antigravity-deployment-security-v1.pdf"
+                download
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border dark:border-white/20 border-gray-300 dark:text-white text-gray-700 dark:hover:bg-white/5 hover:bg-gray-50 font-semibold text-sm transition-all"
+              >
+                <Download className="w-4 h-4" />
+                下载架构白皮书
+              </a>
+              <Link href="/cases" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border dark:border-white/20 border-gray-300 dark:text-white text-gray-700 dark:hover:bg-white/5 hover:bg-gray-50 font-semibold text-sm transition-all">
+                查看成功案例
               </Link>
             </div>
           </div>
