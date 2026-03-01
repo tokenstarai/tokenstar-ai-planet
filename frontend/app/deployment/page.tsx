@@ -358,49 +358,6 @@ export default function DeploymentPage() {
           </div>
         </section>
 
-        {/* ══ 新增模块二：企业部署参考架构图 ══ */}
-        <section className="mb-14">
-          <div className="mb-6">
-            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">企业级参考架构</h2>
-            <p className="dark:text-gray-400 text-gray-500 text-sm">以下架构图展示 OpenCLAW + Antigravity 在企业内网环境中的标准部署拓扑，适用于私有化部署场景。</p>
-          </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* 架构图 A */}
-            <div className="glass rounded-2xl border dark:border-white/8 border-gray-200 overflow-hidden">
-              <div className="p-4 border-b dark:border-white/8 border-gray-100">
-                <h3 className="font-semibold dark:text-white text-gray-900 text-sm mb-1">系统能力分层架构</h3>
-                <p className="text-xs dark:text-gray-400 text-gray-500">从终端接入到数据集成的完整五层架构，展示各组件职责与数据流向。</p>
-              </div>
-              <div className="p-4 dark:bg-white/2 bg-gray-50">
-                <Image
-                  src="/images/arch-a-enterprise-deployment.png"
-                  alt="OpenCLAW + Antigravity 企业级系统能力分层架构图"
-                  width={800}
-                  height={500}
-                  className="w-full h-auto rounded-lg"
-                  unoptimized
-                />
-              </div>
-            </div>
-            {/* 架构图 B */}
-            <div className="glass rounded-2xl border dark:border-white/8 border-gray-200 overflow-hidden">
-              <div className="p-4 border-b dark:border-white/8 border-gray-100">
-                <h3 className="font-semibold dark:text-white text-gray-900 text-sm mb-1">网络安全分区架构</h3>
-                <p className="text-xs dark:text-gray-400 text-gray-500">企业内网安全分区设计，展示办公网、DMZ、业务区、算力区与数据区的隔离边界。</p>
-              </div>
-              <div className="p-4 dark:bg-white/2 bg-gray-50">
-                <Image
-                  src="/images/arch-b-network-zones.png"
-                  alt="OpenCLAW + Antigravity 企业网络安全分区架构图"
-                  width={800}
-                  height={500}
-                  className="w-full h-auto rounded-lg"
-                  unoptimized
-                />
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* ══ 新增模块三：三种部署模式对比 ══ */}
         <section className="mb-14">
