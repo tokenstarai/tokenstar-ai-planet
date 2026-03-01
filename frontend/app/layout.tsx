@@ -21,12 +21,12 @@ export const metadata: Metadata = {
   manifest: '/manifest.webmanifest',
   icons: {
     icon: [
-      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon-16x16.png?v=2', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png?v=2', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico?v=2', sizes: 'any' },
     ],
     apple: [
-      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png?v=2', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
@@ -83,13 +83,13 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="TokenStar" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
 
         {/* Android / Windows PWA */}
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="application-name" content="TokenStar" />
         <meta name="msapplication-TileColor" content="#0B1220" />
-        <meta name="msapplication-TileImage" content="/icons/icon-192.png" />
+        <meta name="msapplication-TileImage" content="/icons/icon-192.png?v=2" />
 
         {/* 防止主题闪烁的内联脚本（同步更新 theme-color meta） */}
         <script

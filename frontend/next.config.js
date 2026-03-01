@@ -1,14 +1,13 @@
 const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
-  skipWaiting: false,
+  skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
   buildExcludes: [/middleware-manifest\.json$/],
   fallbacks: {
     document: '/offline',
   },
   runtimeCaching: [
-    // HTML 页面：Network First
     {
       urlPattern: /^https:\/\/tokenstar\.ai\/.*$/,
       handler: 'NetworkFirst',
@@ -19,7 +18,6 @@ const withPWA = require('next-pwa')({
         cacheableResponse: { statuses: [0, 200] },
       },
     },
-    // 静态资源（JS/CSS/字体）：Stale While Revalidate
     {
       urlPattern: /\.(js|css|woff2?|ttf|eot)(\?.*)?$/i,
       handler: 'StaleWhileRevalidate',
@@ -29,17 +27,25 @@ const withPWA = require('next-pwa')({
         cacheableResponse: { statuses: [0, 200] },
       },
     },
-    // 图片：Cache First
     {
-      urlPattern: /\.(png|jpg|jpeg|gif|webp|svg|ico)(\?.*)?$/i,
-      handler: 'CacheFirst',
+      urlPattern: /\/(favicon|apple-touch-icon|icons\/icon)[^/]*\.(png|ico|svg)(\?.*)?$/i,
+      handler: 'NetworkFirst',
       options: {
-        cacheName: 'image-cache',
-        expiration: { maxEntries: 80, maxAgeSeconds: 30 * 24 * 60 * 60 },
+        cacheName: 'icon-cache',
+        networkTimeoutSeconds: 5,
+        expiration: { maxEntries: 20, maxAgeSeconds: 24 * 60 * 60 },
         cacheableResponse: { statuses: [0, 200] },
       },
     },
-    // Google Fonts：Stale While Revalidate
+    {
+      urlPattern: /\.(png|jpg|jpeg|gif|webp|svg|ico)(\?.*)?$/i,
+      handler: 'StaleWhileRevalidate',
+      options: {
+        cacheName: 'image-cache',
+        expiration: { maxEntries: 80, maxAgeSeconds: 7 * 24 * 60 * 60 },
+        cacheableResponse: { statuses: [0, 200] },
+      },
+    },
     {
       urlPattern: /^https:\/\/fonts\.(googleapis|gstatic)\.com\/.*/i,
       handler: 'StaleWhileRevalidate',
@@ -49,7 +55,6 @@ const withPWA = require('next-pwa')({
         cacheableResponse: { statuses: [0, 200] },
       },
     },
-    // Next.js 静态资源：Cache First
     {
       urlPattern: /^\/_next\/static\/.*/i,
       handler: 'CacheFirst',
