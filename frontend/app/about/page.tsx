@@ -29,7 +29,7 @@ export default function AboutPage() {
       <div className={`page-header ${isDark ? 'bg-gradient-to-b from-indigo-900/20 to-transparent' : ''}`}>
         <div className="max-w-7xl mx-auto px-4">
           <h1 className={`text-4xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>关于 TokenStar</h1>
-          <p className={`max-w-xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
+          <p className={`sm:whitespace-nowrap ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
             OpenCLAW + Antigravity 企业级实施平台，专注中国企业私有化部署与落地生态建设。
           </p>
         </div>
