@@ -38,14 +38,20 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
           {/* Brand — 与顶部 Navbar Logo 完全一致：图标 + TokenStar 单行 */}
           <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-2.5 mb-4 group" aria-label="TokenStar 首页">
-              <LogoIcon size={32} idSuffix="footer" />
+            <Link href="/" className="flex items-center gap-2 mb-4 group" aria-label="TokenStar 首页">
+              <LogoIcon size={30} idSuffix="footer" />
               <span
-                className="font-bold tracking-tight leading-none select-none"
-                style={{ fontSize: '18px', letterSpacing: '-0.02em' }}
+                className="font-extrabold leading-none select-none"
+                style={{ fontSize: '19px', letterSpacing: '-0.01em', fontStyle: 'italic' }}
               >
-                <span style={{ color: isDark ? '#F8FAFC' : '#0F172A' }}>Token</span>
-                <span style={{ color: '#3B82F6' }}>Star</span>
+                <span style={{
+                  background: isDark ? 'linear-gradient(90deg, #c7d2fe 0%, #a5b4fc 100%)' : 'linear-gradient(90deg, #3730a3 0%, #4338ca 100%)',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
+                }}>Token</span>
+                <span style={{
+                  background: 'linear-gradient(90deg, #2563eb 0%, #06b6d4 60%, #10b981 100%)',
+                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
+                }}>Star</span>
               </span>
             </Link>
             <p className={`text-sm leading-relaxed mb-5 max-w-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>

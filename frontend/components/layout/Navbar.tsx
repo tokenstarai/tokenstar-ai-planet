@@ -8,15 +8,7 @@ import { mockNews, mockSkills, mockKnowledge, mockBlogs, mockCases, mockHardware
 
 const navItems = [
   { label: '首页', href: '/' },
-  {
-    label: '企业解决方案',
-    href: '/scenarios',
-    children: [
-      { label: '应用场景总览', href: '/scenarios' },
-      { label: '行业解决方案', href: '/scenarios#industry-types' },
-      { label: '企业规模适配', href: '/scenarios#scales' },
-    ],
-  },
+  { label: '企业解决方案', href: '/scenarios' },
   { label: '成功案例', href: '/cases' },
   {
     label: '部署方案',
@@ -75,6 +67,15 @@ const typeLabels: Record<string, string> = {
  * LogoIcon：纯图标组件（32x32 蓝紫渐变方块 + 四角星 + 外环 + 中心核）
  */
 export function LogoIcon({ size = 32, idSuffix = 'a' }: { size?: number; idSuffix?: string }) {
+  // 四角星路径：8个点，外尖和内凹交替，基于 32x32 viewBox
+  const cx = 16, cy = 16
+  const outer = 12.8, inner = 4.16
+  const starPoints = Array.from({ length: 8 }, (_, i) => {
+    const angle = (i * 45 - 90) * Math.PI / 180
+    const r = i % 2 === 0 ? outer : inner
+    return `${cx + r * Math.cos(angle)},${cy + r * Math.sin(angle)}`
+  }).join(' ')
+
   return (
     <svg
       width={size}
@@ -85,28 +86,25 @@ export function LogoIcon({ size = 32, idSuffix = 'a' }: { size?: number; idSuffi
       aria-hidden="true"
       style={{ flexShrink: 0 }}
     >
-      <rect width="32" height="32" rx="8" fill={`url(#lg1-${idSuffix})`} />
-      <circle cx="16" cy="16" r="11.5" stroke="rgba(255,255,255,0.22)" strokeWidth="1.2" fill="none" />
-      <path
-        d="M16 5.5 L17.6 12.4 L24.5 10.5 L19.8 16 L24.5 21.5 L17.6 19.6 L16 26.5 L14.4 19.6 L7.5 21.5 L12.2 16 L7.5 10.5 L14.4 12.4 Z"
-        fill="white"
-        opacity="0.95"
-      />
-      <circle cx="16" cy="16" r="2.8" fill={`url(#lg2-${idSuffix})`} />
-      <circle cx="7" cy="7" r="1.2" fill="rgba(255,255,255,0.42)" />
-      <circle cx="25" cy="7" r="1.2" fill="rgba(255,255,255,0.42)" />
-      <circle cx="7" cy="25" r="1.2" fill="rgba(255,255,255,0.28)" />
-      <circle cx="25" cy="25" r="1.2" fill="rgba(255,255,255,0.28)" />
       <defs>
         <linearGradient id={`lg1-${idSuffix}`} x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#2563EB" />
+          <stop offset="0%" stopColor="#4F6EF7" />
           <stop offset="100%" stopColor="#7C3AED" />
         </linearGradient>
-        <linearGradient id={`lg2-${idSuffix}`} x1="13" y1="13" x2="19" y2="19" gradientUnits="userSpaceOnUse">
+        <linearGradient id={`lg2-${idSuffix}`} x1="12" y1="12" x2="20" y2="20" gradientUnits="userSpaceOnUse">
           <stop offset="0%" stopColor="#93C5FD" />
-          <stop offset="100%" stopColor="#C4B5FD" />
+          <stop offset="100%" stopColor="#818CF8" />
         </linearGradient>
+        <clipPath id={`clip-${idSuffix}`}>
+          <rect width="32" height="32" rx="7" />
+        </clipPath>
       </defs>
+      {/* 背景圆角方形，无边框 */}
+      <rect width="32" height="32" rx="7" fill={`url(#lg1-${idSuffix})`} />
+      {/* 白色四角星 */}
+      <polygon points={starPoints} fill="white" opacity="0.95" clipPath={`url(#clip-${idSuffix})`} />
+      {/* 中心渐变圆点 */}
+      <circle cx="16" cy="16" r="3.0" fill={`url(#lg2-${idSuffix})`} />
     </svg>
   )
 }
@@ -115,15 +113,19 @@ export function LogoIcon({ size = 32, idSuffix = 'a' }: { size?: number; idSuffi
  * LogoWordmark：图标 + "Token" + "Star"（Star 用蓝色高亮）
  */
 export function LogoWordmark({ isDark }: { isDark: boolean }) {
+  const tokenGrad = isDark
+    ? 'linear-gradient(90deg, #c7d2fe 0%, #a5b4fc 100%)'
+    : 'linear-gradient(90deg, #3730a3 0%, #4338ca 100%)'
+  const starGrad = 'linear-gradient(90deg, #2563eb 0%, #06b6d4 60%, #10b981 100%)'
   return (
-    <Link href="/" className="flex items-center gap-2.5 group shrink-0" aria-label="TokenStar 首页">
-      <LogoIcon size={32} idSuffix="nav" />
+    <Link href="/" className="flex items-center gap-2 group shrink-0" aria-label="TokenStar 首页">
+      <LogoIcon size={30} idSuffix="nav" />
       <span
-        className="font-bold tracking-tight leading-none select-none"
-        style={{ fontSize: '18px', letterSpacing: '-0.02em' }}
+        className="font-extrabold leading-none select-none"
+        style={{ fontSize: '19px', letterSpacing: '-0.01em', fontStyle: 'italic' }}
       >
-        <span style={{ color: isDark ? '#F8FAFC' : '#0F172A' }}>Token</span>
-        <span style={{ color: '#3B82F6' }}>Star</span>
+        <span style={{ background: tokenGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Token</span>
+        <span style={{ background: starGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Star</span>
       </span>
     </Link>
   )
