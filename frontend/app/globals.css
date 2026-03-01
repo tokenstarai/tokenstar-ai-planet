@@ -152,15 +152,22 @@ html.light {
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
-  /* 锚点定位偏移：补偿 fixed navbar（64px）高度，避免内容被遮挡 */
+  /* 锁点定位偏移：补偿 fixed navbar（64px）高度，避免内容被遗挡 */
   scroll-padding-top: calc(80px + env(safe-area-inset-top, 0px));
+  /* 中文阅读优化：移动端基准16px，桌面端基准17px */
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
+  }
 }
 
 body {
   color: var(--color-text-primary);
   background-color: var(--color-bg);
   min-height: 100vh;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
   transition: background-color var(--transition-theme), color var(--transition-theme);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

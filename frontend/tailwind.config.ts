@@ -36,7 +36,20 @@ const config: Config = {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'system-ui', 'sans-serif'],
+      },
+      fontSize: {
+        // 中文优化字号体系（在 Tailwind 默认值基础上整体上调）
+        'xs':   ['0.8125rem',  { lineHeight: '1.5' }],   // 13px（原12px）
+        'sm':   ['0.9375rem',  { lineHeight: '1.65' }],  // 15px（原14px）
+        'base': ['1.0625rem',  { lineHeight: '1.75' }],  // 17px（原16px）
+        'lg':   ['1.1875rem',  { lineHeight: '1.7' }],   // 19px（原18px）
+        'xl':   ['1.3125rem',  { lineHeight: '1.65' }],  // 21px（原20px）
+        '2xl':  ['1.5625rem',  { lineHeight: '1.5' }],   // 25px（原24px）
+        '3xl':  ['1.9375rem',  { lineHeight: '1.35' }],  // 31px（原30px）
+        '4xl':  ['2.3125rem',  { lineHeight: '1.2' }],   // 37px（原36px）
+        '5xl':  ['3rem',       { lineHeight: '1.1' }],   // 48px（不变）
+        '6xl':  ['3.75rem',    { lineHeight: '1' }],     // 60px（不变）
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
