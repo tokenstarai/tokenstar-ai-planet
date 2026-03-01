@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
-  ArrowRight, TrendingUp, BarChart3, Globe, Users,
+  ArrowRight, TrendingUp, BarChart3, Users,
   Building2, Factory, CheckCircle2, ChevronRight,
   Layers, Database, Cpu, MessageSquare,
 } from 'lucide-react'
@@ -12,6 +12,42 @@ export const metadata: Metadata = {
   description: '从销售到供应链，OpenClaw 为每个部门提供可落地的企业级智能体解决方案，覆盖小型、中型、大型企业全规模。',
 }
 
+/*
+ * ─── 配色规范（WCAG AA，对比度 ≥ 4.5:1）────────────────────────────────────
+ *
+ * 深色主题背景层级：
+ *   页面背景      ≈ #0f1117  (near-black)
+ *   glass 卡片    ≈ #1a1d27  (dark:bg-white/5 over page bg)
+ *   嵌套卡片      dark:bg-slate-800  (#1e2130, 实色，避免透明叠加失控)
+ *   表格 header   dark:bg-white/4
+ *   表格行悬停    dark:hover:bg-white/6
+ *
+ * 文字层级：
+ *   主标题        dark:text-white        (#ffffff, 21:1)
+ *   正文/副标题   dark:text-gray-200     (#e5e7eb, ~14:1)
+ *   次要说明      dark:text-gray-400     (#9ca3af, ~4.6:1) ← WCAG AA 最低线
+ *   标签/caption  dark:text-gray-400     (#9ca3af, ~4.6:1)
+ *   禁用/装饰     dark:text-gray-500     (#6b7280, ~3.5:1) — 仅用于纯装饰元素
+ *
+ * 彩色文字（深色背景）：
+ *   sky/blue      dark:text-sky-300      (#7dd3fc, ~8:1)
+ *   violet        dark:text-violet-300   (#c4b5fd, ~7:1)
+ *   amber         dark:text-amber-300    (#fcd34d, ~8:1)
+ *   emerald       dark:text-emerald-400  (#34d399, ~5.5:1)
+ *   rose          dark:text-rose-300     (#fda4af, ~7:1)
+ *
+ * 按钮：
+ *   主按钮        bg-blue-600 hover:bg-blue-500 text-white  (solid, always readable)
+ *   次要按钮      dark:bg-white/15 dark:hover:bg-white/25 dark:text-white
+ *                 light:bg-gray-100 light:hover:bg-gray-200 light:text-gray-900
+ *
+ * 规模卡片（深色）：
+ *   sky 卡片      dark:bg-slate-800 dark:border-sky-500/40
+ *   violet 卡片   dark:bg-slate-800 dark:border-violet-500/40
+ *   amber 卡片    dark:bg-slate-800 dark:border-amber-500/40
+ *   (实色背景确保文字对比度可控)
+ */
+
 // ─── 企业规模配置（全页统一）────────────────────────────────────────────────
 const SCALES = [
   {
@@ -19,30 +55,42 @@ const SCALES = [
     label: '小型企业',
     range: '150 人以内',
     deploy: 'Cloud Pro / Box Pro S',
-    deployColor: 'text-sky-700 dark:text-sky-400',
-    bg: 'bg-sky-50 dark:bg-sky-500/10',
-    border: 'border-sky-200 dark:border-sky-500/20',
-    dot: 'bg-sky-500',
+    // 文字：深色用亮色，浅色用深色，均 ≥ 4.5:1
+    deployColor: 'dark:text-sky-300 text-sky-700',
+    labelColor:  'dark:text-sky-300 text-sky-700',
+    // 卡片背景：深色用实色 slate-800，浅色用淡色
+    cardBg:      'dark:bg-slate-800 bg-sky-50',
+    cardBorder:  'dark:border-sky-500/40 border-sky-200',
+    dot:         'bg-sky-400',
+    // ROI 卡片（嵌套在场景卡片内）
+    roiBg:       'dark:bg-slate-700 bg-sky-50',
+    roiBorder:   'dark:border-sky-500/30 border-sky-200',
   },
   {
     key: 'mid',
     label: '中型企业',
     range: '150–500 人',
     deploy: 'Box Pro S / Box Pro M',
-    deployColor: 'text-violet-700 dark:text-violet-400',
-    bg: 'bg-violet-50 dark:bg-violet-500/10',
-    border: 'border-violet-200 dark:border-violet-500/20',
-    dot: 'bg-violet-500',
+    deployColor: 'dark:text-violet-300 text-violet-700',
+    labelColor:  'dark:text-violet-300 text-violet-700',
+    cardBg:      'dark:bg-slate-800 bg-violet-50',
+    cardBorder:  'dark:border-violet-500/40 border-violet-200',
+    dot:         'bg-violet-400',
+    roiBg:       'dark:bg-slate-700 bg-violet-50',
+    roiBorder:   'dark:border-violet-500/30 border-violet-200',
   },
   {
     key: 'large',
     label: '大型企业',
     range: '500 人以上',
     deploy: 'Box Pro M / 集群定制',
-    deployColor: 'text-amber-700 dark:text-amber-400',
-    bg: 'bg-amber-50 dark:bg-amber-500/10',
-    border: 'border-amber-200 dark:border-amber-500/20',
-    dot: 'bg-amber-500',
+    deployColor: 'dark:text-amber-300 text-amber-700',
+    labelColor:  'dark:text-amber-300 text-amber-700',
+    cardBg:      'dark:bg-slate-800 bg-amber-50',
+    cardBorder:  'dark:border-amber-500/40 border-amber-200',
+    dot:         'bg-amber-400',
+    roiBg:       'dark:bg-slate-700 bg-amber-50',
+    roiBorder:   'dark:border-amber-500/30 border-amber-200',
   },
 ]
 
@@ -51,10 +99,10 @@ const SCENARIOS = [
   {
     id: 'sales',
     icon: TrendingUp,
-    color: 'from-blue-500 to-cyan-500',
-    borderHover: 'hover:border-blue-500/40',
-    accentLight: 'text-blue-700',
-    accentDark: 'dark:text-blue-400',
+    gradient: 'from-blue-500 to-cyan-500',
+    borderHover: 'hover:border-blue-500/50',
+    // 流程步骤标签颜色（深色背景上必须足够亮）
+    stepColor: 'dark:text-sky-300 text-blue-700',
     title: '销售管理智能体',
     tagline: '让销售总监实时掌握全局，让每一条线索都不再流失。',
     pains: [
@@ -81,10 +129,9 @@ const SCENARIOS = [
   {
     id: 'cs',
     icon: MessageSquare,
-    color: 'from-green-500 to-teal-500',
-    borderHover: 'hover:border-green-500/40',
-    accentLight: 'text-emerald-700',
-    accentDark: 'dark:text-emerald-400',
+    gradient: 'from-green-500 to-teal-500',
+    borderHover: 'hover:border-green-500/50',
+    stepColor: 'dark:text-emerald-300 text-emerald-700',
     title: '客服中心智能体',
     tagline: '让客服团队从重复问答中解放，专注处理高价值复杂诉求。',
     pains: [
@@ -111,10 +158,9 @@ const SCENARIOS = [
   {
     id: 'hr',
     icon: Users,
-    color: 'from-pink-500 to-rose-500',
-    borderHover: 'hover:border-pink-500/40',
-    accentLight: 'text-rose-700',
-    accentDark: 'dark:text-rose-400',
+    gradient: 'from-pink-500 to-rose-500',
+    borderHover: 'hover:border-pink-500/50',
+    stepColor: 'dark:text-rose-300 text-rose-700',
     title: '人力资源智能体',
     tagline: '让 HR 从事务性工作中解放，聚焦组织发展与人才战略。',
     pains: [
@@ -141,10 +187,9 @@ const SCENARIOS = [
   {
     id: 'finance',
     icon: BarChart3,
-    color: 'from-emerald-500 to-green-600',
-    borderHover: 'hover:border-emerald-500/40',
-    accentLight: 'text-emerald-700',
-    accentDark: 'dark:text-emerald-400',
+    gradient: 'from-emerald-500 to-green-600',
+    borderHover: 'hover:border-emerald-500/50',
+    stepColor: 'dark:text-emerald-300 text-emerald-700',
     title: '财务管理智能体',
     tagline: '让财务从报表制作中解放，成为企业经营决策的核心支撑。',
     pains: [
@@ -171,10 +216,9 @@ const SCENARIOS = [
   {
     id: 'supply',
     icon: Factory,
-    color: 'from-orange-500 to-amber-500',
-    borderHover: 'hover:border-orange-500/40',
-    accentLight: 'text-amber-700',
-    accentDark: 'dark:text-amber-400',
+    gradient: 'from-orange-500 to-amber-500',
+    borderHover: 'hover:border-orange-500/50',
+    stepColor: 'dark:text-amber-300 text-amber-700',
     title: '供应链管理智能体',
     tagline: '让供应链从被动响应转为主动预判，降低库存风险与交付延误。',
     pains: [
@@ -201,10 +245,9 @@ const SCENARIOS = [
   {
     id: 'data',
     icon: Database,
-    color: 'from-violet-500 to-purple-600',
-    borderHover: 'hover:border-violet-500/40',
-    accentLight: 'text-violet-700',
-    accentDark: 'dark:text-violet-400',
+    gradient: 'from-violet-500 to-purple-600',
+    borderHover: 'hover:border-violet-500/50',
+    stepColor: 'dark:text-violet-300 text-violet-700',
     title: '数据分析智能体',
     tagline: '让每位业务负责人都能直接获取数据洞察，无需等待数据团队。',
     pains: [
@@ -278,29 +321,47 @@ export default function ScenariosPage() {
       <div className="page-header relative overflow-hidden">
         <SubtleGridBackground />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 dark:text-blue-400 text-blue-600 text-sm mb-4">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full
+            dark:bg-blue-500/15 bg-blue-50
+            dark:border dark:border-blue-400/30 border border-blue-200
+            dark:text-blue-300 text-blue-700
+            text-sm mb-4">
             <Layers className="w-3.5 h-3.5" />
             企业级智能体解决方案
           </div>
+
           <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-3">
             企业级智能体应用场景
           </h1>
-          <p className="dark:text-gray-300 text-gray-700 text-base max-w-2xl mx-auto mb-2">
+          <p className="dark:text-gray-200 text-gray-700 text-base max-w-2xl mx-auto mb-2">
             从销售到供应链，让 OpenClaw 成为每个部门的超级管理 Agent。
           </p>
-          <p className="dark:text-gray-500 text-gray-500 text-sm max-w-xl mx-auto mb-7">
+          <p className="dark:text-gray-400 text-gray-500 text-sm max-w-xl mx-auto mb-7">
             企业真正需要的不是 AI 工具，而是可落地的部门级智能解决方案。
           </p>
+
+          {/* CTA 按钮组 */}
           <div className="flex flex-wrap items-center justify-center gap-3">
+            {/* 主按钮：solid，始终可读 */}
             <Link
               href="/about#contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl
+                bg-blue-600 hover:bg-blue-500 active:bg-blue-700
+                text-white font-semibold text-sm transition-all"
             >
               预约企业场景评估 <ArrowRight className="w-4 h-4" />
             </Link>
+            {/* 次要按钮：深色 bg-white/15，浅色 bg-gray-100 */}
             <Link
               href="/deployment"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl dark:bg-white/8 bg-gray-100 dark:hover:bg-white/12 hover:bg-gray-200 dark:text-white text-gray-800 font-semibold text-sm transition-all border dark:border-white/10 border-gray-200"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl
+                dark:bg-white/15 bg-gray-100
+                dark:hover:bg-white/25 hover:bg-gray-200
+                dark:active:bg-white/30 active:bg-gray-300
+                dark:text-white text-gray-900
+                font-semibold text-sm transition-all
+                dark:border dark:border-white/20 border border-gray-200"
             >
               查看部署方案 <ChevronRight className="w-4 h-4" />
             </Link>
@@ -313,8 +374,10 @@ export default function ScenariosPage() {
         {/* ── 企业规模引导区 ──────────────────────────────────────────────── */}
         <section className="mb-14">
           <div className="text-center mb-6">
-            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">按企业规模选择方案</h2>
-            <p className="text-sm dark:text-gray-500 text-gray-500">
+            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">
+              按企业规模选择方案
+            </h2>
+            <p className="text-sm dark:text-gray-400 text-gray-500">
               不同规模企业适配不同部署架构与智能体能力配置
             </p>
           </div>
@@ -322,18 +385,18 @@ export default function ScenariosPage() {
             {SCALES.map(s => (
               <div
                 key={s.key}
-                className={`rounded-2xl p-5 border ${s.bg} ${s.border}`}
+                className={`rounded-2xl p-5 border ${s.cardBg} ${s.cardBorder}`}
               >
                 <div className="flex items-center gap-2 mb-3">
                   <div className={`w-2.5 h-2.5 rounded-full ${s.dot}`} />
-                  <span className="font-bold dark:text-white text-gray-900 text-sm">{s.label}</span>
+                  <span className={`font-bold text-sm ${s.labelColor}`}>{s.label}</span>
                   <span className="text-xs dark:text-gray-400 text-gray-500">（{s.range}）</span>
                 </div>
-                <div className="text-xs dark:text-gray-400 text-gray-600 mb-3 leading-relaxed">
+                <div className="text-xs dark:text-gray-300 text-gray-600 mb-3 leading-relaxed">
                   适合初步引入 AI 能力，快速验证场景价值，控制初期投入成本。
                 </div>
-                <div className="text-xs font-medium">
-                  <span className="dark:text-gray-500 text-gray-500">推荐部署：</span>
+                <div className="text-xs">
+                  <span className="dark:text-gray-400 text-gray-500">推荐部署：</span>
                   <span className={`ml-1 font-semibold ${s.deployColor}`}>{s.deploy}</span>
                 </div>
               </div>
@@ -343,33 +406,41 @@ export default function ScenariosPage() {
 
         {/* ── 六大场景完整模块 ─────────────────────────────────────────────── */}
         <section className="mb-14">
-          <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-8">六大部门智能解决方案</h2>
+          <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-8">
+            六大部门智能解决方案
+          </h2>
           <div className="space-y-8">
             {SCENARIOS.map((sc, idx) => (
               <div
                 key={sc.id}
                 id={sc.id}
-                className={`glass rounded-2xl border dark:border-white/8 border-gray-200 ${sc.borderHover} transition-all overflow-hidden`}
+                className={`glass rounded-2xl border dark:border-white/10 border-gray-200 ${sc.borderHover} transition-all overflow-hidden`}
               >
                 {/* 场景头部 */}
-                <div className="p-6 pb-0">
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className={`p-2.5 rounded-xl bg-gradient-to-br ${sc.color} shrink-0`}>
+                <div className="p-6 pb-4">
+                  <div className="flex items-start gap-4">
+                    <div className={`p-2.5 rounded-xl bg-gradient-to-br ${sc.gradient} shrink-0`}>
                       <sc.icon className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-3 mb-1">
-                        <h3 className="text-base font-bold dark:text-white text-gray-900">{sc.title}</h3>
-                        <span className="text-xs dark:text-gray-600 text-gray-400">0{idx + 1}</span>
+                        <h3 className="text-base font-bold dark:text-white text-gray-900">
+                          {sc.title}
+                        </h3>
+                        <span className="text-xs dark:text-gray-500 text-gray-400 font-mono">
+                          0{idx + 1}
+                        </span>
                       </div>
-                      <p className="text-sm dark:text-gray-300 text-gray-700 font-medium">{sc.tagline}</p>
+                      <p className="text-sm dark:text-gray-200 text-gray-700 font-medium">
+                        {sc.tagline}
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 divide-y lg:divide-y-0 lg:divide-x dark:divide-white/8 divide-gray-100">
+                <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x dark:divide-white/10 divide-gray-100">
 
-                  {/* 左列：痛点 + 流程 */}
+                  {/* ── 左列：痛点 + 流程 ── */}
                   <div className="p-6">
                     {/* 企业痛点 */}
                     <div className="mb-5">
@@ -378,9 +449,11 @@ export default function ScenariosPage() {
                       </div>
                       <ul className="space-y-2">
                         {sc.pains.map((pain, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm dark:text-gray-300 text-gray-700">
+                          <li key={i} className="flex items-start gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-red-400 mt-1.5 shrink-0" />
-                            {pain}
+                            <span className="text-sm dark:text-gray-200 text-gray-700 leading-relaxed">
+                              {pain}
+                            </span>
                           </li>
                         ))}
                       </ul>
@@ -391,22 +464,20 @@ export default function ScenariosPage() {
                       <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-3">
                         OpenClaw 解决逻辑
                       </div>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {sc.flow.map((f, i) => (
                           <div key={i} className="flex items-start gap-3">
-                            <div className="flex items-center gap-1.5 shrink-0">
-                              <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${sc.color} flex items-center justify-center text-white text-xs font-bold`}>
-                                {i + 1}
-                              </div>
-                              {i < sc.flow.length - 1 && (
-                                <div className="w-px h-4 dark:bg-white/10 bg-gray-200 ml-2" />
-                              )}
+                            {/* 步骤圆圈 */}
+                            <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${sc.gradient} flex items-center justify-center text-white text-xs font-bold shrink-0 mt-0.5`}>
+                              {i + 1}
                             </div>
-                            <div className="pb-1">
-                              <span className={`text-xs font-semibold ${sc.accentLight} ${sc.accentDark}`}>
+                            <div>
+                              <span className={`text-xs font-semibold ${sc.stepColor}`}>
                                 {f.step}
                               </span>
-                              <span className="text-xs dark:text-gray-400 text-gray-600 ml-1.5">{f.desc}</span>
+                              <span className="text-xs dark:text-gray-300 text-gray-600 ml-1.5">
+                                {f.desc}
+                              </span>
                             </div>
                           </div>
                         ))}
@@ -414,23 +485,23 @@ export default function ScenariosPage() {
                     </div>
                   </div>
 
-                  {/* 右列：ROI 示例 + 推荐部署 */}
+                  {/* ── 右列：ROI 示例 + 推荐部署 ── */}
                   <div className="p-6">
                     {/* ROI 示例 */}
                     <div className="mb-5">
                       <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-3">
                         ROI 参考示例（保守估算）
                       </div>
-                      <div className="space-y-3">
+                      <div className="space-y-2">
                         {sc.roi.map((r, i) => (
                           <div
                             key={i}
-                            className={`rounded-xl p-3 border ${SCALES[i].bg} ${SCALES[i].border}`}
+                            className={`rounded-xl p-3 border ${SCALES[i].roiBg} ${SCALES[i].roiBorder}`}
                           >
-                            <div className={`text-xs font-semibold mb-1 ${SCALES[i].deployColor}`}>
+                            <div className={`text-xs font-semibold mb-1 ${SCALES[i].labelColor}`}>
                               {r.scale}
                             </div>
-                            <div className="text-xs dark:text-gray-400 text-gray-600 leading-relaxed">
+                            <div className="text-xs dark:text-gray-300 text-gray-600 leading-relaxed">
                               {r.example}
                             </div>
                           </div>
@@ -443,10 +514,10 @@ export default function ScenariosPage() {
                       <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-3">
                         推荐部署版本
                       </div>
-                      <div className="space-y-1.5">
+                      <div className="space-y-2">
                         {SCALES.map((s, i) => (
                           <div key={s.key} className="flex items-center justify-between text-xs">
-                            <span className="dark:text-gray-400 text-gray-600">
+                            <span className="dark:text-gray-300 text-gray-600">
                               {s.label}（{s.range}）
                             </span>
                             <span className={`font-semibold ${s.deployColor}`}>
@@ -458,26 +529,35 @@ export default function ScenariosPage() {
                     </div>
 
                     {/* 综合收益 */}
-                    <div className="pt-3 border-t dark:border-white/8 border-gray-100 mb-4">
+                    <div className="pt-3 border-t dark:border-white/10 border-gray-100 mb-4">
                       <div className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 mt-0.5 shrink-0" />
-                        <p className="text-xs font-medium dark:text-emerald-400 text-emerald-700">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 mt-0.5 shrink-0" />
+                        <p className="text-xs font-medium dark:text-emerald-300 text-emerald-700">
                           {sc.benefit}
                         </p>
                       </div>
                     </div>
 
-                    {/* 场景 CTA */}
+                    {/* 场景 CTA 按钮 */}
                     <div className="flex gap-2">
+                      {/* 主按钮：solid blue */}
                       <Link
                         href="/about#contact"
-                        className="flex-1 text-center py-2 rounded-lg text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all"
+                        className="flex-1 text-center py-2 rounded-lg text-xs font-semibold
+                          bg-blue-600 hover:bg-blue-500 active:bg-blue-700
+                          text-white transition-all"
                       >
                         预约该场景部署
                       </Link>
+                      {/* 次要按钮：深色有足够不透明度 */}
                       <Link
                         href="/about#contact"
-                        className="flex-1 text-center py-2 rounded-lg text-xs font-semibold dark:bg-white/8 bg-gray-100 dark:hover:bg-white/12 hover:bg-gray-200 dark:text-gray-300 text-gray-700 transition-all border dark:border-white/10 border-gray-200"
+                        className="flex-1 text-center py-2 rounded-lg text-xs font-semibold
+                          dark:bg-white/15 bg-gray-100
+                          dark:hover:bg-white/25 hover:bg-gray-200
+                          dark:text-white text-gray-800
+                          transition-all
+                          dark:border dark:border-white/20 border border-gray-200"
                       >
                         获取解决方案
                       </Link>
@@ -491,36 +571,58 @@ export default function ScenariosPage() {
 
         {/* ── 场景横向对比表 ──────────────────────────────────────────────── */}
         <section className="mb-14">
-          <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-6">场景横向对比</h2>
-          <div className="glass rounded-2xl border dark:border-white/8 border-gray-200 overflow-hidden">
+          <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-6">
+            场景横向对比
+          </h2>
+          <div className="glass rounded-2xl border dark:border-white/10 border-gray-200 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="dark:bg-white/4 bg-gray-50 border-b dark:border-white/8 border-gray-200">
-                    <th className="text-left py-3.5 px-5 text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide">场景</th>
-                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide">主要收益</th>
-                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide">推荐部署</th>
-                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide">适用规模</th>
+                  <tr className="dark:bg-white/6 bg-gray-50 border-b dark:border-white/10 border-gray-200">
+                    <th className="text-left py-3.5 px-5 text-xs font-semibold dark:text-gray-300 text-gray-600 uppercase tracking-wide">
+                      场景
+                    </th>
+                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-300 text-gray-600 uppercase tracking-wide">
+                      主要收益
+                    </th>
+                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-300 text-gray-600 uppercase tracking-wide">
+                      推荐部署
+                    </th>
+                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-300 text-gray-600 uppercase tracking-wide">
+                      适用规模
+                    </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y dark:divide-white/5 divide-gray-100">
+                <tbody className="divide-y dark:divide-white/8 divide-gray-100">
                   {COMPARE_TABLE.map((row, i) => (
-                    <tr key={i} className="dark:hover:bg-white/2 hover:bg-gray-50 transition-colors">
+                    <tr
+                      key={i}
+                      className="dark:hover:bg-white/6 hover:bg-gray-50 transition-colors"
+                    >
                       <td className="py-3.5 px-5">
-                        <span className="font-medium dark:text-white text-gray-900 text-sm">{row.scenario}</span>
+                        <span className="font-semibold dark:text-white text-gray-900 text-sm">
+                          {row.scenario}
+                        </span>
                       </td>
                       <td className="py-3.5 px-4">
-                        <span className="text-xs dark:text-gray-300 text-gray-700">{row.benefit}</span>
+                        <span className="text-xs dark:text-gray-200 text-gray-700">
+                          {row.benefit}
+                        </span>
                       </td>
                       <td className="py-3.5 px-4">
-                        <span className="text-xs font-medium dark:text-blue-400 text-blue-700">{row.deploy}</span>
+                        <span className="text-xs font-semibold dark:text-sky-300 text-blue-700">
+                          {row.deploy}
+                        </span>
                       </td>
                       <td className="py-3.5 px-4">
                         <div className="flex flex-wrap gap-1">
                           {row.scales.map(sc => (
                             <span
                               key={sc}
-                              className="inline-block px-2 py-0.5 rounded-full text-xs dark:bg-white/8 bg-gray-100 dark:text-gray-300 text-gray-600 border dark:border-white/10 border-gray-200"
+                              className="inline-block px-2 py-0.5 rounded-full text-xs
+                                dark:bg-white/12 bg-gray-100
+                                dark:text-gray-200 text-gray-700
+                                dark:border dark:border-white/15 border border-gray-200"
                             >
                               {sc}
                             </span>
@@ -537,34 +639,59 @@ export default function ScenariosPage() {
 
         {/* ── 底部收口 CTA ────────────────────────────────────────────────── */}
         <section>
-          <div className="glass rounded-2xl p-10 border dark:border-blue-500/20 border-blue-200 text-center relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br dark:from-blue-500/5 dark:to-violet-500/5 from-blue-50 to-violet-50 pointer-events-none" />
+          <div className="glass rounded-2xl p-10 border dark:border-blue-400/20 border-blue-200 text-center relative overflow-hidden">
+            {/* 背景渐变装饰 */}
+            <div className="absolute inset-0 bg-gradient-to-br
+              dark:from-blue-500/8 dark:to-violet-500/8
+              from-blue-50 to-violet-50
+              pointer-events-none" />
+
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full dark:bg-blue-500/10 bg-blue-100 border dark:border-blue-500/20 border-blue-200 dark:text-blue-400 text-blue-700 text-xs font-medium mb-4">
+              {/* Badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full
+                dark:bg-blue-500/15 bg-blue-50
+                dark:border dark:border-blue-400/30 border border-blue-200
+                dark:text-blue-300 text-blue-700
+                text-xs font-medium mb-4">
                 <Cpu className="w-3.5 h-3.5" />
                 企业专属智能体架构设计
               </div>
+
               <h3 className="text-2xl font-bold dark:text-white text-gray-900 mb-3">
                 为您的企业设计专属智能体架构
               </h3>
-              <p className="dark:text-gray-400 text-gray-600 text-sm max-w-xl mx-auto mb-7">
+              <p className="dark:text-gray-300 text-gray-600 text-sm max-w-xl mx-auto mb-7">
                 从试点部署到规模化智能转型，我们为企业提供完整技术与服务支持。
               </p>
+
+              {/* 按钮组 */}
               <div className="flex flex-wrap items-center justify-center gap-3">
+                {/* 主按钮 */}
                 <Link
                   href="/about#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-lg shadow-blue-500/20"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
+                    bg-blue-600 hover:bg-blue-500 active:bg-blue-700
+                    text-white font-semibold text-sm transition-all
+                    shadow-lg shadow-blue-500/20"
                 >
                   预约企业部署评估 <ArrowRight className="w-4 h-4" />
                 </Link>
+                {/* 次要按钮 */}
                 <Link
                   href="/about#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl dark:bg-white/8 bg-white dark:hover:bg-white/12 hover:bg-gray-50 dark:text-white text-gray-900 font-semibold text-sm transition-all border dark:border-white/15 border-gray-200"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
+                    dark:bg-white/15 bg-white
+                    dark:hover:bg-white/25 hover:bg-gray-50
+                    dark:text-white text-gray-900
+                    font-semibold text-sm transition-all
+                    dark:border dark:border-white/20 border border-gray-200"
                 >
                   获取完整解决方案 <ChevronRight className="w-4 h-4" />
                 </Link>
               </div>
-              <p className="text-xs dark:text-gray-600 text-gray-400 mt-5">
+
+              {/* 信任背书 */}
+              <p className="text-xs dark:text-gray-400 text-gray-500 mt-5">
                 专属顾问 1 对 1 评估 · 48 小时内响应 · 免费出具场景匹配报告
               </p>
             </div>
