@@ -574,30 +574,33 @@ export default function ScenariosPage() {
           <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-6">
             场景横向对比
           </h2>
-          <div className="glass rounded-2xl border dark:border-white/10 border-gray-200 overflow-hidden">
+          {/* 表格容器：深色用实色背景，禁止透明叠加 */}
+          <div className="rounded-2xl border dark:border-slate-700 border-gray-200 overflow-hidden
+            dark:bg-slate-900 bg-white">
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="dark:bg-white/6 bg-gray-50 border-b dark:border-white/10 border-gray-200">
-                    <th className="text-left py-3.5 px-5 text-xs font-semibold dark:text-gray-300 text-gray-600 uppercase tracking-wide">
+                  {/* 表头：深色用 slate-800 实色，浅色用 gray-50 */}
+                  <tr className="dark:bg-slate-800 bg-gray-50 border-b dark:border-slate-700 border-gray-200">
+                    <th className="text-left py-3.5 px-5 text-xs font-semibold dark:text-slate-200 text-gray-600 uppercase tracking-wide">
                       场景
                     </th>
-                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-300 text-gray-600 uppercase tracking-wide">
+                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-slate-200 text-gray-600 uppercase tracking-wide">
                       主要收益
                     </th>
-                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-300 text-gray-600 uppercase tracking-wide">
+                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-slate-200 text-gray-600 uppercase tracking-wide">
                       推荐部署
                     </th>
-                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-gray-300 text-gray-600 uppercase tracking-wide">
+                    <th className="text-left py-3.5 px-4 text-xs font-semibold dark:text-slate-200 text-gray-600 uppercase tracking-wide">
                       适用规模
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y dark:divide-white/8 divide-gray-100">
+                <tbody className="divide-y dark:divide-slate-700/60 divide-gray-100">
                   {COMPARE_TABLE.map((row, i) => (
                     <tr
                       key={i}
-                      className="dark:hover:bg-white/6 hover:bg-gray-50 transition-colors"
+                      className="dark:hover:bg-slate-800 hover:bg-gray-50 transition-colors"
                     >
                       <td className="py-3.5 px-5">
                         <span className="font-semibold dark:text-white text-gray-900 text-sm">
@@ -605,7 +608,7 @@ export default function ScenariosPage() {
                         </span>
                       </td>
                       <td className="py-3.5 px-4">
-                        <span className="text-xs dark:text-gray-200 text-gray-700">
+                        <span className="text-xs dark:text-slate-200 text-gray-700">
                           {row.benefit}
                         </span>
                       </td>
@@ -620,9 +623,9 @@ export default function ScenariosPage() {
                             <span
                               key={sc}
                               className="inline-block px-2 py-0.5 rounded-full text-xs
-                                dark:bg-white/12 bg-gray-100
-                                dark:text-gray-200 text-gray-700
-                                dark:border dark:border-white/15 border border-gray-200"
+                                dark:bg-slate-700 bg-gray-100
+                                dark:text-slate-100 text-gray-700
+                                dark:border dark:border-slate-600 border border-gray-200"
                             >
                               {sc}
                             </span>
