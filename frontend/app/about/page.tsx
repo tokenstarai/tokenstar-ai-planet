@@ -39,7 +39,7 @@ export default function AboutPage() {
         {/* Tabs */}
         <div className={`flex items-center gap-1 mb-10 rounded-xl p-1 w-fit ${isDark ? 'glass' : 'bg-gray-100 border border-gray-200'}`}>
           {[
-            { key: 'about', label: '关于我们' },
+            { key: 'about', label: '关于' },
             { key: 'partner', label: '合作伙伴' },
             { key: 'contact', label: '联系我们' },
           ].map(tab => (

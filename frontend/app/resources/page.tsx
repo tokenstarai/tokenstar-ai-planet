@@ -78,7 +78,7 @@ const RESOURCE_SECTIONS = [
     description: '线上线下企业交流活动、技术沙龙与用户社区，与同行共同探索 AI 落地路径。',
     links: [
       { label: '活动中心', href: '/events', desc: '近期线上线下活动' },
-      { label: '关于我们', href: '/about', desc: '联系团队与合作咨询' },
+      { label: '关于', href: '/about', desc: '联系团队与合作咋询' },
     ],
   },
 ]
@@ -105,10 +105,10 @@ export default function ResourcesPage() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium border mb-6 ${isDark ? 'bg-blue-500/10 text-blue-300 border-blue-500/30' : 'bg-blue-50 text-blue-700 border-blue-200'}`}>
             <BookOpen className="w-3.5 h-3.5" />
-            资源中心
+            生态与资源
           </div>
           <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-5 tracking-tight ${isDark ? 'text-neutral-100' : 'text-neutral-900'}`}>
-            OpenClaw 生态资源中心
+            生态与资源中心
           </h1>
           <p className={`text-lg max-w-2xl mx-auto mb-8 leading-relaxed ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>
             汇聚技术文档、行业资讯、Skills 市场与管理指南，为企业 AI 转型提供完整的知识与工具支撑。
@@ -203,7 +203,7 @@ export default function ResourcesPage() {
               href="/scenarios"
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base transition-all shadow-lg shadow-blue-500/20"
             >
-              查看企业解决方案 <ArrowRight className="w-4 h-4" />
+              查看解决方案 <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/cases"

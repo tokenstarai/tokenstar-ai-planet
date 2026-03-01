@@ -66,7 +66,7 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/scenarios" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
-              查看企业解决方案 <ArrowRight className="w-4 h-4" />
+              查看解决方案 <ArrowRight className="w-4 h-4" />
             </Link>
             <Link href="/cases" className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-all border ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}>
               查看成功案例 <ChevronRight className="w-4 h-4" />
@@ -177,7 +177,7 @@ export default function HomePage() {
       {/* 5. 企业培训支持 */}
       <section className={`py-12 sm:py-16 ${isDark ? 'bg-slate-900/50' : 'bg-slate-50'}`}>
         <div className="max-w-6xl mx-auto px-4">
-          <SectionHeader title="企业培训支持" subtitle="从认知到落地，全程陪伴企业完成 AI 转型" />
+          <SectionHeader title="认证与培训" subtitle="从认知到落地，全程陪伴企业完成 AI 转型" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {trainingOptions.map(o => (
               <Link key={o.title} href={o.href} className={`group rounded-2xl p-6 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10' : 'bg-white border-gray-200 hover:border-purple-300 hover:shadow-md'}`}>
@@ -198,9 +198,9 @@ export default function HomePage() {
       <section className="py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-end justify-between mb-8">
-            <SectionHeader title="资源中心" subtitle="技术文档、行业资讯、Skills 市场与管理指南一站汇聚" />
+            <SectionHeader title="生态与资源" subtitle="技术文档、行业资讯、Skills 市场与管理指南一站汇聚" />
             <Link href="/resources" className={`hidden sm:flex items-center gap-1 text-sm font-medium ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-500'}`}>
-              进入资源中心 <ArrowRight className="w-3.5 h-3.5" />
+              进入生态与资源 <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -214,7 +214,7 @@ export default function HomePage() {
           </div>
           <div className="text-center mt-6 sm:hidden">
             <Link href="/resources" className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border font-medium text-sm transition-all ${isDark ? 'border-white/20 text-gray-300 hover:bg-white/8' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}>
-              进入资源中心 <ArrowRight className="w-4 h-4" />
+              进入生态与资源 <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

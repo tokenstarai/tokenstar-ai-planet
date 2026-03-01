@@ -7,7 +7,7 @@ import { ConsultationForm } from '@/components/deployment/ConsultationForm'
 import { DeploymentRecommendation } from '@/components/deployment/DeploymentRecommendation'
 
 export const metadata: Metadata = {
-  title: 'OpenClaw 企业智能部署解决方案 - TokenStar',
+  title: '部署与安全 - TokenStar',
   description: '三种企业级部署路径，让企业在 1–3 天内拥有可运行的超级管理智能体系统。Box Pro 私有化部署、Cloud 云端部署、Workstation 智能终端。',
 }
 
@@ -178,10 +178,10 @@ export default function DeploymentPage() {
             dark:bg-blue-500/15 dark:text-blue-400 dark:border dark:border-blue-500/30
             bg-blue-50 text-blue-600 border border-blue-200">
             <Server className="w-3.5 h-3.5" />
-            企业级部署解决方案
+            部署与安全
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-4 leading-tight">
-            OpenClaw 企业智能部署解决方案
+            部署与安全
           </h1>
           <p className="text-base sm:text-lg dark:text-gray-300 text-gray-600 max-w-2xl mx-auto">
             三种企业级部署路径，让企业在 1–3 天内拥有可运行的超级管理智能体系统。

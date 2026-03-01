@@ -8,7 +8,7 @@ import {
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 
 export const metadata: Metadata = {
-  title: '企业应用场景 - TokenStar · OpenClaw',
+  title: '解决方案 - TokenStar',
   description: '从销售到供应链，OpenClaw 为每个部门提供可落地的企业级智能体解决方案，覆盖小型、中型、大型企业全规模。',
 }
 
@@ -429,11 +429,11 @@ export default function ScenariosPage() {
             dark:text-blue-300 text-blue-700
             text-sm mb-4">
             <Layers className="w-3.5 h-3.5" />
-            企业级智能体解决方案
+            解决方案
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-3">
-            企业智能解决方案
+            解决方案
           </h1>
           <p className="dark:text-gray-200 text-gray-700 text-base max-w-2xl mx-auto mb-2">
             从销售到供应链，让 OpenClaw 成为每个部门的超级管理 Agent。

@@ -8,10 +8,10 @@ import { mockNews, mockSkills, mockKnowledge, mockBlogs, mockCases, mockHardware
 
 const navItems = [
   { label: '首页', href: '/' },
-  { label: '企业解决方案', href: '/scenarios' },
+  { label: '解决方案', href: '/scenarios' },
   { label: '成功案例', href: '/cases' },
   {
-    label: '部署方案',
+    label: '部署与安全',
     href: '/deployment',
     children: [
       { label: '部署方案总览', href: '/deployment' },
@@ -20,9 +20,9 @@ const navItems = [
       { label: 'ROI 测算', href: '/deployment#roi' },
     ],
   },
-  { label: '企业培训', href: '/training' },
+  { label: '认证与培训', href: '/training' },
   {
-    label: '资源中心',
+    label: '生态与资源',
     href: '/resources',
     children: [
       { label: 'OpenClaw 专区', href: '/openclaw' },
@@ -34,7 +34,7 @@ const navItems = [
       { label: '知识库', href: '/knowledge' },
     ],
   },
-  { label: '关于我们', href: '/about' },
+  { label: '关于', href: '/about' },
 ]
 
 function clientSearch(query: string) {

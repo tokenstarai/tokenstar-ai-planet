@@ -6,7 +6,7 @@ import { formatDate, getEventStatusLabel, getEventStatusColor } from '@/lib/api'
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 
 export const metadata: Metadata = {
-  title: '企业培训 - TokenStar',
+  title: '认证与培训 - TokenStar',
   description: '面向企业管理者和技术团队的 OpenClaw AI 培训课程，从认知到落地，全程陪伴企业完成 AI 转型。',
 }
 
@@ -91,9 +91,9 @@ export default function TrainingPage() {
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm mb-4">
             <GraduationCap className="w-3.5 h-3.5" />
-            企业培训
+            认证与培训
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-3">企业培训支持</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-3">认证与培训</h1>
           <p className="dark:text-gray-400 text-gray-600 text-base max-w-xl mx-auto">
             从管理层认知到技术团队实战，全程陪伴企业完成 AI 转型升级
           </p>
