@@ -110,23 +110,53 @@ export function LogoIcon({ size = 32, idSuffix = 'a' }: { size?: number; idSuffi
 }
 
 /**
- * LogoWordmark：图标 + "Token" + "Star"（Star 用蓝色高亮）
+ * LogoWordmark：图标 + "Token" + "Star"
  */
 export function LogoWordmark({ isDark }: { isDark: boolean }) {
-  const tokenGrad = isDark
-    ? 'linear-gradient(90deg, #c7d2fe 0%, #a5b4fc 100%)'
-    : 'linear-gradient(90deg, #3730a3 0%, #4338ca 100%)'
-  const starGrad = 'linear-gradient(90deg, #2563eb 0%, #06b6d4 60%, #10b981 100%)'
   return (
     <Link href="/" className="flex items-center gap-2 group shrink-0" aria-label="TokenStar 首页">
       <LogoIcon size={30} idSuffix="nav" />
-      <span
-        className="font-extrabold leading-none select-none"
-        style={{ fontSize: '19px', letterSpacing: '-0.01em', fontStyle: 'italic' }}
+      <svg
+        width="110"
+        height="24"
+        viewBox="0 0 110 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        style={{ flexShrink: 0 }}
       >
-        <span style={{ background: tokenGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Token</span>
-        <span style={{ background: starGrad, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Star</span>
-      </span>
+        <defs>
+          <linearGradient id="token-grad-nav" x1="0" y1="0" x2="52" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor={isDark ? '#c7d2fe' : '#3730a3'} />
+            <stop offset="100%" stopColor={isDark ? '#a5b4fc' : '#4338ca'} />
+          </linearGradient>
+          <linearGradient id="star-grad-nav" x1="54" y1="0" x2="110" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#2563eb" />
+            <stop offset="60%" stopColor="#06b6d4" />
+            <stop offset="100%" stopColor="#10b981" />
+          </linearGradient>
+        </defs>
+        <text
+          x="0"
+          y="19"
+          fontFamily="system-ui, -apple-system, 'Segoe UI', sans-serif"
+          fontSize="20"
+          fontWeight="800"
+          fontStyle="italic"
+          letterSpacing="-0.2"
+          fill="url(#token-grad-nav)"
+        >Token</text>
+        <text
+          x="54"
+          y="19"
+          fontFamily="system-ui, -apple-system, 'Segoe UI', sans-serif"
+          fontSize="20"
+          fontWeight="800"
+          fontStyle="italic"
+          letterSpacing="-0.2"
+          fill="url(#star-grad-nav)"
+        >Star</text>
+      </svg>
     </Link>
   )
 }

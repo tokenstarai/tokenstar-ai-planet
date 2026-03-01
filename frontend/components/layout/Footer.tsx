@@ -40,19 +40,47 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4 group" aria-label="TokenStar 首页">
               <LogoIcon size={30} idSuffix="footer" />
-              <span
-                className="font-extrabold leading-none select-none"
-                style={{ fontSize: '19px', letterSpacing: '-0.01em', fontStyle: 'italic' }}
+              <svg
+                width="110"
+                height="24"
+                viewBox="0 0 110 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                style={{ flexShrink: 0 }}
               >
-                <span style={{
-                  background: isDark ? 'linear-gradient(90deg, #c7d2fe 0%, #a5b4fc 100%)' : 'linear-gradient(90deg, #3730a3 0%, #4338ca 100%)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
-                }}>Token</span>
-                <span style={{
-                  background: 'linear-gradient(90deg, #2563eb 0%, #06b6d4 60%, #10b981 100%)',
-                  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text'
-                }}>Star</span>
-              </span>
+                <defs>
+                  <linearGradient id="token-grad-footer" x1="0" y1="0" x2="52" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor={isDark ? '#c7d2fe' : '#3730a3'} />
+                    <stop offset="100%" stopColor={isDark ? '#a5b4fc' : '#4338ca'} />
+                  </linearGradient>
+                  <linearGradient id="star-grad-footer" x1="54" y1="0" x2="110" y2="0" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#2563eb" />
+                    <stop offset="60%" stopColor="#06b6d4" />
+                    <stop offset="100%" stopColor="#10b981" />
+                  </linearGradient>
+                </defs>
+                <text
+                  x="0"
+                  y="19"
+                  fontFamily="system-ui, -apple-system, 'Segoe UI', sans-serif"
+                  fontSize="20"
+                  fontWeight="800"
+                  fontStyle="italic"
+                  letterSpacing="-0.2"
+                  fill="url(#token-grad-footer)"
+                >Token</text>
+                <text
+                  x="54"
+                  y="19"
+                  fontFamily="system-ui, -apple-system, 'Segoe UI', sans-serif"
+                  fontSize="20"
+                  fontWeight="800"
+                  fontStyle="italic"
+                  letterSpacing="-0.2"
+                  fill="url(#star-grad-footer)"
+                >Star</text>
+              </svg>
             </Link>
             <p className={`text-sm leading-relaxed mb-5 max-w-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               TokenStar 是面向中国企业的 OpenCLAW + Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。
