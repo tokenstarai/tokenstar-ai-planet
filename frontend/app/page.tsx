@@ -204,9 +204,9 @@ export default function HomePage() {
       <section className="py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-end justify-between mb-8">
-            <SectionHeader title="企业 AI 频道" subtitle="企业决策者的 AI 认知与落地入口，不讲技术术语，只讲转型逻辑" />
+            <SectionHeader title="企业&AI" subtitle="企业决策者的 AI 认知与落地入口，不讲技术术语，只讲转型逻辑" />
             <Link href="/resources" className={`hidden sm:flex items-center gap-1 text-sm font-medium ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-500'}`}>
-              进入企业 AI 频道 <ArrowRight className="w-3.5 h-3.5" />
+              进入企业&AI <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -220,7 +220,7 @@ export default function HomePage() {
           </div>
           <div className="text-center mt-6 sm:hidden">
             <Link href="/resources" className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border font-medium text-sm transition-all ${isDark ? 'border-white/20 text-gray-300 hover:bg-white/8' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}>
-              进入企业 AI 频道 <ArrowRight className="w-4 h-4" />
+              进入企业&AI <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

@@ -22,7 +22,7 @@ const navItems = [
   },
   { label: '认证与培训', href: '/training' },
   {
-    label: '企业 AI 频道',
+    label: '企业&AI',
     href: '/resources',
     children: [
       { label: '企业与 AI', href: '/resources#enterprise-ai' },

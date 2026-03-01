@@ -11,7 +11,7 @@ const footerLinks = {
     { label: '硬件 & 云方案', href: '/hardware' },
     { label: '案例中心', href: '/cases' },
   ],
-  '企业 AI 频道': [
+  '企业&AI': [
     { label: '企业与 AI', href: '/resources#enterprise-ai' },
     { label: 'AI 管理指南', href: '/guide' },
     { label: 'Skills 用例', href: '/skills' },
