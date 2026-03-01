@@ -9,32 +9,37 @@ import { mockNews, mockSkills, mockKnowledge, mockBlogs, mockCases, mockHardware
 const navItems = [
   { label: '首页', href: '/' },
   {
-    label: 'OpenClaw 生态',
-    href: '/ecosystem',
-    children: [
-      { label: 'OpenClaw 介绍', href: '/openclaw' },
-      { label: '生态动态', href: '/ecosystem' },
-      { label: 'Skills 市场', href: '/skills' },
-      { label: '知识库', href: '/knowledge' },
-    ],
-  },
-  {
-    label: '企业应用场景',
+    label: '企业解决方案',
     href: '/scenarios',
     children: [
       { label: '应用场景总览', href: '/scenarios' },
-      { label: '成功案例', href: '/cases' },
+      { label: '行业解决方案', href: '/scenarios#industry-types' },
+      { label: '企业规模适配', href: '/scenarios#scales' },
     ],
   },
-  { label: '硬件 & 云部署', href: '/deployment' },
+  { label: '成功案例', href: '/cases' },
+  {
+    label: '部署方案',
+    href: '/deployment',
+    children: [
+      { label: '部署方案总览', href: '/deployment' },
+      { label: 'Box Pro 私有硬件', href: '/deployment#hardware' },
+      { label: 'Cloud 云端托管', href: '/deployment#cloud' },
+      { label: 'ROI 测算', href: '/deployment#roi' },
+    ],
+  },
   { label: '企业培训', href: '/training' },
   {
-    label: 'AI 管理指南',
-    href: '/guide',
+    label: '资源中心',
+    href: '/resources',
     children: [
-      { label: '管理指南', href: '/guide' },
+      { label: 'OpenClaw 专区', href: '/openclaw' },
+      { label: '生态动态', href: '/ecosystem' },
+      { label: 'Skills 市场', href: '/skills' },
+      { label: 'AI 管理指南', href: '/guide' },
       { label: '新闻中心', href: '/news' },
       { label: 'Blog', href: '/blog' },
+      { label: '知识库', href: '/knowledge' },
     ],
   },
   { label: '关于我们', href: '/about' },
