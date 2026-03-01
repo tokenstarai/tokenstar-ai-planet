@@ -286,10 +286,10 @@ function CasesContent() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
             成功案例与落地实践
           </h1>
-          <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-3 max-w-2xl mx-auto">
+          <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-3">
             覆盖 8 大行业与 6 大部门场景，验证 OpenClaw 企业部署的真实价值。
           </p>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-8">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-8 whitespace-nowrap overflow-x-auto">
             以下案例为典型落地路径汇总，指标为保守区间估算，实际效果取决于企业规模、流程成熟度与使用深度。
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">

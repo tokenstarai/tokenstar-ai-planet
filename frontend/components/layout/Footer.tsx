@@ -41,20 +41,20 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-2 mb-4 group" aria-label="TokenStar 首页">
               <LogoIcon size={30} idSuffix="footer" />
               <svg
-                width="120"
+                width="128"
                 height="24"
-                viewBox="0 0 120 24"
+                viewBox="0 0 128 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 aria-hidden="true"
                 style={{ flexShrink: 0 }}
               >
                 <defs>
-                  <linearGradient id="token-grad-footer" x1="0" y1="0" x2="56" y2="0" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="token-grad-footer" x1="0" y1="0" x2="58" y2="0" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor={isDark ? '#c7d2fe' : '#3730a3'} />
                     <stop offset="100%" stopColor={isDark ? '#a5b4fc' : '#4338ca'} />
                   </linearGradient>
-                  <linearGradient id="star-grad-footer" x1="62" y1="0" x2="120" y2="0" gradientUnits="userSpaceOnUse">
+                  <linearGradient id="star-grad-footer" x1="68" y1="0" x2="128" y2="0" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stopColor="#2563eb" />
                     <stop offset="60%" stopColor="#06b6d4" />
                     <stop offset="100%" stopColor="#10b981" />
@@ -71,7 +71,7 @@ export function Footer() {
                   fill="url(#token-grad-footer)"
                 >Token</text>
                 <text
-                  x="62"
+                  x="68"
                   y="19"
                   fontFamily="system-ui, -apple-system, 'Segoe UI', sans-serif"
                   fontSize="20"

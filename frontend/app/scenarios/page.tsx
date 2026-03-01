@@ -438,7 +438,7 @@ export default function ScenariosPage() {
           <p className="dark:text-gray-200 text-gray-700 text-base max-w-2xl mx-auto mb-2">
             从销售到供应链，让 OpenClaw 成为每个部门的超级管理 Agent。
           </p>
-          <p className="dark:text-gray-400 text-gray-500 text-sm mx-auto mb-7 sm:whitespace-nowrap">
+          <p className="dark:text-gray-400 text-gray-500 text-sm mb-7 whitespace-nowrap overflow-x-auto">
             OpenCLAW + Antigravity 企业级实施与落地平台 — 企业真正需要的不是 AI 工具，而是可落地的部门级智能解决方案。
           </p>
 
@@ -832,7 +832,7 @@ export default function ScenariosPage() {
             <h3 className="cta-title text-2xl mb-3">
               为您的企业设计专属智能体架构
             </h3>
-            <p className="cta-body text-sm max-w-xl mx-auto mb-7">
+            <p className="cta-body text-sm mb-7">
               从试点部署到规模化智能转型，我们为企业提供完整技术与服务支持。
             </p>
 
