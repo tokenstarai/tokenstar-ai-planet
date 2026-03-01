@@ -60,10 +60,10 @@ export default function HomePage() {
             让 AI 成为每个部门的<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">超级管理 Agent</span>
           </h1>
-          <p className={`text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-            从销售到供应链，从财务到 HR，OpenClaw 企业智能体覆盖全部门管理场景。
-            <span className="block sm:inline"> 可落地、可量化、可持续的 AI 转型路径。</span>
-          </p>
+          <div className={`text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed space-y-1 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+            <p className="sm:whitespace-nowrap">从销售到供应链，从财务到 HR，OpenClaw 企业智能体覆盖全部门管理场景。</p>
+            <p className="sm:whitespace-nowrap">可落地、可量化、可持续的 AI 转型路径。</p>
+          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/scenarios" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
               查看企业解决方案 <ArrowRight className="w-4 h-4" />
