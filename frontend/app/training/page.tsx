@@ -108,7 +108,7 @@ export default function TrainingPage() {
             </a>
             <a
               href="/about#contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl dark:bg-white/8 bg-white border dark:border-white/15 border-gray-200 dark:text-gray-200 text-gray-700 font-semibold text-base hover:dark:bg-white/12 hover:bg-gray-50 transition-all"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl dark:bg-slate-700/60 bg-white border dark:border-slate-500/40 border-gray-200 dark:text-slate-100 text-gray-700 font-semibold text-base hover:dark:bg-slate-600/70 hover:bg-gray-50 transition-all"
             >
               预约企业架构评估
             </a>
@@ -138,9 +138,9 @@ export default function TrainingPage() {
                 </h3>
                 <ul className="space-y-3">
                   {deliverables.map(({ icon: Icon, text }) => (
-                    <li key={text} className="flex items-start gap-3 p-3 rounded-xl dark:bg-white/4 bg-gray-50">
-                      <Icon className="w-4 h-4 dark:text-indigo-400 text-indigo-600 mt-0.5 shrink-0" />
-                      <span className="text-sm dark:text-gray-300 text-gray-700">{text}</span>
+                    <li key={text} className="flex items-start gap-3 p-3 rounded-xl dark:bg-slate-700/50 bg-gray-50 dark:border dark:border-slate-600/40 border border-transparent">
+                      <Icon className="w-4 h-4 dark:text-indigo-300 text-indigo-600 mt-0.5 shrink-0" />
+                      <span className="text-sm dark:text-slate-100 text-gray-700 font-medium">{text}</span>
                     </li>
                   ))}
                 </ul>
@@ -152,8 +152,8 @@ export default function TrainingPage() {
                 </h3>
                 <ul className="space-y-2">
                   {curriculum.map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm dark:text-gray-300 text-gray-700">
-                      <ChevronRight className="w-3.5 h-3.5 dark:text-indigo-400 text-indigo-500 shrink-0" />
+                    <li key={item} className="flex items-center gap-2 text-sm dark:text-slate-200 text-gray-700">
+                      <ChevronRight className="w-3.5 h-3.5 dark:text-indigo-300 text-indigo-500 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -168,8 +168,8 @@ export default function TrainingPage() {
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                   {['完成交付物', '线下必须到场', '现场答辩评审', '认证编号 0001–0020'].map((item) => (
-                    <div key={item} className="text-center p-3 rounded-lg dark:bg-white/5 bg-white border dark:border-white/8 border-gray-100">
-                      <span className="text-sm dark:text-gray-200 text-gray-700 font-medium">{item}</span>
+                    <div key={item} className="text-center p-3 rounded-lg dark:bg-slate-700/60 bg-white border dark:border-slate-500/40 border-gray-100">
+                      <span className="text-sm dark:text-slate-100 text-gray-700 font-medium">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -191,14 +191,14 @@ export default function TrainingPage() {
           <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">前3天线上授课，后2天北京中国尊现场实战与答辩。</p>
           <div className="space-y-3">
             {schedule.map((item, idx) => (
-              <div key={idx} className="flex gap-4 p-4 glass rounded-xl border dark:border-white/8 border-gray-100">
+              <div key={idx} className="flex gap-4 p-4 dark:bg-slate-800/60 bg-white rounded-xl border dark:border-slate-700/50 border-gray-100 shadow-sm">
                 <div className="flex flex-col items-center gap-1.5 shrink-0 w-16">
                   <span className="text-base font-bold dark:text-white text-gray-900">{item.day}</span>
                   <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${item.modeColor}`}>{item.mode}</span>
                 </div>
                 <div className="flex-1 min-w-0">
                   <h3 className="text-base font-semibold dark:text-white text-gray-900 mb-1">{item.title}</h3>
-                  <p className="text-sm dark:text-gray-400 text-gray-500 leading-relaxed">{item.desc}</p>
+                  <p className="text-sm dark:text-slate-300 text-gray-500 leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -227,8 +227,8 @@ export default function TrainingPage() {
                   { label: '形式', value: '线上3天 + 线下2天' },
                   { label: '类型', value: '申请制' },
                 ].map(({ label, value }) => (
-                  <div key={label} className="p-3 rounded-xl dark:bg-white/5 bg-gray-50 border dark:border-white/8 border-gray-100">
-                    <div className="text-xs dark:text-gray-500 text-gray-400 mb-1">{label}</div>
+                  <div key={label} className="p-3 rounded-xl dark:bg-slate-700/50 bg-gray-50 border dark:border-slate-600/40 border-gray-100">
+                    <div className="text-xs dark:text-slate-400 text-gray-400 mb-1">{label}</div>
                     <div className="text-sm font-semibold dark:text-white text-gray-900">{value}</div>
                   </div>
                 ))}
@@ -258,9 +258,9 @@ export default function TrainingPage() {
                 <p className="text-sm dark:text-gray-400 text-gray-500 mb-4">帮助管理层建立实施判断能力。</p>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {['企业AI实施路线图', '风险与合规边界', '投入产出结构', '组织变革逻辑'].map((item) => (
-                    <div key={item} className="flex items-center gap-2 p-3 rounded-xl dark:bg-white/4 bg-gray-50 border dark:border-white/8 border-gray-100">
-                      <CheckCircle className="w-3.5 h-3.5 dark:text-purple-400 text-purple-500 shrink-0" />
-                      <span className="text-sm dark:text-gray-300 text-gray-700">{item}</span>
+                    <div key={item} className="flex items-center gap-2 p-3 rounded-xl dark:bg-slate-700/50 bg-gray-50 border dark:border-slate-600/40 border-gray-100">
+                      <CheckCircle className="w-3.5 h-3.5 dark:text-purple-300 text-purple-500 shrink-0" />
+                      <span className="text-sm dark:text-slate-100 text-gray-700">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -314,13 +314,13 @@ export default function TrainingPage() {
           <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">完成认证的实施者将获得以下长期权益。</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
             {networkBenefits.map(({ icon: Icon, title, desc }) => (
-              <div key={title} className="glass rounded-xl border dark:border-white/8 border-gray-100 p-5 flex gap-4">
-                <div className="p-2.5 rounded-xl dark:bg-indigo-500/15 bg-indigo-50 shrink-0 h-fit">
-                  <Icon className="w-4 h-4 dark:text-indigo-400 text-indigo-600" />
+              <div key={title} className="dark:bg-slate-800/60 bg-white rounded-xl border dark:border-slate-700/50 border-gray-100 p-5 flex gap-4 shadow-sm">
+                <div className="p-2.5 rounded-xl dark:bg-indigo-500/20 bg-indigo-50 shrink-0 h-fit">
+                  <Icon className="w-4 h-4 dark:text-indigo-300 text-indigo-600" />
                 </div>
                 <div>
                   <h3 className="text-base font-semibold dark:text-white text-gray-900 mb-1">{title}</h3>
-                  <p className="text-sm dark:text-gray-400 text-gray-500 leading-relaxed">{desc}</p>
+                  <p className="text-sm dark:text-slate-300 text-gray-500 leading-relaxed">{desc}</p>
                 </div>
               </div>
             ))}
@@ -353,11 +353,11 @@ export default function TrainingPage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <a
                 href="/about#contact"
-                className="flex flex-col items-center gap-2 p-5 rounded-xl dark:bg-white/5 bg-gray-50 border dark:border-white/10 border-gray-200 hover:dark:bg-white/8 hover:bg-gray-100 transition-all group"
+                className="flex flex-col items-center gap-2 p-5 rounded-xl dark:bg-slate-700/50 bg-gray-50 border dark:border-slate-600/50 border-gray-200 hover:dark:bg-slate-600/60 hover:bg-gray-100 transition-all group"
               >
-                <Building2 className="w-6 h-6 dark:text-blue-400 text-blue-600 group-hover:scale-110 transition-transform" />
+                <Building2 className="w-6 h-6 dark:text-blue-300 text-blue-600 group-hover:scale-110 transition-transform" />
                 <span className="text-base font-semibold dark:text-white text-gray-900">预约企业架构评估</span>
-                <span className="text-xs dark:text-gray-500 text-gray-400">适合企业决策者与技术负责人</span>
+                <span className="text-xs dark:text-slate-400 text-gray-400">适合企业决策者与技术负责人</span>
               </a>
               <a
                 href="/events/qizhi-bootcamp-2026"
@@ -369,11 +369,11 @@ export default function TrainingPage() {
               </a>
               <a
                 href="/about#join"
-                className="flex flex-col items-center gap-2 p-5 rounded-xl dark:bg-white/5 bg-gray-50 border dark:border-white/10 border-gray-200 hover:dark:bg-white/8 hover:bg-gray-100 transition-all group"
+                className="flex flex-col items-center gap-2 p-5 rounded-xl dark:bg-slate-700/50 bg-gray-50 border dark:border-slate-600/50 border-gray-200 hover:dark:bg-slate-600/60 hover:bg-gray-100 transition-all group"
               >
-                <Network className="w-6 h-6 dark:text-indigo-400 text-indigo-600 group-hover:scale-110 transition-transform" />
+                <Network className="w-6 h-6 dark:text-indigo-300 text-indigo-600 group-hover:scale-110 transition-transform" />
                 <span className="text-base font-semibold dark:text-white text-gray-900">加入实施者网络</span>
-                <span className="text-xs dark:text-gray-500 text-gray-400">认证后自动加入，共享生态资源</span>
+                <span className="text-xs dark:text-slate-400 text-gray-400">认证后自动加入，共享生态资源</span>
               </a>
             </div>
           </div>
