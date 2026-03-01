@@ -433,13 +433,13 @@ export default function ScenariosPage() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-3">
-            企业级智能体应用场景
+            企业智能解决方案
           </h1>
           <p className="dark:text-gray-200 text-gray-700 text-base max-w-2xl mx-auto mb-2">
             从销售到供应链，让 OpenClaw 成为每个部门的超级管理 Agent。
           </p>
           <p className="dark:text-gray-400 text-gray-500 text-sm max-w-xl mx-auto mb-7">
-            企业真正需要的不是 AI 工具，而是可落地的部门级智能解决方案。
+            OpenClaw 企业级实施与落地平台 — 企业真正需要的不是 AI 工具，而是可落地的部门级智能解决方案。
           </p>
 
           {/* CTA 按钮组 */}
