@@ -94,6 +94,107 @@ const SCALES = [
   },
 ]
 
+
+// ─── 适用企业类型数据（8 类行业）────────────────────────────────────────────
+const INDUSTRY_TYPES = [
+  {
+    key: 'ecommerce',
+    name: '电商与零售企业',
+    icon: BarChart3,
+    gradient: 'from-blue-500 to-cyan-500',
+    dot: 'bg-blue-400',
+    deploy: 'Cloud Pro / Box Pro S',
+    deployColor: 'dark:text-sky-300 text-sky-700',
+    linkColor: 'dark:text-sky-300 text-sky-700',
+    anchor: 'sales',
+    reasons: ['客服自动化', '销售预测', '库存智能补货', '数据驱动营销'],
+  },
+  {
+    key: 'education',
+    name: '教育与培训机构',
+    icon: Users,
+    gradient: 'from-purple-500 to-violet-500',
+    dot: 'bg-purple-400',
+    deploy: 'Cloud Pro / Box Pro S',
+    deployColor: 'dark:text-violet-300 text-violet-700',
+    linkColor: 'dark:text-violet-300 text-violet-700',
+    anchor: 'hr',
+    reasons: ['智能招生助手', '课程内容生成', '学员数据分析', '自动答疑'],
+  },
+  {
+    key: 'manufacturing',
+    name: '制造与生产企业',
+    icon: Factory,
+    gradient: 'from-orange-500 to-amber-500',
+    dot: 'bg-orange-400',
+    deploy: 'Box Pro S / Box Pro M',
+    deployColor: 'dark:text-amber-300 text-amber-700',
+    linkColor: 'dark:text-amber-300 text-amber-700',
+    anchor: 'supply',
+    reasons: ['供应链预测', '生产排程优化', '设备维护分析', '成本控制'],
+  },
+  {
+    key: 'finance',
+    name: '金融与保险企业',
+    icon: Building2,
+    gradient: 'from-emerald-500 to-teal-500',
+    dot: 'bg-emerald-400',
+    deploy: 'Box Pro M / 定制集群',
+    deployColor: 'dark:text-emerald-300 text-emerald-700',
+    linkColor: 'dark:text-emerald-300 text-emerald-700',
+    anchor: 'finance',
+    reasons: ['风控辅助分析', '客户分层管理', '自动报告生成', '合规审计辅助'],
+  },
+  {
+    key: 'healthcare',
+    name: '医疗与健康管理',
+    icon: Database,
+    gradient: 'from-rose-500 to-pink-500',
+    dot: 'bg-rose-400',
+    deploy: 'Box Pro M / 定制集群',
+    deployColor: 'dark:text-rose-300 text-rose-700',
+    linkColor: 'dark:text-rose-300 text-rose-700',
+    anchor: 'data',
+    reasons: ['数据归档', '辅助诊断分析', '患者随访管理', '合规文档处理'],
+  },
+  {
+    key: 'tech',
+    name: '互联网与科技公司',
+    icon: Cpu,
+    gradient: 'from-sky-500 to-blue-600',
+    dot: 'bg-sky-400',
+    deploy: 'Cloud Pro / Box Pro S',
+    deployColor: 'dark:text-sky-300 text-sky-700',
+    linkColor: 'dark:text-sky-300 text-sky-700',
+    anchor: 'data',
+    reasons: ['产品数据分析', '用户行为洞察', '研发效能提升', '客服智能化'],
+  },
+  {
+    key: 'logistics',
+    name: '物流与供应链企业',
+    icon: TrendingUp,
+    gradient: 'from-yellow-500 to-orange-500',
+    dot: 'bg-yellow-400',
+    deploy: 'Box Pro S / Box Pro M',
+    deployColor: 'dark:text-amber-300 text-amber-700',
+    linkColor: 'dark:text-amber-300 text-amber-700',
+    anchor: 'supply',
+    reasons: ['路线优化', '仓储智能调度', '异常预警', '成本分析报告'],
+  },
+  {
+    key: 'professional',
+    name: '专业服务型企业',
+    icon: MessageSquare,
+    gradient: 'from-indigo-500 to-violet-600',
+    dot: 'bg-indigo-400',
+    deploy: 'Cloud Pro / Box Pro S',
+    deployColor: 'dark:text-violet-300 text-violet-700',
+    linkColor: 'dark:text-violet-300 text-violet-700',
+    anchor: 'finance',
+    reasons: ['报告自动生成', '案件整理', '文档处理', '数据归档'],
+  },
+]
+
 // ─── 六大场景数据────────────────────────────────────────────────────────────
 const SCENARIOS = [
   {
@@ -400,6 +501,68 @@ export default function ScenariosPage() {
                   <span className={`ml-1 font-semibold ${s.deployColor}`}>{s.deploy}</span>
                 </div>
               </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── 适用企业类型模块 ─────────────────────────────────────────────── */}
+        <section className="mb-14">
+          <div className="text-center mb-8">
+            <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">
+              哪些企业适合部署 OpenClaw 智能体？
+            </h2>
+            <p className="text-sm dark:text-gray-400 text-gray-500 max-w-xl mx-auto">
+              从数字化升级到智能化转型，以下类型企业最容易率先实现 ROI 回收。
+            </p>
+          </div>
+
+          {/* 8 类行业卡片：PC 4 列，移动 1 列 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {INDUSTRY_TYPES.map((ind) => (
+              <Link
+                key={ind.key}
+                href={`/scenarios#${ind.anchor}`}
+                className="group block rounded-xl p-5 border transition-all
+                  dark:bg-neutral-900 bg-white
+                  dark:border-neutral-800 border-neutral-200
+                  hover:shadow-md dark:hover:border-neutral-700 hover:border-neutral-300
+                  min-h-[44px]"
+              >
+                {/* 图标 + 标题 */}
+                <div className="flex items-center gap-2.5 mb-3">
+                  <div className={`p-2 rounded-lg bg-gradient-to-br ${ind.gradient} shrink-0`}>
+                    <ind.icon className="w-4 h-4 text-white" />
+                  </div>
+                  <h3 className="text-sm font-bold dark:text-neutral-100 text-neutral-900 leading-tight">
+                    {ind.name}
+                  </h3>
+                </div>
+
+                {/* 4 条适用说明 */}
+                <ul className="space-y-1.5 mb-4">
+                  {ind.reasons.map((r, i) => (
+                    <li key={i} className="flex items-start gap-1.5">
+                      <span className={`mt-0.5 w-1.5 h-1.5 rounded-full shrink-0 ${ind.dot}`} />
+                      <span className="text-xs dark:text-neutral-400 text-neutral-600 leading-relaxed">
+                        {r}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* 底部：推荐部署 + 查看场景 */}
+                <div className="pt-3 border-t dark:border-neutral-800 border-neutral-100">
+                  <div className="text-xs dark:text-neutral-500 text-neutral-400 mb-1.5">
+                    推荐部署：
+                    <span className={`ml-1 font-semibold ${ind.deployColor}`}>
+                      {ind.deploy}
+                    </span>
+                  </div>
+                  <div className={`text-xs font-semibold flex items-center gap-1 ${ind.linkColor} group-hover:underline`}>
+                    查看对应场景 <ChevronRight className="w-3 h-3" />
+                  </div>
+                </div>
+              </Link>
             ))}
           </div>
         </section>
