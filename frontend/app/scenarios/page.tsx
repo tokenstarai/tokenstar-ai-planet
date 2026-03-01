@@ -702,27 +702,40 @@ export default function ScenariosPage() {
                     </div>
 
                     {/* 场景 CTA 按钮 */}
-                    <div className="flex gap-2">
-                      {/* 主按钮：solid blue */}
+                    <div className="flex flex-col gap-2">
+                      <div className="flex gap-2">
+                        {/* 主按钮：solid blue */}
+                        <Link
+                          href="/about#contact"
+                          className="flex-1 text-center py-2 rounded-lg text-xs font-semibold
+                            bg-blue-600 hover:bg-blue-500 active:bg-blue-700
+                            text-white transition-all"
+                        >
+                          预约该场景部署
+                        </Link>
+                        {/* 次要按钮：深色有足够不透明度 */}
+                        <Link
+                          href="/about#contact"
+                          className="flex-1 text-center py-2 rounded-lg text-xs font-semibold
+                            dark:bg-white/15 bg-gray-100
+                            dark:hover:bg-white/25 hover:bg-gray-200
+                            dark:text-white text-gray-800
+                            transition-all
+                            dark:border dark:border-white/20 border border-gray-200"
+                        >
+                          获取解决方案
+                        </Link>
+                      </div>
+                      {/* 查看相关案例按钮 */}
                       <Link
-                        href="/about#contact"
-                        className="flex-1 text-center py-2 rounded-lg text-xs font-semibold
-                          bg-blue-600 hover:bg-blue-500 active:bg-blue-700
-                          text-white transition-all"
+                        href={`/cases?scenario=${sc.id === 'cs' ? 'service' : sc.id}`}
+                        className="w-full text-center py-2 rounded-lg text-xs font-semibold
+                          border border-neutral-300 dark:border-neutral-600
+                          text-neutral-700 dark:text-neutral-200
+                          hover:bg-neutral-100 dark:hover:bg-neutral-800
+                          transition-all"
                       >
-                        预约该场景部署
-                      </Link>
-                      {/* 次要按钮：深色有足够不透明度 */}
-                      <Link
-                        href="/about#contact"
-                        className="flex-1 text-center py-2 rounded-lg text-xs font-semibold
-                          dark:bg-white/15 bg-gray-100
-                          dark:hover:bg-white/25 hover:bg-gray-200
-                          dark:text-white text-gray-800
-                          transition-all
-                          dark:border dark:border-white/20 border border-gray-200"
-                      >
-                        获取解决方案
+                        查看相关成功案例 →
                       </Link>
                     </div>
                   </div>

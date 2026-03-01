@@ -4,6 +4,7 @@ import { ArrowRight, Server, Cloud, Smartphone, CheckCircle, Shield, Zap, Users,
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 import { ROICalculator } from '@/components/deployment/ROICalculator'
 import { ConsultationForm } from '@/components/deployment/ConsultationForm'
+import { DeploymentRecommendation } from '@/components/deployment/DeploymentRecommendation'
 
 export const metadata: Metadata = {
   title: 'OpenClaw 企业智能部署解决方案 - TokenStar',
@@ -189,6 +190,9 @@ export default function DeploymentPage() {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+
+        {/* ── 个性化建议模块（来自 /cases 参数跳转）── */}
+        <DeploymentRecommendation />
 
         {/* ── 模块一：部署路径总览 ── */}
         <section className="mb-14">
