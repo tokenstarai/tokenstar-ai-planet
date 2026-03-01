@@ -126,11 +126,12 @@ const cloudProducts = [
 const workstationProducts = [
   {
     id: 'ws-iphone',
-    name: 'iPhone 版本',
+    name: 'iPhone / iPad 版本',
     icon: Smartphone,
     models: [
       { name: 'iPhone 14 Pro – 17 Pro', price: '¥3,999 起' },
       { name: 'iPhone 14 Pro Max – 17 Pro Max', price: '¥4,999 起' },
+      { name: 'iPad mini – iPad Pro', price: '¥3,999 起' },
     ],
     software: ['OpenClaw 移动管理端', '企业智能助手', 'Skills 快捷调用', '企业数据安全访问'],
     targets: ['企业管理层', '销售团队', '外勤人员'],
@@ -306,7 +307,7 @@ export default function DeploymentPage() {
           <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-4 leading-tight">
             企业级部署与安全架构方案
           </h1>
-          <p className="text-base sm:text-lg dark:text-gray-300 text-gray-600 max-w-3xl mx-auto mb-2">
+          <p className="text-base sm:text-lg dark:text-gray-300 text-gray-600 max-w-3xl mx-auto mb-2 whitespace-nowrap">
             OpenCLAW + Antigravity 私有化实施平台 — 专注企业级私有化部署、安全架构设计与系统集成落地。
           </p>
           <p className="text-sm dark:text-gray-400 text-gray-500 max-w-2xl mx-auto">
@@ -657,7 +658,7 @@ export default function DeploymentPage() {
                     ))}
                   </div>
                   <a href="#consultation-form" className={`block w-full text-center py-2.5 rounded-xl text-sm font-semibold transition-all ${product.ctaStyle}`}>
-                    立即咨询
+                    立即购买
                   </a>
                 </div>
               </div>
@@ -716,7 +717,7 @@ export default function DeploymentPage() {
                 </div>
                 <div className="px-5 pb-5">
                   <a href="#consultation-form" className="block w-full text-center py-2.5 rounded-xl text-sm font-semibold bg-purple-600 hover:bg-purple-500 text-white transition-all">
-                    立即咨询
+                    立即购买
                   </a>
                 </div>
               </div>
