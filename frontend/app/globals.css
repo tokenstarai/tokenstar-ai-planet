@@ -152,6 +152,8 @@ html.light {
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  /* 锚点定位偏移：补偿 fixed navbar（64px）高度，避免内容被遮挡 */
+  scroll-padding-top: calc(80px + env(safe-area-inset-top, 0px));
 }
 
 body {

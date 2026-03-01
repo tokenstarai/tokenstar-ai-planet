@@ -173,6 +173,31 @@ function NavDropdown({
   const [isOpen, setIsOpen] = useState(false)
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const router = useRouter()
+
+  // 含 # 的锚点链接智能跳转：同页直接滚动，跨页先导航再由 AnchorScrollHandler 处理
+  const handleAnchorClick = useCallback((e: React.MouseEvent, href: string) => {
+    const hashIndex = href.indexOf('#')
+    if (hashIndex === -1) return // 无 hash，默认行为
+    e.preventDefault()
+    setIsOpen(false)
+    onClose()
+    const pagePath = href.slice(0, hashIndex) || '/'
+    const anchorId = href.slice(hashIndex + 1)
+    const isSamePage = pathname === pagePath || (pagePath === '/' && pathname === '/')
+    if (isSamePage) {
+      // 同页内直接滚动
+      const el = document.getElementById(anchorId)
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+        window.history.pushState(null, '', href)
+      }
+    } else {
+      // 跨页跳转：导航到新页，AnchorScrollHandler 会在页面渲染后自动滚动
+      router.push(href)
+    }
+  }, [pathname, onClose, router])
 
   const cancelClose = useCallback(() => {
     if (closeTimerRef.current) {
@@ -280,12 +305,16 @@ function NavDropdown({
           }`} />
           {item.children.map((child) => {
             const isChildActive = pathname === child.href
+            const hasHash = child.href.includes('#')
             return (
               <Link
                 key={child.href}
                 href={child.href}
                 role="menuitem"
-                onClick={() => { setIsOpen(false); onClose() }}
+                onClick={hasHash
+                  ? (e) => handleAnchorClick(e, child.href)
+                  : () => { setIsOpen(false); onClose() }
+                }
                 className={`flex items-center w-full px-4 py-2.5 text-sm transition-colors duration-[130ms] min-h-[44px] ${
                   isChildActive
                     ? isDark
@@ -449,6 +478,30 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // 移动端含 # 锚点链接智能跳转
+  const handleMobileAnchorClick = useCallback((e: React.MouseEvent, href: string) => {
+    const hashIndex = href.indexOf('#')
+    if (hashIndex === -1) {
+      setIsMenuOpen(false)
+      return
+    }
+    e.preventDefault()
+    setIsMenuOpen(false)
+    const pagePath = href.slice(0, hashIndex) || '/'
+    const anchorId = href.slice(hashIndex + 1)
+    const isSamePage = pathname === pagePath || (pagePath === '/' && pathname === '/')
+    if (isSamePage) {
+      const el = document.getElementById(anchorId)
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' })
+        window.history.pushState(null, '', href)
+      }
+    } else {
+      router.push(href)
+    }
+  }, [pathname, router])
 
   useEffect(() => {
     setIsMenuOpen(false)
@@ -625,20 +678,26 @@ export function Navbar() {
                   {item.children ? (
                     <div className="mb-1">
                       <p className={`px-3 py-1.5 text-xs uppercase tracking-wider font-semibold ${isDark ? 'text-gray-500' : 'text-gray-400'}`}>{item.label}</p>
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          onClick={() => setIsMenuOpen(false)}
-                          className={`flex items-center px-6 py-2.5 text-sm rounded-xl transition-all min-h-[44px] ${
-                            pathname === child.href
-                              ? isDark ? 'text-white bg-blue-600/30 border border-blue-500/20' : 'text-blue-700 bg-blue-50 border border-blue-200'
-                              : isDark ? 'text-gray-300 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                          }`}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
+                      {item.children.map((child) => {
+                        const mobileHasHash = child.href.includes('#')
+                        return (
+                          <Link
+                            key={child.href}
+                            href={child.href}
+                            onClick={mobileHasHash
+                              ? (e) => handleMobileAnchorClick(e, child.href)
+                              : () => setIsMenuOpen(false)
+                            }
+                            className={`flex items-center px-6 py-2.5 text-sm rounded-xl transition-all min-h-[44px] ${
+                              pathname === child.href
+                                ? isDark ? 'text-white bg-blue-600/30 border border-blue-500/20' : 'text-blue-700 bg-blue-50 border border-blue-200'
+                                : isDark ? 'text-gray-300 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                            }`}
+                          >
+                            {child.label}
+                          </Link>
+                        )
+                      })}
                     </div>
                   ) : (
                     <Link

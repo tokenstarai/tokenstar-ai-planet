@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { PWAUpdateToast } from '@/components/pwa/PWAUpdateToast'
 import { DynamicThemeColor } from '@/components/pwa/DynamicThemeColor'
+import { AnchorScrollHandler } from '@/components/AnchorScrollHandler'
 
 export const metadata: Metadata = {
   title: {
@@ -130,6 +131,8 @@ export default function RootLayout({
           <DynamicThemeColor />
           {/* PWA 更新提示 Toast */}
           <PWAUpdateToast />
+          {/* 锚点滚动修复：解决跨页 hash 跳转定位不准问题 */}
+          <AnchorScrollHandler />
           <Navbar />
           {/*
             修复叠压：header 高度 = 64px (h-16) + safe-area-inset-top

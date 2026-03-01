@@ -219,7 +219,7 @@ export default function DeploymentPage() {
         </section>
 
         {/* ── 模块二：Box Pro 产品体系 ── */}
-        <section className="mb-14">
+        <section id="hardware" className="mb-14">
           <div className="flex items-center gap-3 mb-2">
             <Server className="w-5 h-5 dark:text-green-400 text-green-600" />
             <h2 className="text-xl font-bold dark:text-white text-gray-900">OpenClaw Box Pro 产品体系</h2>
@@ -304,7 +304,7 @@ export default function DeploymentPage() {
         </section>
 
         {/* ── 模块三：Cloud 方案 ── */}
-        <section className="mb-14">
+        <section id="cloud" className="mb-14">
           <div className="flex items-center gap-3 mb-2">
             <Cloud className="w-5 h-5 dark:text-blue-400 text-blue-600" />
             <h2 className="text-xl font-bold dark:text-white text-gray-900">OpenClaw Cloud 方案</h2>
@@ -437,7 +437,9 @@ export default function DeploymentPage() {
         </section>
 
         {/* ── 模块六：ROI 测算（客户端组件） ── */}
+        <div id="roi">
         <ROICalculator />
+        </div>
 
         {/* ── 模块七：咨询表单（客户端组件） ── */}
         <ConsultationForm />

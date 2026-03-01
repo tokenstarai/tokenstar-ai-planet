@@ -473,7 +473,7 @@ export default function ScenariosPage() {
       <div className="max-w-6xl mx-auto px-4 py-10">
 
         {/* ── 企业规模引导区 ──────────────────────────────────────────────── */}
-        <section className="mb-14">
+        <section id="scales" className="mb-14">
           <div className="text-center mb-6">
             <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">
               按企业规模选择方案
@@ -506,7 +506,7 @@ export default function ScenariosPage() {
         </section>
 
         {/* ── 适用企业类型模块 ─────────────────────────────────────────────── */}
-        <section className="mb-14">
+        <section id="industry-types" className="mb-14">
           <div className="text-center mb-8">
             <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">
               哪些企业适合部署 OpenClaw 智能体？
