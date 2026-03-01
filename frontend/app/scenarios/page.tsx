@@ -511,7 +511,7 @@ export default function ScenariosPage() {
             <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">
               哪些企业适合部署 OpenClaw 智能体？
             </h2>
-            <p className="text-sm dark:text-gray-400 text-gray-500 max-w-xl mx-auto">
+            <p className="text-sm dark:text-gray-400 text-gray-500">
               从数字化升级到智能化转型，以下类型企业最容易率先实现 ROI 回收。
             </p>
           </div>

@@ -289,7 +289,7 @@ function CasesContent() {
           <p className="text-lg text-neutral-600 dark:text-neutral-300 mb-3 max-w-2xl mx-auto">
             覆盖 8 大行业与 6 大部门场景，验证 OpenClaw 企业部署的真实价值。
           </p>
-          <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-8 max-w-xl mx-auto">
+          <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-8">
             以下案例为典型落地路径汇总，指标为保守区间估算，实际效果取决于企业规模、流程成熟度与使用深度。
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -396,7 +396,7 @@ function CasesContent() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-3">从试点到规模化：行业落地三步走</h2>
-            <p className="text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto text-sm">无论行业与规模，成功落地都遵循相同的路径节奏。</p>
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm">无论行业与规模，成功落地都遵循相同的路径节奏。</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -424,7 +424,7 @@ function CasesContent() {
       <section className="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-16 text-center">
           <h2 className="text-2xl sm:text-3xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">让您的企业成为下一个成功案例</h2>
-          <p className="text-neutral-600 dark:text-neutral-400 mb-8 max-w-xl mx-auto">提交基本信息，我们将为您输出行业匹配的部署建议与 ROI 评估。</p>
+          <p className="text-neutral-600 dark:text-neutral-400 mb-8">提交基本信息，我们将为您输出行业匹配的部署建议与 ROI 评估。</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href="/deployment" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold text-sm transition-colors">
               预约企业部署评估 →

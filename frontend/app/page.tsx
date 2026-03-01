@@ -90,8 +90,10 @@ export default function HomePage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
             {enterpriseScenarios.map(s => (
               <Link key={s.title} href={s.href} className={`group rounded-2xl p-6 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10' : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-md'}`}>
-                <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${s.color} mb-4`}><s.icon className="w-5 h-5 text-white" /></div>
-                <h3 className={`text-base font-semibold mb-2 group-hover:text-blue-400 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>{s.title}</h3>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`inline-flex p-2.5 rounded-xl bg-gradient-to-br ${s.color} flex-shrink-0`}><s.icon className="w-5 h-5 text-white" /></div>
+                  <h3 className={`text-base font-semibold group-hover:text-blue-400 transition-colors leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>{s.title}</h3>
+                </div>
                 <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{s.description}</p>
                 <div className={`mt-4 flex items-center gap-1 text-xs font-medium ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>了解详情 <ArrowRight className="w-3 h-3" /></div>
               </Link>
@@ -156,11 +158,13 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {deploymentOptions.map(o => (
               <Link key={o.title} href={o.href} className={`group rounded-2xl p-6 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-blue-500/30 hover:shadow-lg hover:shadow-blue-500/10' : 'bg-white border-gray-200 hover:border-blue-300 hover:shadow-md'}`}>
-                <div className="flex items-start justify-between mb-4">
-                  <o.icon className={`w-7 h-7 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
-                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${o.badgeColor}`}>{o.badge}</span>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <o.icon className={`w-7 h-7 flex-shrink-0 ${isDark ? 'text-blue-400' : 'text-blue-600'}`} />
+                    <h3 className={`text-base font-semibold leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>{o.title}</h3>
+                  </div>
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full border flex-shrink-0 ${o.badgeColor}`}>{o.badge}</span>
                 </div>
-                <h3 className={`text-base font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{o.title}</h3>
                 <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{o.description}</p>
                 <div className={`mt-4 flex items-center gap-1 text-xs font-medium ${isDark ? 'text-blue-400' : 'text-blue-600'}`}>查看方案 <ArrowRight className="w-3 h-3" /></div>
               </Link>
@@ -181,11 +185,13 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             {trainingOptions.map(o => (
               <Link key={o.title} href={o.href} className={`group rounded-2xl p-6 border transition-all hover:-translate-y-0.5 ${isDark ? 'bg-slate-800/60 border-white/8 hover:border-purple-500/30 hover:shadow-lg hover:shadow-purple-500/10' : 'bg-white border-gray-200 hover:border-purple-300 hover:shadow-md'}`}>
-                <div className="flex items-start justify-between mb-4">
-                  <o.icon className={`w-7 h-7 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
-                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full border ${isDark ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' : 'bg-purple-50 text-purple-700 border-purple-200'}`}>{o.duration}</span>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-3">
+                    <o.icon className={`w-7 h-7 flex-shrink-0 ${isDark ? 'text-purple-400' : 'text-purple-600'}`} />
+                    <h3 className={`text-base font-semibold leading-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>{o.title}</h3>
+                  </div>
+                  <span className={`text-xs font-medium px-2 py-0.5 rounded-full border flex-shrink-0 ${isDark ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' : 'bg-purple-50 text-purple-700 border-purple-200'}`}>{o.duration}</span>
                 </div>
-                <h3 className={`text-base font-semibold mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>{o.title}</h3>
                 <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>{o.description}</p>
                 <div className={`mt-4 flex items-center gap-1 text-xs font-medium ${isDark ? 'text-purple-400' : 'text-purple-600'}`}>了解详情 <ArrowRight className="w-3 h-3" /></div>
               </Link>

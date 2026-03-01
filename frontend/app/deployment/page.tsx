@@ -310,7 +310,7 @@ export default function DeploymentPage() {
           <p className="text-base sm:text-lg dark:text-gray-300 text-gray-600 max-w-3xl mx-auto mb-2 whitespace-nowrap">
             OpenCLAW + Antigravity 私有化实施平台 — 专注企业级私有化部署、安全架构设计与系统集成落地。
           </p>
-          <p className="text-sm dark:text-gray-400 text-gray-500 max-w-2xl mx-auto">
+          <p className="text-sm dark:text-gray-400 text-gray-500">
             从需求评估到验收上线，TokenStar 提供端到端的技术实施支持，确保 AI 系统安全、合规、可持续运行。
           </p>
           {/* 白皮书下载 */}
@@ -772,7 +772,7 @@ export default function DeploymentPage() {
         <section>
           <div className="glass rounded-2xl border dark:border-blue-500/20 border-blue-200 p-8 text-center">
             <h2 className="text-2xl font-bold dark:text-white text-gray-900 mb-3">开启企业智能化升级</h2>
-            <p className="dark:text-gray-400 text-gray-500 text-sm mb-6 max-w-xl mx-auto">
+            <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">
               专业架构师为您量身定制部署方案，从选型到上线全程支持，确保安全合规、快速落地。
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
