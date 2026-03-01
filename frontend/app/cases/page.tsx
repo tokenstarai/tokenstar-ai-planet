@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useMemo, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { CASE_STUDIES, INDUSTRIES, COMPANY_SIZES, SCENARIOS, type CaseStudy } from '@/lib/caseStudies';
 
 /*
@@ -242,6 +242,7 @@ function CasesContent() {
     return p ? (PARAM_TO_SCENARIO[p] ?? '全部场景') : '全部场景';
   }, [searchParams]);
 
+  const router = useRouter();
   const [selectedIndustry, setSelectedIndustry] = useState<string>(initIndustry);
   const [selectedSize, setSelectedSize]         = useState<string>(initSize);
   const [selectedScenario, setSelectedScenario] = useState<string>(initScenario);
@@ -252,6 +253,14 @@ function CasesContent() {
   useEffect(() => { setSelectedSize(initSize); }, [initSize]);
   useEffect(() => { setSelectedScenario(initScenario); }, [initScenario]);
 
+  /** 清除所有筛选：重置 state + 清除 URL 参数 */
+  const clearFilters = () => {
+    setSelectedIndustry('全部行业');
+    setSelectedSize('全部规模');
+    setSelectedScenario('全部场景');
+    router.replace('/cases');
+  };
+
   const filtered = useMemo(() => {
     return CASE_STUDIES.filter((c) => {
       const iMatch = selectedIndustry === '全部行业' || c.industry === selectedIndustry;
@@ -261,8 +270,8 @@ function CasesContent() {
     });
   }, [selectedIndustry, selectedSize, selectedScenario]);
 
-  // 是否有来自外部的参数（显示"已为您筛选"提示）
-  const hasExternalParams = initIndustry !== '全部行业' || initSize !== '全部规模' || initScenario !== '全部场景';
+  // 当前是否有任何激活的筛选（显示提示条）
+  const hasActiveFilters = selectedIndustry !== '全部行业' || selectedSize !== '全部规模' || selectedScenario !== '全部场景';
 
   return (
     <main className="min-h-screen bg-white dark:bg-neutral-950">
@@ -294,23 +303,23 @@ function CasesContent() {
         </div>
       </section>
 
-      {/* ── 外部参数提示条 ── */}
-      {hasExternalParams && (
+      {/* ── 当前筛选提示条（仅当有激活筛选时显示）── */}
+      {hasActiveFilters && (
         <div className="bg-blue-50 dark:bg-blue-900/20 border-b border-blue-200 dark:border-blue-800">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center gap-2 text-sm">
-            <span className="text-blue-700 dark:text-blue-300 font-medium">已为您筛选：</span>
-            {initIndustry !== '全部行业' && (
-              <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">{initIndustry}</span>
+            <span className="text-blue-700 dark:text-blue-300 font-medium">当前筛选：</span>
+            {selectedIndustry !== '全部行业' && (
+              <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">{selectedIndustry}</span>
             )}
-            {initSize !== '全部规模' && (
-              <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">{initSize.split('（')[0]}</span>
+            {selectedSize !== '全部规模' && (
+              <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">{selectedSize.split('（')[0]}</span>
             )}
-            {initScenario !== '全部场景' && (
-              <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">{initScenario}场景</span>
+            {selectedScenario !== '全部场景' && (
+              <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-200 text-xs font-medium">{selectedScenario}场景</span>
             )}
             <button
-              onClick={() => { setSelectedIndustry('全部行业'); setSelectedSize('全部规模'); setSelectedScenario('全部场景'); }}
-              className="ml-auto text-xs text-neutral-500 dark:text-neutral-400 hover:text-neutral-700 dark:hover:text-neutral-200 underline"
+              onClick={clearFilters}
+              className="ml-auto text-xs text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-200 font-medium underline underline-offset-2"
             >
               清除筛选
             </button>
