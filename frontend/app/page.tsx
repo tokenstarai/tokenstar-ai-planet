@@ -11,10 +11,10 @@ import { useTheme } from '@/components/ThemeProvider'
 const enterpriseScenarios = [
   { icon: TrendingUp, title: '销售管理 Agent', description: '自动追踪销售漏斗、生成拜访报告、预测成交概率，让销售总监实时掌握全局。', color: 'from-blue-500 to-cyan-500', href: '/scenarios#sales' },
   { icon: BarChart3, title: '财务分析 Agent', description: '实时汇总多维财务数据，自动生成管理报表，异常预警秒级响应。', color: 'from-green-500 to-emerald-500', href: '/scenarios#finance' },
-  { icon: Globe, title: '市场洞察 Agent', description: '7×24 小时监控竞品动态、行业资讯，自动生成竞争分析简报。', color: 'from-purple-500 to-violet-500', href: '/scenarios#market' },
-  { icon: Target, title: 'CEO 战略 Agent', description: '聚合内外部数据，辅助战略决策，将复杂信息转化为清晰的行动建议。', color: 'from-orange-500 to-red-500', href: '/scenarios#ceo' },
+  { icon: Globe, title: '市场洞察 Agent', description: '7×24 小时监控竞品动态、行业资讯，自动生成竞争分析简报。', color: 'from-purple-500 to-violet-500', href: '/scenarios#data' },
+  { icon: Target, title: 'CEO 战略 Agent', description: '聚合内外部数据，辅助战略决策，将复杂信息转化为清晰的行动建议。', color: 'from-orange-500 to-red-500', href: '/scenarios#data' },
   { icon: Users, title: 'HR 管理 Agent', description: '智能简历筛选、绩效分析、员工关怀提醒，让 HR 聚焦高价值工作。', color: 'from-pink-500 to-rose-500', href: '/scenarios#hr' },
-  { icon: Building2, title: '运营管理 Agent', description: '跨部门流程自动化，项目进度追踪，异常事项自动升级，提升组织执行力。', color: 'from-yellow-500 to-amber-500', href: '/scenarios#ops' },
+  { icon: Building2, title: '运营管理 Agent', description: '跨部门流程自动化，项目进度追踪，异常事项自动升级，提升组织执行力。', color: 'from-yellow-500 to-amber-500', href: '/scenarios#supply' },
 ]
 
 const deploymentOptions = [

@@ -637,64 +637,40 @@ export default function ScenariosPage() {
           </div>
         </section>
 
-        {/* ── 底部收口 CTA ────────────────────────────────────────────────── */}
+        {/* ── 底部收口 CTA（Design Token 驱动，禁止透明叠加）── */}
         <section>
-          <div className="glass rounded-2xl p-10 border dark:border-blue-400/20 border-blue-200 text-center relative overflow-hidden">
-            {/* 背景渐变装饰 */}
-            <div className="absolute inset-0 bg-gradient-to-br
-              dark:from-blue-500/8 dark:to-violet-500/8
-              from-blue-50 to-violet-50
-              pointer-events-none" />
-
-            <div className="relative z-10">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full
-                dark:bg-blue-500/15 bg-blue-50
-                dark:border dark:border-blue-400/30 border border-blue-200
-                dark:text-blue-300 text-blue-700
-                text-xs font-medium mb-4">
-                <Cpu className="w-3.5 h-3.5" />
-                企业专属智能体架构设计
-              </div>
-
-              <h3 className="text-2xl font-bold dark:text-white text-gray-900 mb-3">
-                为您的企业设计专属智能体架构
-              </h3>
-              <p className="dark:text-gray-300 text-gray-600 text-sm max-w-xl mx-auto mb-7">
-                从试点部署到规模化智能转型，我们为企业提供完整技术与服务支持。
-              </p>
-
-              {/* 按钮组 */}
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                {/* 主按钮 */}
-                <Link
-                  href="/about#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
-                    bg-blue-600 hover:bg-blue-500 active:bg-blue-700
-                    text-white font-semibold text-sm transition-all
-                    shadow-lg shadow-blue-500/20"
-                >
-                  预约企业部署评估 <ArrowRight className="w-4 h-4" />
-                </Link>
-                {/* 次要按钮 */}
-                <Link
-                  href="/about#contact"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl
-                    dark:bg-white/15 bg-white
-                    dark:hover:bg-white/25 hover:bg-gray-50
-                    dark:text-white text-gray-900
-                    font-semibold text-sm transition-all
-                    dark:border dark:border-white/20 border border-gray-200"
-                >
-                  获取完整解决方案 <ChevronRight className="w-4 h-4" />
-                </Link>
-              </div>
-
-              {/* 信任背书 */}
-              <p className="text-xs dark:text-gray-400 text-gray-500 mt-5">
-                专属顾问 1 对 1 评估 · 48 小时内响应 · 免费出具场景匹配报告
-              </p>
+          <div className="cta-block p-10 text-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full
+              dark:bg-blue-500/15 bg-blue-50
+              dark:border dark:border-blue-400/30 border border-blue-200
+              dark:text-blue-300 text-blue-700
+              text-xs font-medium mb-4">
+              <Cpu className="w-3.5 h-3.5" />
+              企业专属智能体架构设计
             </div>
+
+            <h3 className="cta-title text-2xl mb-3">
+              为您的企业设计专属智能体架构
+            </h3>
+            <p className="cta-body text-sm max-w-xl mx-auto mb-7">
+              从试点部署到规模化智能转型，我们为企业提供完整技术与服务支持。
+            </p>
+
+            {/* 按钮组 */}
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <Link href="/about#contact" className="btn-cta-primary shadow-lg shadow-blue-500/20">
+                预约企业部署评估 <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link href="/about#contact" className="btn-cta-secondary">
+                获取完整解决方案 <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+
+            {/* 信任背书 */}
+            <p className="cta-body text-xs mt-5">
+              专属顾问 1 对 1 评估 · 48 小时内响应 · 免费出具场景匹配报告
+            </p>
           </div>
         </section>
 
