@@ -22,14 +22,13 @@ const navItems = [
   },
   { label: '认证与培训', href: '/training' },
   {
-    label: '生态与资源',
+    label: '企业 AI 频道',
     href: '/resources',
     children: [
-      { label: 'OpenClaw 专区', href: '/openclaw' },
-      { label: '生态动态', href: '/ecosystem' },
-      { label: 'Skills 市场', href: '/skills' },
+      { label: '企业与 AI', href: '/resources#enterprise-ai' },
       { label: 'AI 管理指南', href: '/guide' },
-      { label: '新闻中心', href: '/news' },
+      { label: 'Skills 用例', href: '/skills' },
+      { label: 'OpenClaw 框架', href: '/openclaw' },
       { label: 'Blog', href: '/blog' },
       { label: '知识库', href: '/knowledge' },
     ],

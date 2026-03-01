@@ -30,12 +30,12 @@ const trainingOptions = [
 ]
 
 const resourceLinks = [
-  { icon: Brain, label: 'OpenClaw 专区', desc: '平台架构与核心能力', href: '/openclaw' },
-  { icon: Zap, label: 'Skills 市场', desc: '500+ 开箱即用模块', href: '/skills' },
-  { icon: BookOpen, label: 'AI 管理指南', desc: '转型方法论与实践', href: '/guide' },
-  { icon: Newspaper, label: '新闻中心', desc: '行业资讯与动态', href: '/news' },
-  { icon: Star, label: 'Blog', desc: '深度技术文章', href: '/blog' },
-  { icon: Code2, label: '知识库', desc: 'API 文档与开发指南', href: '/knowledge' },
+  { icon: Building2, label: '企业与 AI', desc: '转型路径与决策框架', href: '/resources#enterprise-ai' },
+  { icon: BookOpen, label: 'AI 管理指南', desc: '组织升级与战略思想', href: '/guide' },
+  { icon: Zap, label: 'Skills 用例', desc: '按部门拆解真实用例', href: '/skills' },
+  { icon: Brain, label: 'OpenClaw 框架', desc: '超级 Agent 架构解析', href: '/openclaw' },
+  { icon: Star, label: 'Blog', desc: '行业热点与 AI 动态', href: '/blog' },
+  { icon: Code2, label: '知识库', desc: 'AI 产品官方文档入口', href: '/knowledge' },
 ]
 
 export default function HomePage() {
@@ -204,9 +204,9 @@ export default function HomePage() {
       <section className="py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-end justify-between mb-8">
-            <SectionHeader title="生态与资源" subtitle="技术文档、行业资讯、Skills 市场与管理指南一站汇聚" />
+            <SectionHeader title="企业 AI 频道" subtitle="企业决策者的 AI 认知与落地入口，不讲技术术语，只讲转型逻辑" />
             <Link href="/resources" className={`hidden sm:flex items-center gap-1 text-sm font-medium ${isDark ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-500'}`}>
-              进入生态与资源 <ArrowRight className="w-3.5 h-3.5" />
+              进入企业 AI 频道 <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
@@ -220,7 +220,7 @@ export default function HomePage() {
           </div>
           <div className="text-center mt-6 sm:hidden">
             <Link href="/resources" className={`inline-flex items-center gap-2 px-6 py-2.5 rounded-xl border font-medium text-sm transition-all ${isDark ? 'border-white/20 text-gray-300 hover:bg-white/8' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}`}>
-              进入生态与资源 <ArrowRight className="w-4 h-4" />
+              进入企业 AI 频道 <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

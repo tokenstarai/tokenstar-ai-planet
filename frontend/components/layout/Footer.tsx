@@ -11,11 +11,12 @@ const footerLinks = {
     { label: '硬件 & 云方案', href: '/hardware' },
     { label: '案例中心', href: '/cases' },
   ],
-  '资源': [
-    { label: '新闻中心', href: '/news' },
+  '企业 AI 频道': [
+    { label: '企业与 AI', href: '/resources#enterprise-ai' },
+    { label: 'AI 管理指南', href: '/guide' },
+    { label: 'Skills 用例', href: '/skills' },
     { label: '知识库', href: '/knowledge' },
     { label: 'Blog', href: '/blog' },
-    { label: '培训活动', href: '/events' },
   ],
   '关于': [
     { label: '关于我们', href: '/about' },
