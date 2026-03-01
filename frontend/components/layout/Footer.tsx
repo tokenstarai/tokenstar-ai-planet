@@ -12,7 +12,7 @@ const footerLinks = {
     { label: '案例中心', href: '/cases' },
   ],
   '企业&AI': [
-    { label: '企业与 AI', href: '/resources#enterprise-ai' },
+    { label: '企业与AI', href: '/resources#enterprise-ai' },
     { label: 'AI 管理指南', href: '/guide' },
     { label: 'Skills 用例', href: '/skills' },
     { label: '知识库', href: '/knowledge' },

@@ -25,7 +25,7 @@ const navItems = [
     label: '企业&AI',
     href: '/resources',
     children: [
-      { label: '企业与 AI', href: '/resources#enterprise-ai' },
+      { label: '企业与AI', href: '/resources#enterprise-ai' },
       { label: 'AI 管理指南', href: '/guide' },
       { label: 'Skills 用例', href: '/skills' },
       { label: 'OpenClaw 框架', href: '/openclaw' },

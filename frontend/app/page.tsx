@@ -30,7 +30,7 @@ const trainingOptions = [
 ]
 
 const resourceLinks = [
-  { icon: Building2, label: '企业与 AI', desc: '转型路径与决策框架', href: '/resources#enterprise-ai' },
+  { icon: Building2, label: '企业与AI', desc: '转型路径与决策框架', href: '/resources#enterprise-ai' },
   { icon: BookOpen, label: 'AI 管理指南', desc: '组织升级与战略思想', href: '/guide' },
   { icon: Zap, label: 'Skills 用例', desc: '按部门拆解真实用例', href: '/skills' },
   { icon: Brain, label: 'OpenClaw 框架', desc: '超级 Agent 架构解析', href: '/openclaw' },
@@ -70,6 +70,9 @@ export default function HomePage() {
             </Link>
             <Link href="/cases" className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-all border ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}>
               查看成功案例 <ChevronRight className="w-4 h-4" />
+            </Link>
+            <Link href="/training" className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-all border ${isDark ? 'border-amber-500/40 text-amber-300 hover:bg-amber-500/10' : 'border-amber-400 text-amber-700 hover:bg-amber-50'}`}>
+              启智训练营 <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
           <div className={`mt-14 grid grid-cols-3 gap-6 max-w-lg mx-auto text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>

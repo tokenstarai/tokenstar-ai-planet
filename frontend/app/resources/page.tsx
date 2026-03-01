@@ -13,7 +13,7 @@ const RESOURCE_SECTIONS = [
     border: 'border-indigo-200 dark:border-indigo-800',
     badge: '核心入口',
     badgeColor: 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300',
-    title: '企业与 AI',
+    title: '企业与AI',
     description: '企业决策者的 AI 认知入口。从 AI 作为工具的第一阶段，到企业三阶段转型模型，用管理语言讲清楚 AI 对企业的真实价值。',
     links: [
       { label: '企业 AI 转型三阶段模型', href: '/resources/enterprise-ai', desc: '从认知到落地的完整路径' },
@@ -190,7 +190,7 @@ export default function ResourcesPage() {
             企业 AI 认知入口
           </div>
           <h1 className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-5 tracking-tight ${isDark ? 'text-neutral-100' : 'text-neutral-900'}`}>
-            企业与 AI
+            企业与AI
           </h1>
           <p className={`text-lg max-w-2xl mx-auto mb-4 leading-relaxed ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>
             企业决策者的 AI 认知与落地入口。
@@ -201,7 +201,7 @@ export default function ResourcesPage() {
           {/* 快速导航标签 */}
           <div className="flex flex-wrap justify-center gap-2">
             {[
-              { label: '企业与 AI', href: '#enterprise-ai' },
+              { label: '企业与AI', href: '#enterprise-ai' },
               { label: 'AI 管理指南', href: '#guide' },
               { label: 'Skills 用例', href: '#skills' },
               { label: 'OpenClaw 框架', href: '#openclaw' },
