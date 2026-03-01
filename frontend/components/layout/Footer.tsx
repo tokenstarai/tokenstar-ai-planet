@@ -55,7 +55,7 @@ export function Footer() {
               </span>
             </Link>
             <p className={`text-sm leading-relaxed mb-5 max-w-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              面向中国用户的 OpenClaw 生态资源导航站，聚焦 OpenClaw 新闻、教程、Skills、案例、硬件部署方案与培训活动。
+              TokenStar 是面向中国企业的 OpenCLAW + Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。
             </p>
             <div className="flex items-center gap-2">
               {[

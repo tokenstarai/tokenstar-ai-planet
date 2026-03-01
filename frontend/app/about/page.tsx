@@ -30,7 +30,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4">
           <h1 className={`text-4xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>关于 TokenStar</h1>
           <p className={`max-w-xl ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            面向中国用户的 OpenClaw 生态资源导航站，连接开发者、企业与 AI 未来。
+            OpenCLAW + Antigravity 企业级实施平台，专注中国企业私有化部署与落地生态建设。
           </p>
         </div>
       </div>
@@ -66,13 +66,13 @@ export default function AboutPage() {
               <h2 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>我们是谁</h2>
               <div className={`space-y-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 <p>
-                  TokenStar 是面向中国用户的 OpenClaw 生态资源导航站，致力于为中国开发者和企业提供最完整的 OpenClaw 资源与服务。
+                  TokenStar 是面向中国企业的 OpenCLAW + Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。
                 </p>
                 <p>
-                  我们聚焦于 OpenClaw 新闻资讯、技术教程、Skills 生态、企业案例、硬件部署方案与培训活动，帮助更多人了解、学习和使用 OpenClaw，推动 AI Agent 技术在中国的普及与落地。
+                  我们通过技术内容输出、实施案例沉淀与认证培训体系建设，构建 OpenCLAW + Antigravity 在中国的落地生态网络，为企业提供可落地、可量化、可持续的 AI 转型路径。
                 </p>
                 <p>
-                  TokenStar 团队由一群热爱 AI 技术的工程师和产品人组成，我们相信 AI Agent 将深刻改变人类的工作与生活方式，而 OpenClaw 正是这场变革的重要推动力量。
+                  TokenStar 团队由具备深度企业服务经验的实施顾问和架构师组成，我们相信 AI 智能体将成为企业数字化转型的核心引擎，而 OpenCLAW + Antigravity 正是这一路径中最具企业级落地能力的平台组合。
                 </p>
               </div>
 
@@ -103,16 +103,16 @@ export default function AboutPage() {
               <div className="space-y-4">
                 {[
                   {
-                    title: '普及 AI Agent 知识',
-                    description: '通过高质量的教程、文档和案例，降低 AI Agent 开发门槛，让更多人能够使用 OpenClaw。',
+                    title: '企业级私有化部署',
+                    description: '为企业提供完整的 OpenCLAW + Antigravity 私有化部署方案，确保数据安全、满足合规要求，实现开箱即用。',
                   },
                   {
-                    title: '构建开发者社区',
-                    description: '连接全国 OpenClaw 开发者，促进技术交流与合作，共同推动 Skills 生态繁荣。',
+                    title: '安全架构设计与系统集成',
+                    description: '深度理解企业现有系统架构，设计安全、可扩展的集成方案，确保 AI 智能体与业务系统无缝对接。',
                   },
                   {
-                    title: '赋能企业 AI 转型',
-                    description: '提供完整的企业级解决方案，从技术选型到落地实施，全程陪伴企业 AI 转型之路。',
+                    title: '落地生态网络建设',
+                    description: '通过技术内容输出、实施案例沉淀与认证培训体系，构建 OpenCLAW + Antigravity 在中国的持续落地生态网络。',
                   },
                 ].map(item => (
                   <div
@@ -138,8 +138,8 @@ export default function AboutPage() {
             <div className="max-w-3xl mb-12">
               <h2 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>合作伙伴计划</h2>
               <p className={`leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                我们诚邀各类合作伙伴加入 TokenStar 生态，共同推动 OpenClaw 在中国的发展。
-                无论您是技术服务商、硬件厂商、培训机构还是行业解决方案提供商，都欢迎与我们合作。
+                我们诚邀各类合作伙伴加入 TokenStar 生态，共同推动 OpenCLAW + Antigravity 在中国的落地与应用。
+                无论您是技术服务商、系统集成商、培训机构还是行业解决方案提供商，都欢迎与我们合作。
               </p>
             </div>
 
