@@ -656,6 +656,30 @@ html.light .text-white {
 html.light .text-gray-100 {
   color: #1E293B !important;
 }
+
+/* ============================================================
+   浅色主题：有色背景按钮/元素上的文字强制白色
+   覆盖上方 text-white 映射，确保蓝色/彩色背景上文字可读
+   ============================================================ */
+html.light [class*='bg-blue-'].text-white,
+html.light [class*='bg-indigo-'].text-white,
+html.light [class*='bg-violet-'].text-white,
+html.light [class*='bg-purple-'].text-white,
+html.light [class*='bg-green-'].text-white,
+html.light [class*='bg-emerald-'].text-white,
+html.light [class*='bg-red-'].text-white,
+html.light [class*='bg-rose-'].text-white,
+html.light [class*='bg-amber-'].text-white,
+html.light [class*='bg-orange-'].text-white,
+html.light [class*='bg-cyan-'].text-white,
+html.light [class*='bg-teal-'].text-white,
+html.light [class*='bg-sky-'].text-white,
+html.light [class*='bg-pink-'].text-white,
+html.light [class*='bg-fuchsia-'].text-white,
+html.light .btn-primary,
+html.light .btn-cta-primary {
+  color: #ffffff !important;
+}
 html.light .text-gray-200 {
   color: #1E293B !important;
 }
