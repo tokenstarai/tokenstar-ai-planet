@@ -328,50 +328,87 @@ function CasesContent() {
       )}
 
       {/* ── Filters ── */}
-      <section className="sticky top-0 z-20 bg-white dark:bg-neutral-950 border-b border-neutral-200 dark:border-neutral-800 shadow-sm">
+      <section className="sticky top-0 z-20 bg-white/95 dark:bg-neutral-950/95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 space-y-3">
+
           {/* 行业筛选 */}
-          <div className="overflow-x-auto">
-            <div className="flex gap-2 pb-1 min-w-max">
+          <div className="flex items-start gap-3">
+            <span className="shrink-0 text-xs font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mt-2 w-8">行业</span>
+            <div className="flex flex-wrap gap-2 flex-1">
               {INDUSTRIES.map((ind) => (
                 <button
                   key={ind}
                   onClick={() => setSelectedIndustry(ind)}
-                  className={`shrink-0 px-3 py-1.5 rounded-full text-xs font-medium transition-colors min-h-[36px] ${selectedIndustry === ind ? BTN_ACTIVE : BTN_INACTIVE}`}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all min-h-[32px] ${
+                    selectedIndustry === ind
+                      ? 'bg-blue-600 dark:bg-blue-500 text-white shadow-sm shadow-blue-500/30'
+                      : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-100'
+                  }`}
                 >
                   {ind === '全部行业' ? ind : `${industryIcon[ind] ?? ''} ${ind}`}
                 </button>
               ))}
             </div>
           </div>
-          {/* 规模 + 场景筛选 */}
-          <div className="flex flex-wrap gap-2">
-            {COMPANY_SIZES.map((sz) => (
-              <button
-                key={sz}
-                onClick={() => setSelectedSize(sz)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors min-h-[36px] ${selectedSize === sz ? BTN_ACTIVE : BTN_INACTIVE}`}
-              >
-                {sz === '全部规模' ? sz : sz.split('（')[0]}
-              </button>
-            ))}
-            <div className="w-px bg-neutral-200 dark:bg-neutral-700 mx-1 self-stretch" />
-            {SCENARIOS.map((sc) => (
-              <button
-                key={sc}
-                onClick={() => setSelectedScenario(sc)}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors min-h-[36px] ${selectedScenario === sc ? BTN_ACTIVE : BTN_INACTIVE}`}
-              >
-                {sc}
-              </button>
-            ))}
+
+          {/* 规模筛选 */}
+          <div className="flex items-start gap-3">
+            <span className="shrink-0 text-xs font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mt-2 w-8">规模</span>
+            <div className="flex flex-wrap gap-2 flex-1">
+              {COMPANY_SIZES.map((sz) => (
+                <button
+                  key={sz}
+                  onClick={() => setSelectedSize(sz)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all min-h-[32px] ${
+                    selectedSize === sz
+                      ? 'bg-blue-600 dark:bg-blue-500 text-white shadow-sm shadow-blue-500/30'
+                      : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-100'
+                  }`}
+                >
+                  {sz === '全部规模' ? sz : sz.split('（')[0]}
+                </button>
+              ))}
+            </div>
           </div>
-          <div className="text-xs text-neutral-500 dark:text-neutral-400">
-            共 {filtered.length} 个案例
-            {selectedIndustry !== '全部行业' && `，行业：${selectedIndustry}`}
-            {selectedSize !== '全部规模' && `，规模：${selectedSize.split('（')[0]}`}
-            {selectedScenario !== '全部场景' && `，场景：${selectedScenario}`}
+
+          {/* 场景筛选 */}
+          <div className="flex items-start gap-3">
+            <span className="shrink-0 text-xs font-semibold text-neutral-400 dark:text-neutral-500 uppercase tracking-wider mt-2 w-8">场景</span>
+            <div className="flex flex-wrap gap-2 flex-1">
+              {SCENARIOS.map((sc) => (
+                <button
+                  key={sc}
+                  onClick={() => setSelectedScenario(sc)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all min-h-[32px] ${
+                    selectedScenario === sc
+                      ? 'bg-blue-600 dark:bg-blue-500 text-white shadow-sm shadow-blue-500/30'
+                      : 'bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700 hover:text-neutral-900 dark:hover:text-neutral-100'
+                  }`}
+                >
+                  {sc}
+                </button>
+              ))}
+            </div>
           </div>
+
+          {/* 结果统计 + 清除 */}
+          <div className="flex items-center justify-between pt-1 border-t border-neutral-100 dark:border-neutral-800">
+            <p className="text-xs text-neutral-500 dark:text-neutral-400">
+              共 <span className="font-semibold text-neutral-700 dark:text-neutral-200">{filtered.length}</span> 个案例
+              {selectedIndustry !== '全部行业' && <span className="ml-1 text-blue-600 dark:text-blue-400">· {selectedIndustry}</span>}
+              {selectedSize !== '全部规模' && <span className="ml-1 text-blue-600 dark:text-blue-400">· {selectedSize.split('（')[0]}</span>}
+              {selectedScenario !== '全部场景' && <span className="ml-1 text-blue-600 dark:text-blue-400">· {selectedScenario}</span>}
+            </p>
+            {hasActiveFilters && (
+              <button
+                onClick={clearFilters}
+                className="text-xs text-neutral-400 dark:text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-200 transition-colors flex items-center gap-1"
+              >
+                <span>✕</span> 清除筛选
+              </button>
+            )}
+          </div>
+
         </div>
       </section>
 
