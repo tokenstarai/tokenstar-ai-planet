@@ -14,22 +14,22 @@ type BannerFrame = {
 const DEFAULT_FRAMES: BannerFrame[] = [
   {
     key: 'agent',
-    darkSrc: '/banners/hero/agent-dark.png',
-    lightSrc: '/banners/hero/agent-light.png',
+    darkSrc: '/banners/hero/agent-dark.webp',
+    lightSrc: '/banners/hero/agent-light.webp',
     alt: '超级管理 Agent 覆盖全部门的科技背景',
     label: 'Super Agent',
   },
   {
     key: 'flow',
-    darkSrc: '/banners/hero/flow-dark.png',
-    lightSrc: '/banners/hero/flow-light.png',
+    darkSrc: '/banners/hero/flow-dark.webp',
+    lightSrc: '/banners/hero/flow-light.webp',
     alt: '业务链路贯通的数据流科技背景',
     label: 'Business Flow',
   },
   {
     key: 'path',
-    darkSrc: '/banners/hero/path-dark.png',
-    lightSrc: '/banners/hero/path-light.png',
+    darkSrc: '/banners/hero/path-dark.webp',
+    lightSrc: '/banners/hero/path-light.webp',
     alt: '可落地可量化可持续的转型路径科技背景',
     label: 'Measurable Path',
   },
