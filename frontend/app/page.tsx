@@ -61,7 +61,7 @@ export default function HomePage() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">超级管理 Agent</span>
           </h1>
           <div className={`text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed space-y-1 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-            <p className="sm:whitespace-nowrap">从销售到供应链，从财务到 HR，OpenClaw 企业智能体覆盖全部门管理场景。</p>
+            <p className="sm:whitespace-nowrap">从销售到供应链，从开源到节流，从财务到 HR，OpenClaw 企业智能体覆盖全部门管理场景。</p>
             <p className="sm:whitespace-nowrap">可落地、可量化、可持续的 AI 转型路径。</p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
