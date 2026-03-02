@@ -107,7 +107,7 @@ export default function QizhiBootcampPage() {
           <div className="flex justify-center gap-2 mb-6">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold dark:bg-indigo-500/15 bg-indigo-50 dark:text-indigo-300 text-indigo-700 dark:border dark:border-indigo-500/25 border border-indigo-200">
               <Zap className="w-3 h-3" />
-              启智训练营
+              AI领航计划
             </span>
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold dark:bg-amber-500/15 bg-amber-50 dark:text-amber-300 text-amber-700 dark:border dark:border-amber-500/25 border border-amber-200">
               <Star className="w-3 h-3" />
@@ -115,7 +115,7 @@ export default function QizhiBootcampPage() {
             </span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-4 leading-tight">
-            启智训练营 · 企业管理层专场
+            AI领航计划 · 企业管理层专场
             <br />
             <span className="dark:text-indigo-300 text-indigo-600">（北京站）</span>
           </h1>

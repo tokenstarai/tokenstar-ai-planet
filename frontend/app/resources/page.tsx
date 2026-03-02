@@ -323,7 +323,7 @@ export default function ResourcesPage() {
               href="/training"
               className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-base transition-all shadow-lg shadow-indigo-500/20"
             >
-              参加启智训练营 <ArrowRight className="w-4 h-4" />
+              参加AI领航计划 <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/scenarios"

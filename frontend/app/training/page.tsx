@@ -130,7 +130,7 @@ export default function TrainingPage() {
           </div>
         </section>
 
-        {/* 模块 1：启智训练营 · 管理层专场 */}
+        {/* 模块 1：AI领航计划 · 管理层专场 */}
         <section id="management" className="mb-14">
           <div className="rounded-2xl border dark:border-indigo-500/25 border-indigo-200 overflow-hidden dark:bg-slate-800/40 bg-white shadow-sm">
             <div className="px-6 pt-8 pb-6 dark:bg-gradient-to-r dark:from-indigo-500/10 dark:to-transparent bg-gradient-to-r from-indigo-50 to-transparent border-b dark:border-white/8 border-gray-100">
@@ -139,7 +139,7 @@ export default function TrainingPage() {
                 <span className="text-sm font-semibold dark:text-indigo-300 text-indigo-700 uppercase tracking-wide">第一期 · 核心产品</span>
               </div>
               <h2 className="text-2xl font-bold dark:text-white text-gray-900 mb-2">
-                启智训练营（管理层专场）
+                AI领航计划（管理层专场）
               </h2>
               <p className="text-base dark:text-gray-300 text-gray-600 leading-relaxed max-w-2xl">
                 这是一场思想升级营，不是技术实操营。帮助企业老板与管理层理解 AI 大时代的结构性变化，看清企业在未来 3 年的转型机会，建立清晰的 AI 升级路径。
@@ -254,7 +254,7 @@ export default function TrainingPage() {
                 <Zap className="w-5 h-5 dark:text-amber-400 text-amber-600" />
                 <span className="text-sm font-semibold dark:text-amber-300 text-amber-700 uppercase tracking-wide">活动入口</span>
               </div>
-              <h2 className="text-xl font-bold dark:text-white text-gray-900">启智训练营 · 企业管理层专场（北京站）</h2>
+              <h2 className="text-xl font-bold dark:text-white text-gray-900">AI领航计划 · 企业管理层专场（北京站）</h2>
             </div>
             <div className="p-6">
               <p className="text-base dark:text-gray-300 text-gray-600 mb-5 leading-relaxed">

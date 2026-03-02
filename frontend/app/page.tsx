@@ -72,7 +72,7 @@ export default function HomePage() {
               查看成功案例 <ChevronRight className="w-4 h-4" />
             </Link>
             <Link href="/training" className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-all border ${isDark ? 'border-amber-500/40 text-amber-300 hover:bg-amber-500/10' : 'border-amber-400 text-amber-700 hover:bg-amber-50'}`}>
-              启智训练营 <ChevronRight className="w-4 h-4" />
+              AI领航计划 <ChevronRight className="w-4 h-4" />
             </Link>
           </div>
           <div className={`mt-14 grid grid-cols-3 gap-6 max-w-lg mx-auto text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
