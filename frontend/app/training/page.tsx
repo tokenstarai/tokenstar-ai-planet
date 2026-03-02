@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import {
   Calendar, MapPin, Users, Clock, ArrowRight,
   Lightbulb, TrendingUp, Target, Compass, Layers,
@@ -86,18 +87,42 @@ const networkBenefits = [
 export default function TrainingPage() {
   return (
     <main className="min-h-screen dark:bg-[#0a0a0f] bg-gray-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
 
-        {/* Hero */}
-        <section className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full dark:bg-amber-500/15 bg-amber-50 dark:border dark:border-amber-500/30 border border-amber-200 mb-6">
+      {/* Hero — 中国尊背景图 */}
+      <section className="relative overflow-hidden" style={{ minHeight: '520px' }}>
+        {/* 背景图片 */}
+        <Image
+          src="/images/training/china-zun.webp"
+          alt="北京中信大厦中国尊"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        {/* 深色主题遮罩：深蓝黑色，与图片蓝色调协调 */}
+        <div
+          className="absolute inset-0 dark:block hidden"
+          style={{
+            background: 'linear-gradient(180deg, rgba(8,12,28,0.78) 0%, rgba(8,12,28,0.82) 60%, rgba(10,10,15,0.96) 100%)'
+          }}
+        />
+        {/* 浅色主题遮罩：白色半透明，保持文字清晰 */}
+        <div
+          className="absolute inset-0 dark:hidden block"
+          style={{
+            background: 'linear-gradient(180deg, rgba(240,246,255,0.82) 0%, rgba(240,246,255,0.88) 60%, rgba(248,250,255,0.97) 100%)'
+          }}
+        />
+        {/* Hero 内容 */}
+        <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 py-16 sm:py-24 text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full dark:bg-amber-500/20 bg-amber-100/80 dark:border dark:border-amber-500/40 border border-amber-300 mb-6 backdrop-blur-sm">
             <MapPin className="w-3.5 h-3.5 dark:text-amber-400 text-amber-600" />
             <span className="text-sm font-semibold dark:text-amber-300 text-amber-700">北京首发 · 中国尊站</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold dark:text-white text-gray-900 mb-5 leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-bold dark:text-white text-gray-900 mb-5 leading-tight drop-shadow-sm">
             认证与培训
           </h1>
-          <p className="text-base sm:text-lg dark:text-gray-300 text-gray-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg dark:text-gray-200 text-gray-700 max-w-2xl mx-auto mb-8 leading-relaxed">
             站在企业决策者视角，理解 AI 与 Agent 时代带来的机遇与挑战，重新设计公司未来 3 年的发展路径。
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-8">
@@ -107,28 +132,31 @@ export default function TrainingPage() {
               { icon: Calendar, text: '2026年3月28日开营' },
               { icon: Users, text: '限20席 · 申请制' },
             ].map(({ icon: Icon, text }) => (
-              <div key={text} className="flex items-center gap-2 px-4 py-2 rounded-xl dark:bg-white/5 bg-white border dark:border-white/10 border-gray-200 shadow-sm">
-                <Icon className="w-4 h-4 dark:text-indigo-400 text-indigo-600 shrink-0" />
-                <span className="text-sm font-medium dark:text-gray-200 text-gray-700">{text}</span>
+              <div key={text} className="flex items-center gap-2 px-4 py-2 rounded-xl dark:bg-white/10 bg-white/70 border dark:border-white/15 border-gray-300/60 shadow-sm backdrop-blur-sm">
+                <Icon className="w-4 h-4 dark:text-indigo-300 text-indigo-600 shrink-0" />
+                <span className="text-sm font-medium dark:text-gray-100 text-gray-800">{text}</span>
               </div>
             ))}
           </div>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="/events/qizhi-bootcamp-2026"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-base transition-all shadow-lg shadow-indigo-500/20"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-base transition-all shadow-lg shadow-indigo-500/30"
             >
               申请管理层专场席位
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
               href="/about#contact"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl dark:bg-slate-700/60 bg-white border dark:border-slate-500/40 border-gray-200 dark:text-slate-100 text-gray-700 font-semibold text-base hover:dark:bg-slate-600/70 hover:bg-gray-50 transition-all"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl dark:bg-white/10 bg-white/80 border dark:border-white/20 border-gray-300 dark:text-white text-gray-800 font-semibold text-base hover:dark:bg-white/15 hover:bg-white transition-all backdrop-blur-sm"
             >
               预约企业咨询
             </a>
           </div>
-        </section>
+        </div>
+      </section>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
 
         {/* 模块 1：AI领航计划 · 管理层专场 */}
         <section id="management" className="mb-14">
