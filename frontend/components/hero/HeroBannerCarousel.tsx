@@ -474,7 +474,7 @@ export default function HeroBannerCarousel() {
               // 背景图片焦点 60% 偏左，让球体/视觉主体更靠近屏幕中央
               className="object-cover"
               style={{
-                objectPosition: '60% center',
+                objectPosition: 'center center',
                 transform: isActive && !prefersReducedMotion ? 'scale(1.03)' : 'scale(1)',
                 transition: 'transform 12s ease-out',
                 willChange: 'transform',
