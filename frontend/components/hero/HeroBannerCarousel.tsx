@@ -455,8 +455,8 @@ export default function HeroBannerCarousel() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: isDark
-            ? 'linear-gradient(105deg, rgba(5,13,26,0.88) 0%, rgba(5,13,26,0.72) 40%, rgba(5,13,26,0.15) 65%, transparent 100%)'
-            : 'linear-gradient(105deg, rgba(248,250,255,0.92) 0%, rgba(248,250,255,0.78) 40%, rgba(248,250,255,0.2) 65%, transparent 100%)',
+            ? 'linear-gradient(105deg, rgba(5,13,26,0.95) 0%, rgba(5,13,26,0.88) 38%, rgba(5,13,26,0.55) 58%, rgba(5,13,26,0.1) 75%, transparent 100%)'
+            : 'linear-gradient(105deg, rgba(248,250,255,0.97) 0%, rgba(248,250,255,0.90) 38%, rgba(248,250,255,0.55) 58%, rgba(248,250,255,0.1) 75%, transparent 100%)',
         }}
       />
 
@@ -465,8 +465,8 @@ export default function HeroBannerCarousel() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: isDark
-            ? 'linear-gradient(to top, rgba(5,13,26,0.85) 0%, rgba(5,13,26,0.4) 25%, transparent 50%)'
-            : 'linear-gradient(to top, rgba(248,250,255,0.90) 0%, rgba(248,250,255,0.4) 25%, transparent 50%)',
+            ? 'linear-gradient(to top, rgba(5,13,26,0.92) 0%, rgba(5,13,26,0.55) 28%, transparent 52%)'
+            : 'linear-gradient(to top, rgba(248,250,255,0.95) 0%, rgba(248,250,255,0.55) 28%, transparent 52%)',
         }}
       />
 
