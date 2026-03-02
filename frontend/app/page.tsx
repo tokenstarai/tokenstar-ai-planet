@@ -30,7 +30,7 @@ const trainingOptions = [
 ]
 
 const resourceLinks = [
-  { icon: Building2, label: '企业与AI', desc: '转型路径与决策框架', href: '/resources#enterprise-ai' },
+  { icon: Building2, label: '企业与AI', desc: '转型路径与决策框架', href: '/resources/' },
   { icon: BookOpen, label: 'AI 管理指南', desc: '组织升级与战略思想', href: '/guide' },
   { icon: Zap, label: 'Skills 用例', desc: '按部门拆解真实用例', href: '/skills' },
   { icon: Brain, label: 'OpenClaw 框架', desc: '超级 Agent 架构解析', href: '/openclaw' },
