@@ -1,0 +1,58 @@
+flowchart TB
+  %% Zones
+  subgraph Z0[企业终端与身份域]
+    U1[员工/业务用户]
+    U2[管理员/审计员]
+    IDP["SSO/IdP\n(AD/LDAP/OIDC)"]
+  end
+
+  subgraph Z1[接入与安全边界]
+    WAF[WAF/防火墙]
+    GW["API Gateway\n(鉴权/限流/签名)"]
+    AUD["审计日志入口\n(Log Collector)"]
+  end
+
+  subgraph Z2[Agent 编排与能力层]
+    AG["Antigravity\n多Agent编排/工作流"]
+    POL["Policy Engine\n权限策略/配额"]
+    SK["Skills Runtime\n工具调用/连接器"]
+  end
+
+  subgraph Z3[模型与推理层]
+    OC["OpenCLAW Core\n推理服务/多模型路由"]
+    VDB["向量库/检索\n(可选)"]
+    CACHE["缓存/队列\n(可选)"]
+  end
+
+  subgraph Z4[数据与系统集成层]
+    KB[企业知识库\n文档/FAQ]
+    OA[OA/审批]
+    CRM[CRM/工单]
+    ERP[ERP/财务]
+    DW[数据仓库/BI]
+  end
+
+  %% Flows
+  U1 --> WAF --> GW --> AG
+  U2 --> WAF --> GW --> AG
+  IDP --> GW
+
+  AG --> POL
+  AG --> SK
+  AG --> OC
+
+  SK --> KB
+  SK --> OA
+  SK --> CRM
+  SK --> ERP
+  SK --> DW
+
+  OC --> VDB
+  OC --> CACHE
+
+  %% Audit
+  GW --> AUD
+  AG --> AUD
+  SK --> AUD
+  OC --> AUD
+  POL --> AUD

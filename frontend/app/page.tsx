@@ -6,6 +6,7 @@ import { ContentCard } from '@/components/ui/ContentCard'
 import { mockNews, mockSkills, mockCases } from '@/lib/mock-data'
 import { formatDate } from '@/lib/api'
 import { InteractiveParticleBackground } from '@/components/backgrounds/InteractiveParticleBackground'
+import HeroBannerCarousel from '@/components/hero/HeroBannerCarousel'
 import { useTheme } from '@/components/ThemeProvider'
 
 const enterpriseScenarios = [
@@ -49,8 +50,12 @@ export default function HomePage() {
 
       {/* 1. Hero — 企业价值主张 */}
       <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center justify-center overflow-hidden">
+        {/* Banner 图片轮播：绝对定位在最底层 */}
+        <HeroBannerCarousel />
+        {/* 粒子动效层叠加在 Banner 上，增强科技感 */}
         <InteractiveParticleBackground />
         <div className="hero-overlay absolute inset-0 pointer-events-none" style={{ zIndex: 3 }} />
+        {/* Hero 内容：z-index 高于轮播和粒子层，按钮保持可点击 */}
         <div className="relative max-w-5xl mx-auto px-4 text-center py-12" style={{ zIndex: 10 }}>
           <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium border mb-6 ${isDark ? 'bg-blue-500/10 text-blue-300 border-blue-500/30' : 'bg-blue-50 text-blue-700 border-blue-200'}`}>
             <Zap className="w-3.5 h-3.5" />

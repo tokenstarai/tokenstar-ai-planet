@@ -1,0 +1,36 @@
+flowchart LR
+  subgraph A[办公网 / 终端区]
+    PC[员工终端]
+  end
+
+  subgraph B[DMZ / 接入区]
+    WAF[WAF/防火墙]
+    GW[API Gateway]
+  end
+
+  subgraph C[业务内网 / 应用区]
+    AG[Antigravity]
+    SK[Skills Runtime]
+    POL[Policy Engine]
+  end
+
+  subgraph D[算力内网 / 推理区]
+    OC[OpenCLAW 推理服务]
+    GPU[GPU/算力池]
+  end
+
+  subgraph E[数据区]
+    DB[(业务数据库)]
+    KB[(知识库)]
+    LOG[(审计日志库)]
+  end
+
+  PC --> WAF --> GW --> AG
+  AG --> SK --> DB
+  AG --> POL
+  AG --> OC --> GPU
+  GW --> LOG
+  AG --> LOG
+  SK --> LOG
+  OC --> LOG
+  SK --> KB
