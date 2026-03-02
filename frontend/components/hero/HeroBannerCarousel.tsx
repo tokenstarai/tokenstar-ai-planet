@@ -45,8 +45,12 @@ function usePrefersReducedMotion(): boolean {
   return reduced;
 }
 
-function useIsDark(): boolean {
-  const [isDark, setIsDark] = useState(true);
+/**
+ * 读取 <html> 上的 .dark class，初始值用 null 表示"尚未水合"，
+ * 避免 SSR/CSR 不一致导致图片闪烁。
+ */
+function useIsDark(): boolean | null {
+  const [isDark, setIsDark] = useState<boolean | null>(null);
   useEffect(() => {
     const el = document.documentElement;
     const read = () => setIsDark(el.classList.contains('dark'));
@@ -71,12 +75,16 @@ export default function HeroBannerCarousel({
   fadeMs = 1000,
   stats = [
     { value: '8+', label: '行业覆盖' },
-    { value: '24+', label: '落地案例' },
     { value: '6', label: '部门场景' },
+    { value: '24+', label: '落地案例' },
   ],
 }: HeroBannerCarouselProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
-  const isDark = useIsDark();
+  const isDarkRaw = useIsDark();
+  // 水合前用 null，水合后才渲染图片，避免主题闪烁
+  const isDark = isDarkRaw ?? true;
+  const hydrated = isDarkRaw !== null;
+
   const [index, setIndex] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -115,8 +123,8 @@ export default function HeroBannerCarousel({
     /* 全屏容器：图片 + 交互层 */
     <div className="relative w-full h-full min-h-[calc(100vh-var(--header-height))] overflow-hidden">
 
-      {/* ── 图片轮播层 ── */}
-      {frames.map((frame, i) => {
+      {/* ── 图片轮播层（水合后才渲染，防止主题闪烁） ── */}
+      {hydrated && frames.map((frame, i) => {
         const src = isDark ? frame.darkSrc : frame.lightSrc;
         const isActive = i === activeIndex;
         return (
@@ -151,8 +159,8 @@ export default function HeroBannerCarousel({
         className="absolute inset-0 pointer-events-none"
         style={{
           background: isDark
-            ? 'linear-gradient(to bottom, transparent 50%, rgba(11,18,32,0.75) 100%)'
-            : 'linear-gradient(to bottom, transparent 50%, rgba(244,246,250,0.80) 100%)',
+            ? 'linear-gradient(to bottom, transparent 45%, rgba(11,18,32,0.82) 100%)'
+            : 'linear-gradient(to bottom, transparent 45%, rgba(244,246,250,0.88) 100%)',
         }}
       />
 
@@ -161,7 +169,7 @@ export default function HeroBannerCarousel({
         <div className="max-w-5xl mx-auto w-full px-4 pointer-events-auto">
 
           {/* 按钮组 */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-start sm:justify-start mb-8 sm:mb-10">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-start mb-8 sm:mb-10">
             <Link
               href="/scenarios"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm sm:text-base transition-all shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 backdrop-blur-sm"
