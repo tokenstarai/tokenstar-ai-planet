@@ -1090,6 +1090,11 @@ html.light .btn-primary:hover {
    微质感升级：Section 标题淡入动画（仅触发一次）
    reduced-motion 时禁用
    ============================================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }

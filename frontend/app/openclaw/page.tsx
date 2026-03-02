@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
-import { Zap, Brain, Shield, Globe, Layers, Code, ArrowRight, CheckCircle, Star } from 'lucide-react'
+import { Zap, Brain, Shield, Globe, Layers, Code, ArrowRight, CheckCircle } from 'lucide-react'
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 
 export const metadata: Metadata = {
@@ -61,38 +62,97 @@ const advantages = [
 export default function OpenClawPage() {
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="relative py-10 sm:py-12 px-4 overflow-hidden">
+
+      {/* ── Hero ── */}
+      <section className="relative py-10 sm:py-14 px-4 overflow-hidden">
         <div className="absolute inset-0 hero-gradient opacity-50" />
-        {/* Subtle animated grid background */}
         <SubtleGridBackground intensity="strong" />
-        {/* Overlay for text readability */}
         <div className="absolute inset-0 hero-overlay" style={{ zIndex: 4 }} />
-        <div className="relative max-w-5xl mx-auto text-center" style={{ zIndex: 10 }}>
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-blue-500/30 text-sm text-blue-400 mb-8">
-            <Zap className="w-3.5 h-3.5" />
-            新一代企业级 AI Agent 平台
-          </div>
-          <h1 className="text-5xl font-bold text-white mb-6">
-            认识 <span className="gradient-text">OpenClaw</span>
-          </h1>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            OpenClaw 是专为企业设计的 AI Agent 平台，将大语言模型的强大能力与企业级工程实践完美结合，
-            让 AI 真正落地业务场景，创造可量化的商业价值。
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/knowledge/quick-start" className="btn-primary flex items-center gap-2 group">
-              快速入门
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/hardware" className="btn-secondary flex items-center gap-2">
-              查看部署方案
-            </Link>
+
+        <div className="relative max-w-5xl mx-auto" style={{ zIndex: 10 }}>
+          {/* 两栏布局：左文字 右 Logo */}
+          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+
+            {/* 左侧：文字内容 */}
+            <div className="flex-1 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-blue-500/30 text-sm text-blue-400 mb-6">
+                <Zap className="w-3.5 h-3.5" />
+                新一代企业级 AI Agent 平台
+              </div>
+              <h1 className="text-4xl sm:text-5xl font-bold text-white mb-5 leading-tight">
+                认识 <span className="gradient-text">OpenClaw</span>
+              </h1>
+              <p className="text-lg text-gray-300 mb-8 leading-relaxed max-w-xl">
+                OpenClaw 是专为企业设计的 AI Agent 平台，将大语言模型的强大能力与企业级工程实践完美结合，
+                让 AI 真正落地业务场景，创造可量化的商业价值。
+              </p>
+              <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
+                <Link href="/knowledge/quick-start" className="btn-primary flex items-center gap-2 group">
+                  快速入门
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <Link href="/hardware" className="btn-secondary flex items-center gap-2">
+                  查看部署方案
+                </Link>
+              </div>
+            </div>
+
+            {/* 右侧：Hero Lobster Logo */}
+            <div className="flex-shrink-0 flex items-center justify-center">
+              {/* 发光背景圆 */}
+              <div className="relative">
+                <div
+                  className="absolute inset-0 rounded-full blur-3xl opacity-30"
+                  style={{ background: 'radial-gradient(circle, #ef4444 0%, #f97316 60%, transparent 100%)', transform: 'scale(1.4)' }}
+                />
+                {/* 外圈装饰环 */}
+                <div className="relative w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center"
+                  style={{ boxShadow: '0 0 60px rgba(239,68,68,0.15), inset 0 0 40px rgba(239,68,68,0.05)' }}
+                >
+                  {/* 内圈 */}
+                  <div className="w-44 h-44 sm:w-52 sm:h-52 lg:w-60 lg:h-60 rounded-full border border-red-500/20 bg-gradient-to-br from-red-500/10 to-orange-500/5 flex items-center justify-center"
+                    style={{ animation: 'float 4s ease-in-out infinite' }}
+                  >
+                    <Image
+                      src="/images/openclaw/hero-lobster.svg"
+                      alt="OpenClaw Logo"
+                      width={160}
+                      height={160}
+                      className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 drop-shadow-2xl"
+                      priority
+                    />
+                  </div>
+                </div>
+                {/* 轨道装饰点 */}
+                <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-red-400 opacity-60" style={{ animation: 'pulse 2s ease-in-out infinite' }} />
+                <div className="absolute bottom-8 left-2 w-1.5 h-1.5 rounded-full bg-orange-400 opacity-50" style={{ animation: 'pulse 2.5s ease-in-out infinite 0.5s' }} />
+                <div className="absolute top-1/2 -right-3 w-1 h-1 rounded-full bg-red-300 opacity-40" style={{ animation: 'pulse 3s ease-in-out infinite 1s' }} />
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Features */}
+      {/* ── 品牌标语分割线 ── */}
+      <div className="relative py-6 px-4 overflow-hidden">
+        <div className="max-w-5xl mx-auto flex items-center gap-6">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+          <div className="flex items-center gap-3 px-5 py-2 rounded-full glass border border-white/10">
+            <Image
+              src="/images/openclaw/lobster.svg"
+              alt="OpenClaw"
+              width={20}
+              height={20}
+              className="w-5 h-5 opacity-90"
+            />
+            <span className="text-xs text-gray-400 font-medium tracking-wider uppercase">Powered by OpenClaw</span>
+          </div>
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        </div>
+      </div>
+
+      {/* ── Features ── */}
       <section className="py-8 sm:py-10 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
@@ -113,7 +173,7 @@ export default function OpenClawPage() {
         </div>
       </section>
 
-      {/* Architecture */}
+      {/* ── Architecture ── */}
       <section className="py-8 sm:py-10 px-4 bg-gradient-to-b from-transparent to-dark-800/30">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
@@ -145,7 +205,7 @@ export default function OpenClawPage() {
         </div>
       </section>
 
-      {/* Advantages */}
+      {/* ── Advantages ── */}
       <section className="py-8 sm:py-10 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -164,7 +224,23 @@ export default function OpenClawPage() {
                 ))}
               </ul>
             </div>
-            <div className="glass rounded-2xl p-8 border border-blue-500/20">
+
+            {/* 右侧统计卡片，顶部加 Logo */}
+            <div className="glass rounded-2xl p-8 border border-red-500/20">
+              {/* Logo + 品牌名 */}
+              <div className="flex items-center justify-center gap-3 mb-6 pb-5 border-b border-white/10">
+                <Image
+                  src="/images/openclaw/lobster.svg"
+                  alt="OpenClaw"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10"
+                />
+                <div>
+                  <div className="text-base font-bold text-white">OpenClaw</div>
+                  <div className="text-xs text-gray-500">Enterprise AI Platform</div>
+                </div>
+              </div>
               <div className="text-center mb-6">
                 <div className="text-4xl font-bold gradient-text mb-2">200+</div>
                 <div className="text-gray-400 text-sm">企业客户信赖之选</div>
@@ -187,9 +263,22 @@ export default function OpenClawPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ── CTA ── */}
       <section className="py-8 sm:py-10 px-4">
         <div className="max-w-3xl mx-auto text-center">
+          {/* Logo 装饰 */}
+          <div className="flex items-center justify-center mb-5">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full blur-xl opacity-40" style={{ background: 'radial-gradient(circle, #ef4444, transparent)' }} />
+              <Image
+                src="/images/openclaw/lobster.svg"
+                alt="OpenClaw"
+                width={48}
+                height={48}
+                className="relative w-12 h-12"
+              />
+            </div>
+          </div>
           <h2 className="text-3xl font-bold text-white mb-4">开始您的 AI 之旅</h2>
           <p className="text-gray-400 mb-8">
             无论您是个人开发者还是大型企业，OpenClaw 都有适合您的解决方案。
@@ -208,6 +297,8 @@ export default function OpenClawPage() {
           </div>
         </div>
       </section>
+
+
     </div>
   )
 }
