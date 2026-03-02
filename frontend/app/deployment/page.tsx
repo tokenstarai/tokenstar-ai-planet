@@ -347,13 +347,13 @@ export default function DeploymentPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {challenges.map((c) => (
               <div key={c.title} className={`glass rounded-xl p-5 border ${c.border} flex flex-col gap-3`}>
-                <div className={`w-10 h-10 rounded-lg ${c.bg} flex items-center justify-center shrink-0`}>
-                  <c.icon className={`w-5 h-5 ${c.color}`} />
+                <div className="flex items-center gap-3">
+                  <div className={`shrink-0 w-9 h-9 rounded-lg ${c.bg} flex items-center justify-center`}>
+                    <c.icon className={`w-4 h-4 ${c.color}`} />
+                  </div>
+                  <h3 className="font-semibold dark:text-white text-gray-900 text-sm leading-snug">{c.title}</h3>
                 </div>
-                <div>
-                  <h3 className="font-semibold dark:text-white text-gray-900 text-sm mb-1">{c.title}</h3>
-                  <p className="text-xs dark:text-gray-400 text-gray-500 leading-relaxed">{c.desc}</p>
-                </div>
+                <p className="text-xs dark:text-gray-400 text-gray-500 leading-relaxed">{c.desc}</p>
               </div>
             ))}
           </div>
@@ -371,13 +371,17 @@ export default function DeploymentPage() {
               <div key={mode.id} className={`glass rounded-2xl border ${mode.border} flex flex-col overflow-hidden`}>
                 <div className="p-5 border-b dark:border-white/8 border-gray-100">
                   <div className="flex items-center justify-between mb-3">
-                    <div className={`w-10 h-10 rounded-lg ${mode.bg} flex items-center justify-center`}>
-                      <mode.icon className={`w-5 h-5 ${mode.color}`} />
+                    <div className="flex items-center gap-2.5">
+                      <div className={`shrink-0 w-9 h-9 rounded-lg ${mode.bg} flex items-center justify-center`}>
+                        <mode.icon className={`w-4 h-4 ${mode.color}`} />
+                      </div>
+                      <div>
+                        <h3 className="font-bold dark:text-white text-gray-900 leading-snug">{mode.title}</h3>
+                        <p className="text-xs dark:text-gray-500 text-gray-400">{mode.sub}</p>
+                      </div>
                     </div>
-                    <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${mode.badgeColor}`}>{mode.badge}</span>
+                    <span className={`text-xs px-2.5 py-1 rounded-full border font-medium shrink-0 ml-2 ${mode.badgeColor}`}>{mode.badge}</span>
                   </div>
-                  <h3 className="font-bold dark:text-white text-gray-900 mb-0.5">{mode.title}</h3>
-                  <p className="text-xs dark:text-gray-500 text-gray-400">{mode.sub}</p>
                 </div>
                 <div className="p-5 flex-1 space-y-4">
                   <div>
