@@ -5,7 +5,6 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 import { ContentCard } from '@/components/ui/ContentCard'
 import { mockNews, mockSkills, mockCases } from '@/lib/mock-data'
 import { formatDate } from '@/lib/api'
-import { InteractiveParticleBackground } from '@/components/backgrounds/InteractiveParticleBackground'
 import HeroBannerCarousel from '@/components/hero/HeroBannerCarousel'
 import { useTheme } from '@/components/ThemeProvider'
 
@@ -48,47 +47,9 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
 
-      {/* 1. Hero — 企业价值主张 */}
-      <section className="relative min-h-[calc(100vh-var(--header-height))] flex items-center justify-center overflow-hidden">
-        {/* Banner 图片轮播：绝对定位在最底层 */}
+      {/* 1. Hero — 图文一体化轮播 */}
+      <section className="relative overflow-hidden">
         <HeroBannerCarousel />
-        {/* 粒子动效层叠加在 Banner 上，增强科技感 */}
-        <InteractiveParticleBackground />
-        <div className="hero-overlay absolute inset-0 pointer-events-none" style={{ zIndex: 3 }} />
-        {/* Hero 内容：z-index 高于轮播和粒子层，按钮保持可点击 */}
-        <div className="relative max-w-5xl mx-auto px-4 text-center py-12" style={{ zIndex: 10 }}>
-          <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium border mb-6 ${isDark ? 'bg-blue-500/10 text-blue-300 border-blue-500/30' : 'bg-blue-50 text-blue-700 border-blue-200'}`}>
-            <Zap className="w-3.5 h-3.5" />
-            企业级 AI 智能体实施平台
-          </div>
-          <h1 className={`text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6 tracking-tight ${isDark ? 'text-white' : 'text-gray-900'}`}>
-            让 AI 成为每个部门的<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">超级管理 Agent</span>
-          </h1>
-          <div className={`text-lg sm:text-xl max-w-3xl mx-auto mb-10 leading-relaxed space-y-1 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
-            <p className="sm:whitespace-nowrap">从销售到供应链，从开源到节流，从财务到 HR，OpenClaw 企业智能体覆盖全部门管理场景。</p>
-            <p className="sm:whitespace-nowrap">可落地、可量化、可持续的 AI 转型路径。</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/scenarios" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-base transition-all shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
-              查看解决方案 <ArrowRight className="w-4 h-4" />
-            </Link>
-            <Link href="/cases" className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-all border ${isDark ? 'border-white/20 text-white hover:bg-white/10' : 'border-gray-300 text-gray-700 hover:bg-gray-100'}`}>
-              查看成功案例 <ChevronRight className="w-4 h-4" />
-            </Link>
-            <Link href="/training" className={`inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-base transition-all border ${isDark ? 'border-amber-500/40 text-amber-300 hover:bg-amber-500/10' : 'border-amber-400 text-amber-700 hover:bg-amber-50'}`}>
-              AI领航计划 <ChevronRight className="w-4 h-4" />
-            </Link>
-          </div>
-          <div className={`mt-14 grid grid-cols-3 gap-6 max-w-lg mx-auto text-center ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-            {[{ value: '8+', label: '行业覆盖' }, { value: '24+', label: '落地案例' }, { value: '6', label: '部门场景' }].map(s => (
-              <div key={s.label}>
-                <div className={`text-2xl font-bold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>{s.value}</div>
-                <div className="text-sm">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* 2. 企业解决方案入口 — 行业 + 场景 */}
