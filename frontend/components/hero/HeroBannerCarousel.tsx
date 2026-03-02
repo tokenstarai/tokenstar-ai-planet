@@ -8,17 +8,17 @@ import { ArrowRight, ChevronRight } from 'lucide-react';
 /* ─────────────────────────────────────────────
    类型定义
 ───────────────────────────────────────────── */
-type AnimationType = 'particle-assemble' | 'fly-in-left' | 'fly-in-bottom';
+type AnimationType = 'typewriter' | 'fly-in-left' | 'fly-in-bottom';
 
 interface SlideConfig {
   key: string;
   darkSrc: string;
   lightSrc: string;
   tag: string;
-  title: string[];          // 每行一个元素
+  title: string[];
   subtitle: string;
   animation: AnimationType;
-  accentColor: string;      // CSS color for glow/highlight
+  accentColor: string;
 }
 
 /* ─────────────────────────────────────────────
@@ -32,7 +32,7 @@ const SLIDES: SlideConfig[] = [
     tag: 'ENTERPRISE AI PLATFORM',
     title: ['让 AI 成为每个部门的', '超级管理 Agent'],
     subtitle: '覆盖销售、财务、HR、运营等全部门管理场景',
-    animation: 'particle-assemble',
+    animation: 'typewriter',
     accentColor: '#38bdf8',
   },
   {
@@ -86,169 +86,200 @@ function useIsDark(): boolean | null {
 }
 
 /* ─────────────────────────────────────────────
-   粒子聚合 Canvas 组件（Frame 1 专用）
+   打字机动效组件（Frame 1 专用）
+   效果：标签淡入 → 第一行逐字打出 → 第二行逐字打出（带光标）
+         → 光扫描线从左到右扫过标题 → 副标题淡入上移
 ───────────────────────────────────────────── */
-interface ParticleCanvasProps {
-  text: string[];
+interface TypewriterTextProps {
+  slide: SlideConfig;
   active: boolean;
   isDark: boolean;
-  accentColor: string;
+  animKey: number;
 }
 
-function ParticleCanvas({ text, active, isDark, accentColor }: ParticleCanvasProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const animRef = useRef<number>(0);
-  const particlesRef = useRef<Array<{
-    x: number; y: number; tx: number; ty: number;
-    vx: number; vy: number; size: number; alpha: number; color: string;
-  }>>([]);
-  const phaseRef = useRef<'idle' | 'assemble' | 'hold' | 'disperse'>('idle');
+function TypewriterText({ slide, active, isDark, animKey }: TypewriterTextProps) {
+  const fullText = slide.title.join(''); // 合并两行用于计算总字数
+  const line1 = slide.title[0];
+  const line2 = slide.title[1];
+  const totalChars = line1.length + line2.length;
+
+  const [charCount, setCharCount] = useState(0);
+  const [showCursor, setShowCursor] = useState(false);
+  const [showSubtitle, setShowSubtitle] = useState(false);
+  const [showTag, setShowTag] = useState(false);
+  const [scanPhase, setScanPhase] = useState<'idle' | 'scanning' | 'done'>('idle');
+
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const initParticles = useCallback((canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
-    const W = canvas.width;
-    const H = canvas.height;
-    const isMobile = W < 640;
-    const fontSize1 = isMobile ? 28 : 52;
-    const fontSize2 = isMobile ? 22 : 42;
-    const lineH = isMobile ? 40 : 72;
-    const startY = H * 0.38;
-
-    ctx.clearRect(0, 0, W, H);
-
-    // 采样文字像素
-    const targets: Array<{ x: number; y: number }> = [];
-    text.forEach((line, li) => {
-      const fs = li === 0 ? fontSize1 : fontSize2;
-      ctx.font = `bold ${fs}px "PingFang SC", "Microsoft YaHei", sans-serif`;
-      ctx.fillStyle = '#ffffff';
-      const tw = ctx.measureText(line).width;
-      const tx = isMobile ? 16 : Math.min(W * 0.05, 60);
-      const ty = startY + li * lineH;
-      ctx.fillText(line, tx, ty);
-
-      const imgData = ctx.getImageData(tx, ty - fs, Math.min(tw + 20, W - tx), fs + 10);
-      for (let py = 0; py < imgData.height; py += 3) {
-        for (let px = 0; px < imgData.width; px += 3) {
-          const idx = (py * imgData.width + px) * 4;
-          if (imgData.data[idx + 3] > 120) {
-            targets.push({ x: tx + px, y: ty - fs + py });
-          }
-        }
-      }
-    });
-    ctx.clearRect(0, 0, W, H);
-
-    // 限制粒子数量（移动端减半）
-    const maxParticles = isMobile ? 600 : 1400;
-    const step = Math.max(1, Math.floor(targets.length / maxParticles));
-    const sampled = targets.filter((_, i) => i % step === 0);
-
-    const colors = [accentColor, '#ffffff', '#93c5fd', '#e0f2fe'];
-    particlesRef.current = sampled.map(t => ({
-      tx: t.x, ty: t.y,
-      x: Math.random() * W,
-      y: Math.random() * H,
-      vx: 0, vy: 0,
-      size: Math.random() * 2 + 1,
-      alpha: 0,
-      color: colors[Math.floor(Math.random() * colors.length)],
-    }));
-  }, [text, accentColor]);
+  const clearAll = useCallback(() => {
+    if (timerRef.current) clearTimeout(timerRef.current);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const resize = () => {
-      const rect = canvas.parentElement!.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
-      if (active) {
-        initParticles(canvas, ctx);
-        phaseRef.current = 'assemble';
-      }
-    };
-
-    resize();
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, [active, initParticles]);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
     if (!active) {
-      cancelAnimationFrame(animRef.current);
-      if (timerRef.current) clearTimeout(timerRef.current);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      phaseRef.current = 'idle';
-      particlesRef.current = [];
+      clearAll();
+      setCharCount(0);
+      setShowCursor(false);
+      setShowSubtitle(false);
+      setShowTag(false);
+      setScanPhase('idle');
       return;
     }
 
-    initParticles(canvas, ctx);
-    phaseRef.current = 'assemble';
+    // 重置
+    setCharCount(0);
+    setShowCursor(false);
+    setShowSubtitle(false);
+    setShowTag(false);
+    setScanPhase('idle');
 
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const phase = phaseRef.current;
-      let allArrived = true;
+    // 1. 标签淡入
+    timerRef.current = setTimeout(() => {
+      setShowTag(true);
 
-      particlesRef.current.forEach(p => {
-        if (phase === 'assemble') {
-          const dx = p.tx - p.x;
-          const dy = p.ty - p.y;
-          p.vx = p.vx * 0.8 + dx * 0.12;
-          p.vy = p.vy * 0.8 + dy * 0.12;
-          p.x += p.vx;
-          p.y += p.vy;
-          p.alpha = Math.min(1, p.alpha + 0.04);
-          if (Math.abs(dx) > 2 || Math.abs(dy) > 2) allArrived = false;
-        } else if (phase === 'disperse') {
-          p.vx += (Math.random() - 0.5) * 3;
-          p.vy += (Math.random() - 0.5) * 3 - 0.5;
-          p.x += p.vx;
-          p.y += p.vy;
-          p.alpha = Math.max(0, p.alpha - 0.03);
-        }
+      // 2. 光标出现
+      timerRef.current = setTimeout(() => {
+        setShowCursor(true);
 
-        ctx.save();
-        ctx.globalAlpha = p.alpha;
-        ctx.fillStyle = p.color;
-        ctx.shadowColor = p.color;
-        ctx.shadowBlur = 4;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      });
+        // 3. 逐字打出（每字约 55ms，中文字符）
+        let count = 0;
+        intervalRef.current = setInterval(() => {
+          count++;
+          setCharCount(count);
+          if (count >= totalChars) {
+            clearInterval(intervalRef.current!);
+            intervalRef.current = null;
 
-      if (phase === 'assemble' && allArrived && particlesRef.current.length > 0) {
-        phaseRef.current = 'hold';
-      }
+            // 4. 打完后光标再闪烁 0.8s，然后消失，触发扫光
+            timerRef.current = setTimeout(() => {
+              setShowCursor(false);
+              setScanPhase('scanning');
 
-      animRef.current = requestAnimationFrame(draw);
-    };
+              // 5. 扫光结束后副标题淡入
+              timerRef.current = setTimeout(() => {
+                setScanPhase('done');
+                setShowSubtitle(true);
+              }, 900);
+            }, 800);
+          }
+        }, 55);
+      }, 300);
+    }, 150);
 
-    animRef.current = requestAnimationFrame(draw);
-    return () => {
-      cancelAnimationFrame(animRef.current);
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, [active, initParticles]);
+    return clearAll;
+  }, [active, animKey, totalChars, clearAll]);
+
+  // 计算当前显示的文字
+  const displayLine1 = line1.slice(0, Math.min(charCount, line1.length));
+  const displayLine2 = charCount > line1.length ? line2.slice(0, charCount - line1.length) : '';
+  const cursorOnLine = charCount <= line1.length ? 1 : 2;
+
+  const tagColor = isDark ? 'text-sky-400' : 'text-blue-600';
+  const titleColor = isDark ? 'text-white' : 'text-gray-900';
+  const subtitleColor = isDark ? 'text-slate-300' : 'text-gray-600';
+  const accentStyle: React.CSSProperties = {
+    color: slide.accentColor,
+    textShadow: isDark ? `0 0 24px ${slide.accentColor}80, 0 0 8px ${slide.accentColor}40` : 'none',
+  };
+
+  // 扫光线样式
+  const scanLineStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: '-4px',
+    bottom: '-4px',
+    width: '3px',
+    background: `linear-gradient(to bottom, transparent 0%, ${slide.accentColor} 40%, #ffffff 50%, ${slide.accentColor} 60%, transparent 100%)`,
+    boxShadow: `0 0 16px 4px ${slide.accentColor}80`,
+    borderRadius: '2px',
+    pointerEvents: 'none',
+    zIndex: 20,
+    left: scanPhase === 'idle' ? '-6px' : scanPhase === 'scanning' ? 'calc(100% + 6px)' : 'calc(100% + 6px)',
+    opacity: scanPhase === 'scanning' ? 1 : 0,
+    transition: scanPhase === 'scanning'
+      ? 'left 0.85s cubic-bezier(0.4, 0, 0.2, 1) 0ms, opacity 0.15s ease 0ms'
+      : scanPhase === 'done'
+      ? 'opacity 0.3s ease 0ms'
+      : 'none',
+  };
+
+  // 光标样式（闪烁）
+  const cursorStyle: React.CSSProperties = {
+    display: 'inline-block',
+    width: '3px',
+    height: '1em',
+    backgroundColor: slide.accentColor,
+    boxShadow: `0 0 8px ${slide.accentColor}`,
+    marginLeft: '2px',
+    verticalAlign: 'text-bottom',
+    opacity: showCursor ? 1 : 0,
+    transition: 'opacity 0.1s',
+    animation: showCursor ? 'cursor-blink 0.7s step-end infinite' : 'none',
+  };
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      style={{ zIndex: 5 }}
-    />
+    <div className="relative" style={{ zIndex: 10 }}>
+      {/* 内嵌光标闪烁动画 */}
+      <style>{`
+        @keyframes cursor-blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+      `}</style>
+
+      {/* 标签行 */}
+      <div
+        className={`text-xs sm:text-sm font-mono tracking-[0.2em] mb-3 sm:mb-4 ${tagColor}`}
+        style={{
+          opacity: showTag ? 1 : 0,
+          transform: showTag ? 'translateY(0)' : 'translateY(-8px)',
+          transition: 'opacity 0.4s ease, transform 0.4s ease',
+        }}
+      >
+        {slide.tag}
+      </div>
+
+      {/* 主标题区域（含扫光线） */}
+      <div className="relative" style={{ overflow: 'visible' }}>
+        {/* 扫光线 */}
+        <div style={scanLineStyle} />
+
+        {/* 第一行 */}
+        <div
+          className={`font-bold leading-tight mb-1 sm:mb-2 ${titleColor}`}
+          style={{ fontSize: 'clamp(22px, 3.8vw, 48px)', minHeight: '1.2em' }}
+        >
+          {displayLine1}
+          {cursorOnLine === 1 && showCursor && <span style={cursorStyle} />}
+        </div>
+
+        {/* 第二行（强调色） */}
+        <div
+          className="font-bold leading-tight mb-1 sm:mb-2"
+          style={{
+            fontSize: 'clamp(26px, 4.2vw, 54px)',
+            minHeight: '1.2em',
+            ...accentStyle,
+          }}
+        >
+          {displayLine2}
+          {cursorOnLine === 2 && showCursor && <span style={cursorStyle} />}
+        </div>
+      </div>
+
+      {/* 副标题 */}
+      <p
+        className={`mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed max-w-sm sm:max-w-md ${subtitleColor}`}
+        style={{
+          opacity: showSubtitle ? 1 : 0,
+          transform: showSubtitle ? 'translateY(0)' : 'translateY(14px)',
+          transition: 'opacity 0.7s ease, transform 0.7s ease',
+        }}
+      >
+        {slide.subtitle}
+      </p>
+    </div>
   );
 }
 
@@ -277,24 +308,27 @@ function AnimatedText({ slide, active, isDark }: AnimatedTextProps) {
   const tagColor = isDark ? 'text-sky-400' : 'text-blue-600';
   const titleColor = isDark ? 'text-white' : 'text-gray-900';
   const subtitleColor = isDark ? 'text-slate-300' : 'text-gray-600';
-  const accentStyle = { color: slide.accentColor, textShadow: isDark ? `0 0 20px ${slide.accentColor}60` : 'none' };
+  const accentStyle: React.CSSProperties = {
+    color: slide.accentColor,
+    textShadow: isDark ? `0 0 20px ${slide.accentColor}60` : 'none',
+  };
 
-  const getLineStyle = (lineIdx: number, charIdx?: number): React.CSSProperties => {
-    const delay = lineIdx * 120 + (charIdx ?? 0) * 30;
+  const getLineStyle = (lineIdx: number): React.CSSProperties => {
+    const delay = lineIdx * 130;
     if (slide.animation === 'fly-in-left') {
       return {
         display: 'inline-block',
         opacity: phase === 'hidden' ? 0 : 1,
-        transform: phase === 'hidden' ? 'translateX(-60px)' : 'translateX(0)',
-        transition: `opacity 0.6s ease ${delay}ms, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+        transform: phase === 'hidden' ? 'translateX(-70px)' : 'translateX(0)',
+        transition: `opacity 0.65s ease ${delay}ms, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
       };
     }
     if (slide.animation === 'fly-in-bottom') {
       return {
         display: 'inline-block',
         opacity: phase === 'hidden' ? 0 : 1,
-        transform: phase === 'hidden' ? 'translateY(40px)' : 'translateY(0)',
-        transition: `opacity 0.55s ease ${delay}ms, transform 0.55s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+        transform: phase === 'hidden' ? 'translateY(44px)' : 'translateY(0)',
+        transition: `opacity 0.6s ease ${delay}ms, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
       };
     }
     return {};
@@ -309,7 +343,7 @@ function AnimatedText({ slide, active, isDark }: AnimatedTextProps) {
   const subtitleStyle: React.CSSProperties = {
     opacity: phase === 'hidden' ? 0 : 1,
     transform: phase === 'hidden' ? 'translateY(16px)' : 'translateY(0)',
-    transition: 'opacity 0.6s ease 500ms, transform 0.6s ease 500ms',
+    transition: 'opacity 0.6s ease 520ms, transform 0.6s ease 520ms',
   };
 
   // 扫光线（fly-in-left 专用）
@@ -328,12 +362,10 @@ function AnimatedText({ slide, active, isDark }: AnimatedTextProps) {
 
   return (
     <div className="relative" style={{ zIndex: 10 }}>
-      {/* 标签行 */}
       <div className={`text-xs sm:text-sm font-mono tracking-[0.2em] mb-3 sm:mb-4 ${tagColor}`} style={tagStyle}>
         {slide.tag}
       </div>
 
-      {/* 主标题 */}
       <div className="relative overflow-visible">
         {slide.animation === 'fly-in-left' && (
           <div style={scanLineStyle} />
@@ -343,20 +375,15 @@ function AnimatedText({ slide, active, isDark }: AnimatedTextProps) {
             key={li}
             className={`font-bold leading-tight mb-1 sm:mb-2 ${titleColor}`}
             style={{
-              fontSize: li === 0
-                ? 'clamp(22px, 4vw, 48px)'
-                : 'clamp(26px, 4.5vw, 56px)',
+              fontSize: li === 0 ? 'clamp(22px, 3.8vw, 48px)' : 'clamp(26px, 4.2vw, 54px)',
               ...(li === 1 ? accentStyle : {}),
             }}
           >
-            <span style={getLineStyle(li)}>
-              {line}
-            </span>
+            <span style={getLineStyle(li)}>{line}</span>
           </div>
         ))}
       </div>
 
-      {/* 副标题 */}
       <p
         className={`mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed max-w-sm sm:max-w-md ${subtitleColor}`}
         style={subtitleStyle}
@@ -377,9 +404,9 @@ export default function HeroBannerCarousel() {
   const hydrated = isDarkRaw !== null;
 
   const [index, setIndex] = useState(0);
-  const [animKey, setAnimKey] = useState(0); // 强制重新触发动效
+  const [animKey, setAnimKey] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const INTERVAL = 9000;
+  const INTERVAL = 10000;
 
   const goTo = useCallback((next: number) => {
     setIndex(next);
@@ -409,7 +436,6 @@ export default function HeroBannerCarousel() {
     return () => { stop(); document.removeEventListener('visibilitychange', onVis); };
   }, [prefersReducedMotion]);
 
-  const activeSlide = SLIDES[index];
   const stats = [
     { value: '8+', label: '行业覆盖' },
     { value: '6', label: '部门场景' },
@@ -417,8 +443,14 @@ export default function HeroBannerCarousel() {
   ];
 
   return (
-    <div className="relative w-full overflow-hidden" style={{ height: 'calc(100vh - var(--header-height, 64px))', minHeight: '520px', maxHeight: '900px' }}>
-
+    <div
+      className="relative w-full overflow-hidden"
+      style={{
+        height: 'calc(100vh - var(--header-height, 64px))',
+        minHeight: '520px',
+        maxHeight: '900px',
+      }}
+    >
       {/* ── 背景图片轮播层 ── */}
       {hydrated && SLIDES.map((slide, i) => {
         const src = isDark ? slide.darkSrc : slide.lightSrc;
@@ -439,10 +471,11 @@ export default function HeroBannerCarousel() {
               fill
               priority={i === 0}
               sizes="100vw"
-              className="object-cover object-right sm:object-center"
+              // 背景图片焦点居中偏右，与文字左侧形成视觉平衡
+              className="object-cover object-center"
               style={{
-                transform: isActive && !prefersReducedMotion ? 'scale(1.04)' : 'scale(1)',
-                transition: 'transform 10s ease-out',
+                transform: isActive && !prefersReducedMotion ? 'scale(1.03)' : 'scale(1)',
+                transition: 'transform 12s ease-out',
                 willChange: 'transform',
               }}
             />
@@ -450,13 +483,13 @@ export default function HeroBannerCarousel() {
         );
       })}
 
-      {/* ── 左侧渐变遮罩（确保文字区域清晰可读） ── */}
+      {/* ── 左侧渐变遮罩（文字区域清晰可读，向中心过渡） ── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: isDark
-            ? 'linear-gradient(105deg, rgba(5,13,26,0.95) 0%, rgba(5,13,26,0.88) 38%, rgba(5,13,26,0.55) 58%, rgba(5,13,26,0.1) 75%, transparent 100%)'
-            : 'linear-gradient(105deg, rgba(248,250,255,0.97) 0%, rgba(248,250,255,0.90) 38%, rgba(248,250,255,0.55) 58%, rgba(248,250,255,0.1) 75%, transparent 100%)',
+            ? 'linear-gradient(100deg, rgba(5,13,26,0.96) 0%, rgba(5,13,26,0.90) 30%, rgba(5,13,26,0.65) 50%, rgba(5,13,26,0.20) 68%, transparent 85%)'
+            : 'linear-gradient(100deg, rgba(248,250,255,0.97) 0%, rgba(248,250,255,0.92) 30%, rgba(248,250,255,0.60) 50%, rgba(248,250,255,0.15) 68%, transparent 85%)',
         }}
       />
 
@@ -465,37 +498,30 @@ export default function HeroBannerCarousel() {
         className="absolute inset-0 pointer-events-none"
         style={{
           background: isDark
-            ? 'linear-gradient(to top, rgba(5,13,26,0.92) 0%, rgba(5,13,26,0.55) 28%, transparent 52%)'
-            : 'linear-gradient(to top, rgba(248,250,255,0.95) 0%, rgba(248,250,255,0.55) 28%, transparent 52%)',
+            ? 'linear-gradient(to top, rgba(5,13,26,0.92) 0%, rgba(5,13,26,0.50) 25%, transparent 50%)'
+            : 'linear-gradient(to top, rgba(248,250,255,0.95) 0%, rgba(248,250,255,0.50) 25%, transparent 50%)',
         }}
       />
 
-      {/* ── 粒子 Canvas（Frame 1 专用） ── */}
-      {hydrated && !prefersReducedMotion && (
-        <ParticleCanvas
-          key={`particle-${animKey}`}
-          text={activeSlide.animation === 'particle-assemble' ? activeSlide.title : []}
-          active={activeSlide.animation === 'particle-assemble'}
-          isDark={isDark}
-          accentColor={activeSlide.accentColor}
-        />
-      )}
-
-      {/* ── 主内容层 ── */}
-      <div className="absolute inset-0 flex flex-col justify-between py-10 sm:py-14 px-4 sm:px-8 lg:px-16">
-
-        {/* 文字区域（左上） */}
-        <div className="flex-1 flex items-center">
-          <div className="w-full max-w-xl lg:max-w-2xl">
+      {/* ── 主内容层（居中布局，文字在左半区，背景视觉在右半区） ── */}
+      <div className="absolute inset-0 flex flex-col justify-between py-10 sm:py-14">
+        {/* 使用 max-w-7xl 居中容器，让内容不贴边 */}
+        <div className="flex-1 flex items-center w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
+          {/* 文字区域：占左侧约 50%，右侧留给背景图视觉元素 */}
+          <div className="w-full sm:w-1/2 lg:w-5/12">
             {hydrated && SLIDES.map((slide, i) => {
               const isActive = i === index;
               if (!isActive && !prefersReducedMotion) return null;
-              if (slide.animation === 'particle-assemble') {
-                // Frame 1：粒子动效，这里只渲染 tag 和 subtitle（标题由 Canvas 渲染）
+
+              if (slide.animation === 'typewriter') {
                 return (
-                  <div key={`${slide.key}-${animKey}`} style={{ zIndex: 10, position: 'relative' }}>
-                    <ParticleTextFallback slide={slide} isDark={isDark} active={isActive} prefersReducedMotion={prefersReducedMotion} />
-                  </div>
+                  <TypewriterText
+                    key={`${slide.key}-${animKey}`}
+                    slide={slide}
+                    active={isActive}
+                    isDark={isDark}
+                    animKey={animKey}
+                  />
                 );
               }
               return (
@@ -510,10 +536,10 @@ export default function HeroBannerCarousel() {
           </div>
         </div>
 
-        {/* 按钮 + 统计（底部） */}
-        <div>
+        {/* 按钮 + 统计（底部，同样居中对齐） */}
+        <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           {/* 按钮组 */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-5 sm:mb-7">
             <Link
               href="/scenarios"
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm sm:text-base transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 backdrop-blur-sm"
@@ -579,64 +605,6 @@ export default function HeroBannerCarousel() {
           </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-/* ─────────────────────────────────────────────
-   Frame 1 的 tag + subtitle（粒子动效时标题由 Canvas 渲染）
-   在 reduced-motion 或 Canvas 不可用时降级为普通文字
-───────────────────────────────────────────── */
-function ParticleTextFallback({
-  slide, isDark, active, prefersReducedMotion
-}: { slide: SlideConfig; isDark: boolean; active: boolean; prefersReducedMotion: boolean }) {
-  const [show, setShow] = useState(false);
-  useEffect(() => {
-    if (!active) { setShow(false); return; }
-    const t = setTimeout(() => setShow(true), 100);
-    return () => clearTimeout(t);
-  }, [active]);
-
-  const tagColor = isDark ? 'text-sky-400' : 'text-blue-600';
-  const titleColor = isDark ? 'text-white' : 'text-gray-900';
-  const subtitleColor = isDark ? 'text-slate-300' : 'text-gray-600';
-  const accentStyle = { color: slide.accentColor, textShadow: isDark ? `0 0 20px ${slide.accentColor}60` : 'none' };
-
-  return (
-    <div>
-      <div
-        className={`text-xs sm:text-sm font-mono tracking-[0.2em] mb-3 sm:mb-4 ${tagColor}`}
-        style={{ opacity: show ? 1 : 0, transition: 'opacity 0.5s ease' }}
-      >
-        {slide.tag}
-      </div>
-
-      {/* 粒子动效时，标题由 Canvas 渲染；reduced-motion 时降级为普通文字 */}
-      {prefersReducedMotion && slide.title.map((line, li) => (
-        <div
-          key={li}
-          className={`font-bold leading-tight mb-1 sm:mb-2 ${titleColor}`}
-          style={{
-            fontSize: li === 0 ? 'clamp(22px, 4vw, 48px)' : 'clamp(26px, 4.5vw, 56px)',
-            ...(li === 1 ? accentStyle : {}),
-            opacity: show ? 1 : 0,
-            transition: `opacity 0.5s ease ${li * 150}ms`,
-          }}
-        >
-          {line}
-        </div>
-      ))}
-
-      <p
-        className={`mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed max-w-sm sm:max-w-md ${subtitleColor}`}
-        style={{
-          opacity: show ? 1 : 0,
-          transform: show ? 'translateY(0)' : 'translateY(12px)',
-          transition: 'opacity 0.6s ease 600ms, transform 0.6s ease 600ms',
-        }}
-      >
-        {slide.subtitle}
-      </p>
     </div>
   );
 }
