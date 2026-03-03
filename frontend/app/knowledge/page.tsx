@@ -324,35 +324,44 @@ export default function KnowledgePage() {
         <section>
           <SectionTitle icon={Zap} title="Agent 框架" id="agent" isDark={isDark} />
           {/* OpenClaw 高亮展示 */}
-          <div className={`mb-4 p-5 rounded-2xl border flex items-center gap-5 ${
+          <div className={`mb-4 p-5 rounded-2xl border ${
             isDark
               ? 'bg-gradient-to-r from-red-950/50 to-orange-950/30 border-red-900/50'
               : 'bg-gradient-to-r from-red-50 to-orange-50 border-red-200'
           }`}>
-            <div className="w-16 h-16 relative flex-shrink-0">
-              <Image
-                src="/images/openclaw-hero-lobster.svg"
-                alt="OpenClaw"
-                fill
-                className="object-contain"
-              />
-            </div>
-            <div className="flex-1">
-              <div className="flex items-center gap-2 mb-1">
-                <span className={`text-base font-bold ${isDark ? 'text-neutral-100' : 'text-neutral-900'}`}>OpenClaw</span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 font-semibold">企业首选</span>
-                <span className={`text-xs ${isDark ? 'text-neutral-500' : 'text-neutral-500'}`}>by TokenStar</span>
+            {/* 移动端：竖向排列；PC 端：横向排列 */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              {/* 左侧：图标 + 文字信息 */}
+              <div className="flex items-start gap-4 flex-1 min-w-0">
+                <div className="w-14 h-14 relative flex-shrink-0">
+                  <Image
+                    src="/images/openclaw-hero-lobster.svg"
+                    alt="OpenClaw"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-2 mb-1">
+                    <span className={`text-base font-bold ${isDark ? 'text-neutral-100' : 'text-neutral-900'}`}>OpenClaw</span>
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 font-semibold whitespace-nowrap">企业首选</span>
+                    <span className={`text-xs ${isDark ? 'text-neutral-500' : 'text-neutral-500'}`}>by TokenStar</span>
+                  </div>
+                  <p className={`text-sm leading-relaxed ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>
+                    企业级超级 Agent 平台，支持私有化部署、多 Agent 协作与全流程安全合规，是 OpenCLAW + Antigravity 的完整企业解决方案。
+                  </p>
+                </div>
               </div>
-              <p className={`text-sm ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>
-                企业级超级 Agent 平台，支持私有化部署、多 Agent 协作与全流程安全合规，是 OpenCLAW + Antigravity 的完整企业解决方案。
-              </p>
+              {/* 右侧：按钮（移动端左对齐，PC 端右侧对齐） */}
+              <div className="flex-shrink-0 sm:self-center">
+                <Link
+                  href="/openclaw"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition-all whitespace-nowrap"
+                >
+                  了解更多 <ArrowRight className="w-4 h-4" />
+                </Link>
+              </div>
             </div>
-            <Link
-              href="/openclaw"
-              className="flex-shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-red-600 hover:bg-red-700 text-white font-semibold text-sm transition-all"
-            >
-              了解更多 <ArrowRight className="w-4 h-4" />
-            </Link>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {AGENT_FRAMEWORKS.filter(f => !f.highlight).map(product => (
