@@ -212,14 +212,14 @@ export default function OpenClawPage() {
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-white mb-4">为什么选择 OpenClaw？</h2>
-              <p className="text-gray-400 mb-8 leading-relaxed">
+              <h2 className="text-3xl font-bold dark:text-white text-gray-900 mb-4">为什么选择 OpenClaw？</h2>
+              <p className="dark:text-gray-400 text-gray-600 mb-8 leading-relaxed">
                 OpenClaw 不仅仅是一个 AI 框架，更是一个完整的企业 AI 落地解决方案，
                 从技术到服务，从开发到运营，全程陪伴企业 AI 转型之路。
               </p>
               <ul className="space-y-3">
                 {advantages.map(adv => (
-                  <li key={adv} className="flex items-center gap-3 text-sm text-gray-300">
+                  <li key={adv} className="flex items-center gap-3 text-sm dark:text-gray-300 text-gray-600">
                     <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
                     {adv}
                   </li>
@@ -230,7 +230,7 @@ export default function OpenClawPage() {
             {/* 右侧统计卡片，顶部加 Logo */}
             <div className="glass rounded-2xl p-8 border border-red-500/20">
               {/* Logo + 品牌名 */}
-              <div className="flex items-center justify-center gap-3 mb-6 pb-5 border-b border-white/10">
+              <div className="flex items-center justify-center gap-3 mb-6 pb-5 border-b dark:border-white/10 border-gray-200">
                 <Image
                   src="/images/openclaw/lobster.svg"
                   alt="OpenClaw"
@@ -239,13 +239,13 @@ export default function OpenClawPage() {
                   className="w-10 h-10"
                 />
                 <div>
-                  <div className="text-base font-bold text-white">OpenClaw</div>
-                  <div className="text-xs text-gray-500">Enterprise AI Platform</div>
+                  <div className="text-base font-bold dark:text-white text-gray-900">OpenClaw</div>
+                  <div className="text-xs dark:text-gray-500 text-gray-400">Enterprise AI Platform</div>
                 </div>
               </div>
               <div className="text-center mb-6">
                 <div className="text-4xl font-bold gradient-text mb-2">200+</div>
-                <div className="text-gray-400 text-sm">企业客户信赖之选</div>
+                <div className="dark:text-gray-400 text-gray-500 text-sm">企业客户信赖之选</div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 {[
@@ -254,9 +254,9 @@ export default function OpenClawPage() {
                   { value: '60%', label: '平均成本降低' },
                   { value: '99.99%', label: '服务可用性' },
                 ].map(stat => (
-                  <div key={stat.label} className="text-center p-3 bg-white/5 rounded-xl">
-                    <div className="text-xl font-bold text-blue-400">{stat.value}</div>
-                    <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
+                  <div key={stat.label} className="text-center p-3 dark:bg-white/5 bg-gray-100 rounded-xl">
+                    <div className="text-xl font-bold dark:text-blue-400 text-blue-600">{stat.value}</div>
+                    <div className="text-xs dark:text-gray-500 text-gray-500 mt-1">{stat.label}</div>
                   </div>
                 ))}
               </div>
