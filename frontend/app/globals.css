@@ -319,6 +319,74 @@ html.light .page-header p {
 .prose-dark th, .prose-dark td { border: 1px solid #1e293b; padding: 0.5rem 0.75rem; }
 .prose-dark th { background: #1e293b; font-weight: 600; }
 
+/* ============================================================
+   浅色主题下强制覆盖 prose-dark 为高对比度深色文字
+   解决 guide 文章详情页在浅色主题下文字与背景色相近的问题
+   ============================================================ */
+html.light .prose-dark {
+  color: #1e293b !important;
+}
+html.light .prose-dark h1,
+html.light .prose-dark h2,
+html.light .prose-dark h3,
+html.light .prose-dark h4,
+html.light .prose-dark h5,
+html.light .prose-dark h6 {
+  color: #0f172a !important;
+}
+html.light .prose-dark p {
+  color: #1e293b !important;
+}
+html.light .prose-dark li {
+  color: #1e293b !important;
+}
+html.light .prose-dark ul,
+html.light .prose-dark ol {
+  color: #1e293b !important;
+}
+html.light .prose-dark strong {
+  color: #0f172a !important;
+}
+html.light .prose-dark em {
+  color: #334155 !important;
+}
+html.light .prose-dark a {
+  color: #2563eb !important;
+}
+html.light .prose-dark blockquote {
+  color: #475569 !important;
+  border-left-color: #2563eb;
+  background: #f8fafc;
+  padding: 0.75rem 1rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+html.light .prose-dark code {
+  background: #f1f5f9 !important;
+  color: #6d28d9 !important;
+  border: 1px solid #e2e8f0;
+}
+html.light .prose-dark pre {
+  background: #f8fafc !important;
+  border-color: #e2e8f0 !important;
+}
+html.light .prose-dark pre code {
+  background: none !important;
+  color: #1e293b !important;
+  border: none !important;
+}
+html.light .prose-dark table {
+  border-color: #e2e8f0;
+}
+html.light .prose-dark th {
+  background: #f1f5f9 !important;
+  color: #0f172a !important;
+  border-color: #e2e8f0 !important;
+}
+html.light .prose-dark td {
+  color: #1e293b !important;
+  border-color: #e2e8f0 !important;
+}
+
 /* Prose 内容样式（浅色）— 高对比度 */
 .prose-light {
   color: #1E293B;
