@@ -316,12 +316,12 @@ export default function DeploymentPage() {
           {/* 白皮书下载 */}
           <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="/downloads/openclaw-antigravity-deployment-security-v1.pdf"
-              download
+              href="/TokenStar_AI_INFO_2026.pdf"
+              download="TokenStar企业AI部署白皮书2026.pdf"
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border dark:border-blue-500/40 border-blue-300 dark:text-blue-400 text-blue-600 dark:hover:bg-blue-500/10 hover:bg-blue-50 text-sm font-medium transition-all"
             >
               <Download className="w-4 h-4" />
-              下载部署架构白皮书（即将发布）
+              下载 TokenStar 企业 AI 部署白皮书（2026）
             </a>
             <a
               href="#consultation-form"
@@ -784,12 +784,12 @@ export default function DeploymentPage() {
                 预约企业部署评估 <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="/downloads/openclaw-antigravity-deployment-security-v1.pdf"
-                download
+                href="/TokenStar_AI_INFO_2026.pdf"
+                download="TokenStar企业AI部署白皮书2026.pdf"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border dark:border-white/20 border-gray-300 dark:text-white text-gray-700 dark:hover:bg-white/5 hover:bg-gray-50 font-semibold text-sm transition-all"
               >
                 <Download className="w-4 h-4" />
-                下载架构白皮书
+                下载 TokenStar 企业 AI 部署白皮书（2026）
               </a>
               <Link href="/cases" className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border dark:border-white/20 border-gray-300 dark:text-white text-gray-700 dark:hover:bg-white/5 hover:bg-gray-50 font-semibold text-sm transition-all">
                 查看成功案例
