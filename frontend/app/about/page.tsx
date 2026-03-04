@@ -30,7 +30,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4">
           <h1 className={`text-4xl font-bold mb-3 ${isDark ? 'text-white' : 'text-gray-900'}`}>关于 TokenStar</h1>
           <p className={`sm:whitespace-nowrap ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-            OpenCLAW + Antigravity 企业级实施平台，专注中国企业私有化部署与落地生态建设。
+            OpenCLAW + Open-Antigravity 企业级实施平台，专注中国企业私有化部署与落地生态建设。
           </p>
         </div>
       </div>
@@ -66,13 +66,13 @@ export default function AboutPage() {
               <h2 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-gray-900'}`}>我们是谁</h2>
               <div className={`space-y-4 leading-relaxed ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>
                 <p>
-                  TokenStar 是面向中国企业的 OpenCLAW + Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。
+                  TokenStar 是面向中国企业的 OpenCLAW + Open-Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。
                 </p>
                 <p>
-                  我们通过技术内容输出、实施案例沉淀与认证培训体系建设，构建 OpenCLAW + Antigravity 在中国的落地生态网络，为企业提供可落地、可量化、可持续的 AI 转型路径。
+                  我们通过技术内容输出、实施案例沉淀与认证培训体系建设，构建 OpenCLAW + Open-Antigravity 在中国的落地生态网络，为企业提供可落地、可量化、可持续的 AI 转型路径。
                 </p>
                 <p>
-                  TokenStar 团队由具备深度企业服务经验的实施顾问和架构师组成，我们相信 AI 智能体将成为企业数字化转型的核心引擎，而 OpenCLAW + Antigravity 正是这一路径中最具企业级落地能力的平台组合。
+                  TokenStar 团队由具备深度企业服务经验的实施顾问和架构师组成，我们相信 AI 智能体将成为企业数字化转型的核心引擎，而 OpenCLAW + Open-Antigravity 正是这一路径中最具企业级落地能力的平台组合。
                 </p>
               </div>
 
@@ -104,7 +104,7 @@ export default function AboutPage() {
                 {[
                   {
                     title: '企业级私有化部署',
-                    description: '为企业提供完整的 OpenCLAW + Antigravity 私有化部署方案，确保数据安全、满足合规要求，实现开箱即用。',
+                    description: '为企业提供完整的 OpenCLAW + Open-Antigravity 私有化部署方案，确保数据安全、满足合规要求，实现开箱即用。',
                   },
                   {
                     title: '安全架构设计与系统集成',
@@ -112,7 +112,7 @@ export default function AboutPage() {
                   },
                   {
                     title: '落地生态网络建设',
-                    description: '通过技术内容输出、实施案例沉淀与认证培训体系，构建 OpenCLAW + Antigravity 在中国的持续落地生态网络。',
+                    description: '通过技术内容输出、实施案例沉淀与认证培训体系，构建 OpenCLAW + Open-Antigravity 在中国的持续落地生态网络。',
                   },
                 ].map(item => (
                   <div
@@ -138,7 +138,7 @@ export default function AboutPage() {
             <div className="max-w-3xl mb-12">
               <h2 className={`text-2xl font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-900'}`}>合作伙伴计划</h2>
               <p className={`leading-relaxed ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                我们诚邀各类合作伙伴加入 TokenStar 生态，共同推动 OpenCLAW + Antigravity 在中国的落地与应用。
+                我们诚邀各类合作伙伴加入 TokenStar 生态，共同推动 OpenCLAW + Open-Antigravity 在中国的落地与应用。
                 无论您是技术服务商、系统集成商、培训机构还是行业解决方案提供商，都欢迎与我们合作。
               </p>
             </div>

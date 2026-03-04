@@ -9,7 +9,7 @@ import { DeploymentRecommendation } from '@/components/deployment/DeploymentReco
 
 export const metadata: Metadata = {
   title: '部署与安全 - TokenStar',
-  description: 'OpenCLAW + Antigravity 企业级私有化部署与安全架构方案。涵盖三种部署模式、安全权限模型、系统集成框架与标准交付流程。',
+  description: 'OpenCLAW + Open-Antigravity 企业级私有化部署与安全架构方案。涵盖三种部署模式、安全权限模型、系统集成框架与标准交付流程。',
 }
 
 // ─── Box Pro 产品数据 ────────────────────────────────────────────────────────
@@ -237,7 +237,7 @@ const deliverySteps = [
   { step: '01', title: '需求评估', duration: '1–2 天', desc: '架构师与企业技术负责人对接，评估规模、安全要求、集成需求，输出《部署评估报告》。', color: 'dark:border-blue-500/40 border-blue-300' },
   { step: '02', title: '方案设计', duration: '2–3 天', desc: '输出《系统架构设计文档》，包含网络拓扑、权限模型、集成接口清单、硬件选型建议。', color: 'dark:border-blue-500/40 border-blue-300' },
   { step: '03', title: '环境准备', duration: '1–2 天', desc: '企业侧准备服务器/网络环境，TokenStar 工程师提供《环境准备 Checklist》并远程指导。', color: 'dark:border-blue-500/40 border-blue-300' },
-  { step: '04', title: '系统部署', duration: '1–3 天', desc: '安装 OpenCLAW + Antigravity，配置 SSO、权限策略、Skills 预装，完成基础联调。', color: 'dark:border-blue-500/40 border-blue-300' },
+  { step: '04', title: '系统部署', duration: '1–3 天', desc: '安装 OpenCLAW + Open-Antigravity，配置 SSO、权限策略、Skills 预装，完成基础联调。', color: 'dark:border-blue-500/40 border-blue-300' },
   { step: '05', title: '集成调试', duration: '2–5 天', desc: '完成与企业 OA/CRM/ERP/知识库的接口对接，进行端到端功能验证与压力测试。', color: 'dark:border-blue-500/40 border-blue-300' },
   { step: '06', title: '验收上线', duration: '1 天', desc: '完成《系统验收报告》签署，交付运维手册，启动正式运营，进入技术支持服务周期。', color: 'dark:border-green-500/40 border-green-300' },
 ]
@@ -308,7 +308,7 @@ export default function DeploymentPage() {
             企业级部署与安全架构方案
           </h1>
           <p className="text-base sm:text-lg dark:text-gray-300 text-gray-600 max-w-3xl mx-auto mb-2 whitespace-nowrap">
-            OpenCLAW + Antigravity 私有化实施平台 — 专注企业级私有化部署、安全架构设计与系统集成落地。
+            OpenCLAW + Open-Antigravity 私有化实施平台 — 专注企业级私有化部署、安全架构设计与系统集成落地。
           </p>
           <p className="text-sm dark:text-gray-400 text-gray-500">
             从需求评估到验收上线，TokenStar 提供端到端的技术实施支持，确保 AI 系统安全、合规、可持续运行。
@@ -451,7 +451,7 @@ export default function DeploymentPage() {
         <section className="mb-14">
           <div className="mb-6">
             <h2 className="text-xl font-bold dark:text-white text-gray-900 mb-2">企业系统集成框架</h2>
-            <p className="dark:text-gray-400 text-gray-500 text-sm">Antigravity Skills Runtime 提供标准化连接器，支持与企业现有系统无缝集成，无需重构现有 IT 架构。</p>
+            <p className="dark:text-gray-400 text-gray-500 text-sm">Open-Antigravity Skills Runtime 提供标准化连接器，支持与企业现有系统无缝集成，无需重构现有 IT 架构。</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {integrations.map((integ) => (

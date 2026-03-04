@@ -75,7 +75,7 @@ export function Footer() {
               </svg>
             </Link>
             <p className={`text-sm leading-relaxed mb-5 max-w-xs ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-              TokenStar 是面向中国企业的 OpenCLAW + Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。
+              TokenStar 是面向中国企业的 OpenCLAW + Open-Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。
             </p>
             <div className="flex items-center gap-2">
               {[

@@ -348,7 +348,7 @@ export default function KnowledgePage() {
                     <span className={`text-xs ${isDark ? 'text-neutral-500' : 'text-neutral-500'}`}>by TokenStar</span>
                   </div>
                   <p className={`text-sm leading-relaxed ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>
-                    企业级超级 Agent 平台，支持私有化部署、多 Agent 协作与全流程安全合规，是 OpenCLAW + Antigravity 的完整企业解决方案。
+                    企业级超级 Agent 平台，支持私有化部署、多 Agent 协作与全流程安全合规，是 OpenCLAW + Open-Antigravity 的完整企业解决方案。
                   </p>
                 </div>
               </div>

@@ -439,7 +439,7 @@ export default function ScenariosPage() {
             从销售到供应链，让 OpenClaw 成为每个部门的超级管理 Agent。
           </p>
           <p className="dark:text-gray-400 text-gray-500 text-sm mb-7 whitespace-nowrap overflow-x-auto">
-            OpenCLAW + Antigravity 企业级实施与落地平台 — 企业真正需要的不是 AI 工具，而是可落地的部门级智能解决方案。
+            OpenCLAW + Open-Antigravity 企业级实施与落地平台 — 企业真正需要的不是 AI 工具，而是可落地的部门级智能解决方案。
           </p>
 
           {/* CTA 按钮组 */}

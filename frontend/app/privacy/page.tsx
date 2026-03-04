@@ -34,7 +34,7 @@ export default function PrivacyPage() {
           <section className="legal-section">
             <h2>1. 我们是谁</h2>
             <p>
-              TokenStar · AI星球 是面向中国企业的 OpenCLAW + Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地，提供技术内容、实施案例、培训体系与部署方案服务。
+              TokenStar · AI星球 是面向中国企业的 OpenCLAW + Open-Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地，提供技术内容、实施案例、培训体系与部署方案服务。
             </p>
           </section>
 

@@ -1,7 +1,7 @@
 {
   "name": "TokenStar · AI星球",
   "short_name": "TokenStar",
-  "description": "TokenStar 是面向中国企业的 OpenCLAW + Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。",
+  "description": "TokenStar 是面向中国企业的 OpenCLAW + Open-Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。",
   "start_url": "/?source=pwa",
   "scope": "/",
   "display": "standalone",
