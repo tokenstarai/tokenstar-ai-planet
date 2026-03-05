@@ -8,8 +8,9 @@ import { ConsultationForm } from '@/components/deployment/ConsultationForm'
 import { DeploymentRecommendation } from '@/components/deployment/DeploymentRecommendation'
 
 export const metadata: Metadata = {
-  title: '部署与安全 - TokenStar',
-  description: 'OpenCLAW + Open-Antigravity 企业级私有化部署与安全架构方案。涵盖三种部署模式、安全权限模型、系统集成框架与标准交付流程。',
+  title: 'AI 私有化部署与安全 | Box Pro 硬件一体机 & Cloud 方案',
+  description: '选择最适合您的 AI 部署方案。TokenStar 提供 Box Pro 私有化硬件一体机、Cloud 云端托管服务，具备企业级安全架构和完善的系统集成能力，确保您的数据安全与业务连续性。',
+  keywords: ['AI私有化部署', 'AI安全', '硬件一体机', 'Box Pro', 'Cloud AI', '数据安全', '系统集成', 'TokenStar', 'OpenClaw部署', '企业AI部署'],
 }
 
 // ─── Box Pro 产品数据 ────────────────────────────────────────────────────────

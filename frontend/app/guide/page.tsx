@@ -6,8 +6,9 @@ import { formatDate } from '@/lib/api'
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 
 export const metadata: Metadata = {
-  title: 'AI 管理指南 - TokenStar',
-  description: '面向企业管理者的 AI 应用指南，从战略认知到实操落地，帮助管理者在 Agent 时代做出正确决策。',
+  title: 'AI 管理指南 | 企业决策者的 AI 战略与转型必读',
+  description: '专为企业管理者打造的 AI 管理指南。从战略认知、组织升级到应用规划，获取专家级洞察，理解 AI Agent 如何重塑商业模式，并制定清晰的 AI 转型路线图。',
+  keywords: ['AI管理', 'AI战略', '企业AI转型', '数字化转型', 'AI决策', '组织升级', 'TokenStar', 'AI指南', 'AI Agent应用', '管理者AI'],
 }
 
 const guideCategories = [

@@ -3,8 +3,9 @@ import { ContentCard } from '@/components/ui/ContentCard'
 import { mockNews } from '@/lib/mock-data'
 
 export const metadata: Metadata = {
-  title: '新闻中心',
-  description: 'OpenClaw 最新产品动态、合作动态、生态动态与技术资讯。',
+  title: '新闻中心 | OpenClaw 与 AI 生态最新动态',
+  description: '掌握 OpenClaw 与 TokenStar 最新动态。这里汇聚产品更新、合作公告、生态动态与行业技术资讯，为企业决策者提供及时、准确的 AI 领域信息。',
+  keywords: ['OpenClaw新闻', 'AI资讯', 'TokenStar动态', 'AI生态', '产品更新', '行业动态', 'AI新闻', '智能体资讯'],
 }
 
 export default function NewsPage() {

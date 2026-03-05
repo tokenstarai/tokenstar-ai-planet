@@ -5,8 +5,9 @@ import { Zap, Brain, Shield, Globe, Layers, Code, ArrowRight, CheckCircle } from
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 
 export const metadata: Metadata = {
-  title: 'OpenClaw 介绍',
-  description: 'OpenClaw 是新一代企业级 AI Agent 平台，支持多模态推理、Skills 生态、私有化部署，赋能各行各业智能化转型。',
+  title: 'OpenClaw 框架介绍 | 多模态·高安全·企业级 AI Agent 平台',
+  description: '深入了解 OpenClaw 框架——新一代企业级 AI Agent 平台。探索其多模态推理、Skills 生态、企业级安全特性和私有化部署能力，了解 TokenStar 如何基于 OpenClaw 为您构建强大的 AI 应用。',
+  keywords: ['OpenClaw', 'AI Agent框架', '多模态AI', 'AI安全', '私有化部署', 'Skills生态', 'TokenStar', '企业AI平台', 'Open-Antigravity'],
 }
 
 const features = [

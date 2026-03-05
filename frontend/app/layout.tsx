@@ -9,11 +9,11 @@ import { AnchorScrollHandler } from '@/components/AnchorScrollHandler'
 
 export const metadata: Metadata = {
   title: {
-    default: 'TokenStar · OpenCLAW + Open-Antigravity 企业级实施平台',
-    template: '%s | TokenStar',
+    default: 'TokenStar · AI Agent 企业级应用与私有化部署平台',
+    template: '%s | TokenStar · AI Agent 企业级应用平台',
   },
-  description: 'TokenStar 是面向中国企业的 OpenCLAW + Open-Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地，构建 OpenCLAW + Open-Antigravity 在中国的落地生态网络。',
-  keywords: ['OpenClaw', 'AI Agent', 'TokenStar', '企业AI', 'AI部署', '企业管理', 'AI转型', 'Skills', '大模型'],
+  description: 'TokenStar (图斯塔) 是领先的 AI Agent 企业级应用与私有化部署平台，提供基于 OpenClaw 框架的 AI 解决方案、安全部署方案、成功案例与专家级 AI 管理指南，赋能企业智能化转型。',
+  keywords: ['AI Agent', '企业AI', '智能体', '大模型应用', 'OpenClaw', 'Open-Antigravity', 'TokenStar', '图斯塔', '私有化部署', 'AI解决方案', '企业智能化', 'AI转型', 'AI安全', 'Skills', '数字化转型'],
   authors: [{ name: 'TokenStar Team' }],
   creator: 'TokenStar',
   publisher: 'TokenStar',
@@ -33,14 +33,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'zh_CN',
     url: '/',
-    siteName: 'TokenStar',
-    title: 'TokenStar · OpenCLAW + Open-Antigravity 企业级实施平台',
-    description: 'TokenStar 是面向中国企业的 OpenCLAW + Open-Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。',
+    siteName: 'TokenStar · AI Agent 企业级应用平台',
+    title: 'TokenStar · AI Agent 企业级应用与私有化部署平台',
+    description: 'TokenStar (图斯塔) 致力于让每一项 AI 创新触手可及。提供基于 OpenClaw 的企业级 AI Agent 解决方案、私有化部署硬件与专家指南，助力企业安全高效地拥抱 AI。',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TokenStar · OpenCLAW + Open-Antigravity 企业级实施平台',
-    description: 'TokenStar 是面向中国企业的 OpenCLAW + Open-Antigravity 生态内容与实施结合平台，专注于企业级私有化部署、安全架构设计与系统集成落地。',
+    title: 'TokenStar · AI Agent 企业级应用与私有化部署平台',
+    description: 'TokenStar (图斯塔) 致力于让每一项 AI 创新触手可及。提供基于 OpenClaw 的企业级 AI Agent 解决方案、私有化部署硬件与专家指南，助力企业安全高效地拥抱 AI。',
   },
   robots: {
     index: true,

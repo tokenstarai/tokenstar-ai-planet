@@ -4,8 +4,9 @@ import { Package, Github, Star, ArrowRight, Download } from 'lucide-react'
 import { mockSkills } from '@/lib/mock-data'
 
 export const metadata: Metadata = {
-  title: 'Skills 市场',
-  description: 'OpenClaw Skills 市场，500+ 开箱即用的 AI 技能包，覆盖搜索、代码执行、文档处理、数据库查询等场景。',
+  title: 'Skills 市场 | 500+ 开筱即用的 AI 智能体技能',
+  description: '探索 OpenClaw Skills 市场，发现超过 500 种即插即用的 AI 技能。轻松为您的 AI Agent 扩展文件处理、数据分析、API 调用等能力，加速应用开发与落地。',
+  keywords: ['OpenClaw Skills', 'AI技能', 'AI Agent能力', '技能市场', 'API集成', 'TokenStar', '插件', '智能体扩展', '开筱即用'],
 }
 
 export default function SkillsPage() {

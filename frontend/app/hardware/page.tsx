@@ -4,8 +4,9 @@ import { Server, ExternalLink, Star, CheckCircle, Zap } from 'lucide-react'
 import { mockHardware } from '@/lib/mock-data'
 
 export const metadata: Metadata = {
-  title: '硬件 & 云方案',
-  description: 'OpenClaw 硬件部署方案与云服务，从边缘推理盒到企业集群，满足各种规模的 AI 部署需求。',
+  title: 'AI 硬件与云方案 | 企业级 AI 部署硬件选型指南',
+  description: '探索 TokenStar 提供的 AI 硬件与云部署方案。从边缘推理盒到企业级集群，满足 10 人到 500 人团队的各种规模 AI 部署需求，配套专业运维支持。',
+  keywords: ['AI硬件', 'AI部署', '企业集群', '边缘推理', '私有化硬件', 'Box Pro', 'TokenStar', 'OpenClaw硬件', '服务器'],
 }
 
 export default function HardwarePage() {

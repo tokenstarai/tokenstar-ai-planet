@@ -8,8 +8,9 @@ import {
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 
 export const metadata: Metadata = {
-  title: '解决方案 - TokenStar',
-  description: '从销售到供应链，OpenClaw 为每个部门提供可落地的企业级智能体解决方案，覆盖小型、中型、大型企业全规模。',
+  title: 'AI 解决方案 | 覆盖全行业的企业级智能体应用',
+  description: '探索 TokenStar 提供的企业级 AI 解决方案。我们为销售、客服、人力资源、供应链等部门提供定制化的 AI Agent 应用，覆盖金融、制造、零售等多个行业，附有详细的落地路线图。',
+  keywords: ['AI解决方案', '企业AI应用', '行业AI', '部门智能化', 'AI Agent用例', '销售AI', '客服AI', 'TokenStar', '智能体应用'],
 }
 
 /*

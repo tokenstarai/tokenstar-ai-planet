@@ -33,6 +33,7 @@ const navItems = [
       { label: '知识库', href: '/knowledge' },
     ],
   },
+  { label: '图斯塔', href: 'https://www.trustar.work', external: true },
   { label: '关于', href: '/about' },
 ]
 
@@ -602,6 +603,21 @@ export function Navbar() {
                     pathname={pathname}
                     onClose={() => {}}
                   />
+                ) : (item as any).external ? (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm transition-all duration-150 ${
+                      isDark
+                        ? 'text-gray-300 hover:text-white hover:bg-white/10'
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                    }`}
+                  >
+                    {item.label}
+                    <svg className="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                  </a>
                 ) : (
                   <Link
                     key={item.label}
@@ -721,6 +737,19 @@ export function Navbar() {
                         )
                       })}
                     </div>
+                  ) : (item as any).external ? (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-sm transition-all min-h-[44px] ${
+                        isDark ? 'text-gray-300 hover:text-white hover:bg-white/10' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                      }`}
+                    >
+                      <span>{item.label}</span>
+                      <svg className="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                    </a>
                   ) : (
                     <Link
                       href={item.href}

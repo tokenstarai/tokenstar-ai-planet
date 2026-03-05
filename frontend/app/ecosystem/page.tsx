@@ -6,8 +6,9 @@ import { formatDate } from '@/lib/api'
 import { SubtleGridBackground } from '@/components/backgrounds/SubtleGridBackground'
 
 export const metadata: Metadata = {
-  title: 'OpenClaw 生态 - TokenStar',
-  description: 'OpenClaw 生态动态、Skills 市场、知识库与版本更新，掌握 AI Agent 生态最新进展。',
+  title: 'OpenClaw 生态 | Skills 市场、知识库与版本动态',
+  description: '全面掌握 OpenClaw 生态动态。这里汇聚 Skills 市场更新、知识库扩充、版本发布与社区动态，是企业技术团队跟踪 OpenClaw 生态发展的核心页面。',
+  keywords: ['OpenClaw生态', 'Skills市场', 'AI生态', '知识库', '版本更新', 'TokenStar', 'AI Agent生态', '开发者社区'],
 }
 
 export default function EcosystemPage() {

@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useMemo, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { CASE_STUDIES, INDUSTRIES, COMPANY_SIZES, SCENARIOS, type CaseStudy } from '@/lib/caseStudies';

@@ -5,8 +5,9 @@ import { mockEvents } from '@/lib/mock-data'
 import { formatDate, getEventStatusLabel, getEventStatusColor, getEventTypeLabel } from '@/lib/api'
 
 export const metadata: Metadata = {
-  title: '培训活动',
-  description: 'OpenClaw 培训活动，包括公开课、训练营、企业专场，线上线下全覆盖。',
+  title: 'AI 培训与认证 | OpenClaw 企业实战训练营与公开课',
+  description: '参加 TokenStar 组织的 AI 培训与认证活动。包括面向管理层的认知课程、企业实战训练营和定制部署支持，线上线下全覆盖，帮助企业快速握握 AI 应用能力。',
+  keywords: ['AI培训', 'OpenClaw认证', '企业AI训练', 'AI训练营', 'AI公开课', 'TokenStar', '管理层培训', 'AI实战'],
 }
 
 export default function EventsPage() {

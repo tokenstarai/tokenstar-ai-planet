@@ -6,8 +6,9 @@ import { formatDate } from '@/lib/api'
 import { ContentCard } from '@/components/ui/ContentCard'
 
 export const metadata: Metadata = {
-  title: 'Blog',
-  description: 'TokenStar AI星球技术博客，分享 AI Agent 技术洞察、行业观察与实战经验。',
+  title: 'AI 技术博客 | AI Agent 实战洞察与行业观察',
+  description: 'TokenStar AI星球技术博客——深度分析 AI Agent 技术趋势、行业应用案例与企业实战经验。为技术人员和企业决策者提供最有价値的 AI 知识内容。',
+  keywords: ['AI博客', 'AI Agent技术', '行业AI洞察', 'TokenStar', 'AI实战', '技术分析', '大模型应用', 'AI趋势', '智能体开发'],
 }
 
 export default function BlogPage() {
