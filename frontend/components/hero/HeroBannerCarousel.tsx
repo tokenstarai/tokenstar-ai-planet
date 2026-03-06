@@ -182,6 +182,9 @@ function TypewriterText({ slide, active, isDark, animKey }: TypewriterTextProps)
   const accentStyle: React.CSSProperties = {
     color: slide.accentColor,
     textShadow: isDark ? `0 0 24px ${slide.accentColor}80, 0 0 8px ${slide.accentColor}40` : 'none',
+    background: isDark ? `linear-gradient(to right, ${slide.accentColor}, #fff)` : `linear-gradient(to right, ${slide.accentColor}, #000)`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
   };
 
   // 扫光线样式
@@ -230,7 +233,7 @@ function TypewriterText({ slide, active, isDark, animKey }: TypewriterTextProps)
 
       {/* 标签行 */}
       <div
-        className={`text-xs sm:text-sm font-mono tracking-[0.2em] mb-3 sm:mb-4 ${tagColor}`}
+        className={`text-[10px] sm:text-sm font-mono tracking-[0.3em] mb-2 sm:mb-4 uppercase ${tagColor}`}
         style={{
           opacity: showTag ? 1 : 0,
           transform: showTag ? 'translateY(0)' : 'translateY(-8px)',
@@ -247,8 +250,8 @@ function TypewriterText({ slide, active, isDark, animKey }: TypewriterTextProps)
 
         {/* 第一行 */}
         <div
-          className={`font-bold leading-tight mb-1 sm:mb-2 ${titleColor}`}
-          style={{ fontSize: 'clamp(22px, 3.8vw, 48px)', minHeight: '1.2em' }}
+          className={`font-extrabold tracking-tight leading-[1.1] mb-1 sm:mb-2 ${titleColor}`}
+          style={{ fontSize: 'clamp(28px, 8vw, 48px)', minHeight: '1.1em' }}
         >
           {displayLine1}
           {cursorOnLine === 1 && showCursor && <span style={cursorStyle} />}
@@ -256,10 +259,10 @@ function TypewriterText({ slide, active, isDark, animKey }: TypewriterTextProps)
 
         {/* 第二行（强调色） */}
         <div
-          className="font-bold leading-tight mb-1 sm:mb-2"
+          className="font-extrabold tracking-tight leading-[1.1] mb-1 sm:mb-2"
           style={{
-            fontSize: 'clamp(26px, 4.2vw, 54px)',
-            minHeight: '1.2em',
+            fontSize: 'clamp(32px, 9vw, 54px)',
+            minHeight: '1.1em',
             ...accentStyle,
           }}
         >
@@ -270,7 +273,7 @@ function TypewriterText({ slide, active, isDark, animKey }: TypewriterTextProps)
 
       {/* 副标题 */}
       <p
-        className={`mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed max-w-sm sm:max-w-md ${subtitleColor}`}
+        className={`mt-4 sm:mt-6 text-sm sm:text-lg leading-relaxed max-w-[280px] sm:max-w-md font-medium ${subtitleColor}`}
         style={{
           opacity: showSubtitle ? 1 : 0,
           transform: showSubtitle ? 'translateY(0)' : 'translateY(14px)',
@@ -317,17 +320,17 @@ function AnimatedText({ slide, active, isDark }: AnimatedTextProps) {
     const delay = lineIdx * 130;
     if (slide.animation === 'fly-in-left') {
       return {
-        display: 'inline-block',
+        display: 'block',
         opacity: phase === 'hidden' ? 0 : 1,
-        transform: phase === 'hidden' ? 'translateX(-70px)' : 'translateX(0)',
+        transform: phase === 'hidden' ? 'translateX(-40px)' : 'translateX(0)',
         transition: `opacity 0.65s ease ${delay}ms, transform 0.65s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
       };
     }
     if (slide.animation === 'fly-in-bottom') {
       return {
-        display: 'inline-block',
+        display: 'block',
         opacity: phase === 'hidden' ? 0 : 1,
-        transform: phase === 'hidden' ? 'translateY(44px)' : 'translateY(0)',
+        transform: phase === 'hidden' ? 'translateY(30px)' : 'translateY(0)',
         transition: `opacity 0.6s ease ${delay}ms, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
       };
     }
@@ -362,34 +365,35 @@ function AnimatedText({ slide, active, isDark }: AnimatedTextProps) {
 
   return (
     <div className="relative" style={{ zIndex: 10 }}>
-      <div className={`text-xs sm:text-sm font-mono tracking-[0.2em] mb-3 sm:mb-4 ${tagColor}`} style={tagStyle}>
+      <div className={`text-[10px] sm:text-sm font-mono tracking-[0.3em] mb-2 sm:mb-4 uppercase ${tagColor}`} style={tagStyle}>
         {slide.tag}
       </div>
 
-      <div className="relative overflow-visible">
+      <div className="relative overflow-visible mb-4 sm:mb-8">
         {slide.animation === 'fly-in-left' && (
           <div style={scanLineStyle} />
         )}
         {slide.title.map((line, li) => (
           <div
             key={li}
-            className={`font-bold leading-tight mb-1 sm:mb-2 ${titleColor}`}
+            className={`font-extrabold tracking-tight leading-[1.1] mb-1 sm:mb-2 ${titleColor}`}
             style={{
-              fontSize: li === 0 ? 'clamp(22px, 3.8vw, 48px)' : 'clamp(26px, 4.2vw, 54px)',
-              ...(li === 1 ? accentStyle : {}),
+              fontSize: 'clamp(28px, 8vw, 48px)',
+              minHeight: '1.1em',
+              ...getLineStyle(li),
             }}
           >
-            <span style={getLineStyle(li)}>{line}</span>
+            {line}
           </div>
         ))}
       </div>
 
-      <p
-        className={`mt-3 sm:mt-4 text-sm sm:text-base leading-relaxed max-w-sm sm:max-w-md ${subtitleColor}`}
+      <div
+        className={`mt-4 sm:mt-6 text-sm sm:text-lg leading-relaxed max-w-[280px] sm:max-w-md font-medium ${subtitleColor}`}
         style={subtitleStyle}
       >
         {slide.subtitle}
-      </p>
+      </div>
     </div>
   );
 }
@@ -504,12 +508,18 @@ export default function HeroBannerCarousel() {
         }}
       />
 
+      {/* ── 背景装饰：微光效果 ── */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className={`absolute top-1/4 -left-20 w-80 h-80 rounded-full blur-[120px] opacity-20 ${isDark ? 'bg-blue-500' : 'bg-blue-300'}`} />
+        <div className={`absolute bottom-1/4 -right-20 w-80 h-80 rounded-full blur-[120px] opacity-10 ${isDark ? 'bg-purple-500' : 'bg-purple-300'}`} />
+      </div>
+
       {/* ── 主内容层（居中布局，文字在左半区，背景视觉在右半区） ── */}
-      <div className="absolute inset-0 flex flex-col justify-between py-10 sm:py-14">
+      <div className="absolute inset-0 flex flex-col justify-between py-8 sm:py-14">
         {/* 使用 max-w-7xl 居中容器，让内容不贴边 */}
         <div className="flex-1 flex items-center w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
           {/* 文字区域：占左侧约 50%，右侧留给背景图视觉元素 */}
-          <div className="w-full sm:w-1/2 lg:w-5/12">
+          <div className="w-full sm:w-3/5 lg:w-5/12">
             {hydrated && SLIDES.map((slide, i) => {
               const isActive = i === index;
               if (!isActive && !prefersReducedMotion) return null;
@@ -539,45 +549,52 @@ export default function HeroBannerCarousel() {
 
         {/* 按钮 + 统计（底部，同样居中对齐） */}
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
-          {/* 按钮组 */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-5 sm:mb-7">
+          {/* 按钮组：移动端优化为 1 主 + 2 次布局 */}
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
+            {/* 主按钮：移动端全宽 */}
             <Link
               href="/scenarios"
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm sm:text-base transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 backdrop-blur-sm"
+              className="group relative inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:px-8 sm:py-4 rounded-2xl bg-blue-600 text-white font-bold text-base sm:text-lg transition-all overflow-hidden shadow-[0_8px_30px_rgb(37,99,235,0.4)] hover:shadow-[0_8px_30px_rgb(37,99,235,0.6)] active:scale-95"
             >
-              查看解决方案 <ArrowRight className="w-4 h-4" />
+              <span className="relative z-10">查看解决方案</span>
+              <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-100 group-hover:opacity-90 transition-opacity" />
             </Link>
-            <Link
-              href="/cases"
-              className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-xl font-semibold text-sm sm:text-base transition-all border backdrop-blur-sm ${
-                isDark
-                  ? 'border-white/20 text-white hover:bg-white/10 bg-black/20'
-                  : 'border-gray-400/40 text-gray-800 hover:bg-white/70 bg-white/50'
-              }`}
-            >
-              查看成功案例 <ChevronRight className="w-4 h-4" />
-            </Link>
-            <Link
-              href="/training"
-              className={`inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3 rounded-xl font-semibold text-sm sm:text-base transition-all border backdrop-blur-sm ${
-                isDark
-                  ? 'border-amber-400/40 text-amber-300 hover:bg-amber-400/15 bg-black/20'
-                  : 'border-amber-500/50 text-amber-700 hover:bg-amber-50/80 bg-white/50'
-              }`}
-            >
-              AI 领航计划 <ChevronRight className="w-4 h-4" />
-            </Link>
+
+            {/* 次要按钮：移动端并排显示以节省空间 */}
+            <div className="flex gap-3 w-full sm:w-auto">
+              <Link
+                href="/cases"
+                className={`flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-7 sm:py-4 rounded-2xl font-bold text-sm sm:text-base transition-all border backdrop-blur-md ${
+                  isDark
+                    ? 'border-white/10 text-white hover:bg-white/10 bg-white/5'
+                    : 'border-gray-200 text-gray-800 hover:bg-gray-50 bg-white/80'
+                } hover:shadow-lg active:scale-95`}
+              >
+                成功案例
+              </Link>
+              <Link
+                href="/training"
+                className={`flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-3 sm:px-7 sm:py-4 rounded-2xl font-bold text-sm sm:text-base transition-all border backdrop-blur-md ${
+                  isDark
+                    ? 'border-amber-400/20 text-amber-300 hover:bg-amber-400/10 bg-amber-400/5'
+                    : 'border-amber-200 text-amber-700 hover:bg-amber-50 bg-amber-50/50'
+                } hover:shadow-lg active:scale-95`}
+              >
+                领航计划
+              </Link>
+            </div>
           </div>
 
           {/* 统计数字 + 进度点 */}
-          <div className="flex items-end justify-between">
-            <div className="flex gap-6 sm:gap-10">
+          <div className="flex items-end justify-between border-t border-black/5 dark:border-white/5 pt-6 sm:pt-0 sm:border-none">
+            <div className="flex gap-6 sm:gap-12">
               {stats.map((s) => (
-                <div key={s.label}>
-                  <div className={`text-xl sm:text-2xl font-bold mb-0.5 ${isDark ? 'text-white' : 'text-gray-900'}`}>
+                <div key={s.label} className="relative">
+                  <div className={`text-2xl sm:text-3xl font-black tracking-tighter mb-0.5 ${isDark ? 'text-white' : 'text-gray-900'}`}>
                     {s.value}
                   </div>
-                  <div className={`text-xs sm:text-sm ${isDark ? 'text-slate-400' : 'text-gray-500'}`}>
+                  <div className={`text-[10px] sm:text-xs font-bold uppercase tracking-wider ${isDark ? 'text-slate-500' : 'text-gray-400'}`}>
                     {s.label}
                   </div>
                 </div>
