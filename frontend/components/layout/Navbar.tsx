@@ -33,7 +33,7 @@ const navItems = [
       { label: '知识库', href: '/knowledge' },
     ],
   },
-  { label: '图斯塔', href: 'https://www.trustar.work', external: true },
+  { label: '图思塔', href: 'https://www.trustar.work', external: true },
   { label: '关于', href: '/about' },
 ]
 
