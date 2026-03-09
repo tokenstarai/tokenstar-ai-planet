@@ -10,7 +10,7 @@ import { DeploymentRecommendation } from '@/components/deployment/DeploymentReco
 export const metadata: Metadata = {
   title: 'AI 私有化部署与安全 | Box Pro 硬件一体机 & Cloud 方案',
   description: '选择最适合您的 AI 部署方案。TokenStar 提供 Box Pro 私有化硬件一体机、Cloud 云端托管服务，具备企业级安全架构和完善的系统集成能力，确保您的数据安全与业务连续性。',
-  keywords: ['AI私有化部署', 'AI安全', '硬件一体机', 'Box Pro', 'Cloud AI', '数据安全', '系统集成', 'TokenStar', 'OpenClaw部署', '企业AI部署'],
+  keywords: ['AI私有化部署', 'AI安全', '硬件一体机', 'Box Pro', 'Cloud AI', '数据安全', '系统集成', 'TokenStar', 'TokenBase部署', '企业AI部署'],
 }
 
 // ─── TokenBase 产品数据 ────────────────────────────────────────────────────────
@@ -37,7 +37,7 @@ const boxProProducts = [
       { label: '网络', value: '双千兆网口' },
       { label: '机架', value: '2U 企业服务器' },
     ],
-    software: ['OpenClaw 企业版', '兼容主流开源 LLM', '10 个核心 Skills 预配置', '管理控制台', 'API 接口', '日志监控'],
+    software: ['TokenBase 企业版', '兼容主流开源 LLM', '10 个核心 Skills 预配置', '管理控制台', 'API 接口', '日志监控'],
     services: ['远程或上门部署', '初始模型优化', '企业数据接入指导', '3 个月技术支持', '企业管理员培训 1 场'],
   },
   {
@@ -105,7 +105,7 @@ const cloudProducts = [
       { label: '存储', value: '50GB 起' },
     ],
     platforms: ['AWS', '阿里云', '腾讯云', '华为云', '火山引擎'],
-    software: ['OpenClaw 轻量版', '基础 LLM 支持', '5 个核心 Skills', '控制台管理界面'],
+    software: ['TokenBase 轻量版', '基础 LLM 支持', '5 个核心 Skills', '控制台管理界面'],
     scenarios: ['企业试点', '培训环境', '部门实验'],
     ctaStyle: 'border dark:border-blue-500/40 border-blue-400 dark:text-blue-400 text-blue-600 dark:hover:bg-blue-500/10 hover:bg-blue-50',
   },
@@ -120,7 +120,7 @@ const cloudProducts = [
       { label: '并发', value: '支持多部门并发' },
     ],
     platforms: ['AWS', '阿里云', '腾讯云', '华为云', '火山引擎'],
-    software: ['OpenClaw 企业版', '多模型支持', '20+ Skills', 'API 扩展能力'],
+    software: ['TokenBase 企业版', '多模型支持', '20+ Skills', 'API 扩展能力'],
     scenarios: ['正式生产环境', '多部门协同', '企业级应用'],
     ctaStyle: 'bg-blue-600 hover:bg-blue-500 text-white',
   },
@@ -137,7 +137,7 @@ const workstationProducts = [
       { name: 'iPhone 14 Pro Max – 17 Pro Max', price: '¥4,999 起' },
       { name: 'iPad mini – iPad Pro', price: '¥3,999 起' },
     ],
-    software: ['OpenClaw 移动管理端', '企业智能助手', 'Skills 快捷调用', '企业数据安全访问'],
+    software: ['TokenBase 移动管理端', '企业智能助手', 'Skills 快捷调用', '企业数据安全访问'],
     targets: ['企业管理层', '销售团队', '外勤人员'],
   },
   {
@@ -149,7 +149,7 @@ const workstationProducts = [
       { name: 'M2 Pro / 16GB / 512GB（标准版）', price: '¥6,999 起' },
       { name: 'M3 Pro / 32GB / 1TB（高配版）', price: '¥12,999 起' },
     ],
-    software: ['OpenClaw 桌面端', '本地模型推理', '企业 Skills 套件', '数据本地化处理'],
+    software: ['TokenBase 桌面端', '本地模型推理', '企业 Skills 套件', '数据本地化处理'],
     targets: ['企业 AI 管理员', '技术负责人', '数据分析人员'],
   },
 ]
@@ -375,10 +375,10 @@ export default function DeploymentPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {deploymentModes.map((mode) => (
-              <div key={mode.id} className={`glass rounded-2xl border ${mode.border} flex flex-col overflow-hidden relative`}>
+              <div key={mode.id} className={`glass rounded-2xl border ${mode.border} flex flex-col relative`}>
                 {/* TokenBase Logo \u5370\u7ae0 */}
                 {mode.logo && (
-                  <div className="absolute -top-4 -right-4 w-40 h-40 opacity-35 dark:opacity-30 pointer-events-none z-0 mix-blend-multiply dark:mix-blend-screen">
+                  <div className="absolute -top-10 -right-10 w-48 h-48 opacity-50 dark:opacity-40 pointer-events-none z-0 mix-blend-multiply dark:mix-blend-screen overflow-visible">
                     <Image
                       src="/images/tokenbase-stamp.png"
                       alt="TokenBase"
@@ -545,21 +545,23 @@ export default function DeploymentPage() {
           <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">以下为各部署模式的具体产品配置与报价，点击查看详情。</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
-              { icon: Server, color: 'text-green-400', bg: 'dark:bg-green-500/10 bg-green-50', border: 'dark:border-green-500/30 border-green-200', title: '私有化部署', sub: 'OpenClaw Box Pro', desc: '适合对数据安全要求高、计划长期使用 AI 的企业。', anchor: '#hardware' },
-              { icon: Cloud, color: 'text-blue-400', bg: 'dark:bg-blue-500/10 bg-blue-50', border: 'dark:border-blue-500/30 border-blue-200', title: '云端部署', sub: 'OpenClaw Cloud', desc: '适合希望快速上线、轻资产试点的企业。', anchor: '#cloud' },
-              { icon: Smartphone, color: 'text-purple-400', bg: 'dark:bg-purple-500/10 bg-purple-50', border: 'dark:border-purple-500/30 border-purple-200', title: '员工智能终端', sub: 'OpenClaw Workstation', desc: '为管理层与业务人员提供随时可用的智能助手终端。', anchor: '#workstation' },
-            ].map((item) => (
-              <a key={item.title} href={item.anchor} className={`glass rounded-xl p-5 border ${item.border} flex flex-col gap-3 hover:opacity-80 transition-opacity`}>
-                <div className={`w-10 h-10 rounded-lg ${item.bg} flex items-center justify-center`}>
-                  <item.icon className={`w-5 h-5 ${item.color}`} />
-                </div>
-                <div>
-                  <div className="text-xs dark:text-gray-500 text-gray-400 mb-0.5">{item.sub}</div>
-                  <h3 className="font-semibold dark:text-white text-gray-900">{item.title}</h3>
-                </div>
-                <p className="text-sm dark:text-gray-400 text-gray-500">{item.desc}</p>
-              </a>
-            ))}
+              { icon: Server, color: 'text-green-400', bg: 'dark:bg-green-500/10 bg-green-50', border: 'dark:border-green-500/30 border-green-200', title: '私有化部署', sub: 'TokenBase 系列', desc: '适合对数据安全要求高、计划长期使用 AI 的企业。', anchor: '#hardware' },
+              { icon: Cloud, color: 'text-blue-400', bg: 'dark:bg-blue-500/10 bg-blue-50', border: 'dark:border-blue-500/30 border-blue-200', title: '云端部署', sub: 'TokenBase Cloud 系列', desc: '适合希望快速上线、轻资产试点的企业。', anchor: '#cloud' },
+              { icon: Smartphone, color: 'text-purple-400', bg: 'dark:bg-purple-500/10 bg-purple-50', border: 'dark:border-purple-500/30 border-purple-200', title: '员工智能终端', sub: 'TokenBase Workstation 系列', desc: '为管理层与业务人员提供随时可用的智能助手终端。', anchor: '#workstation' },
+	            ].map((item) => (
+	              <a key={item.title} href={item.anchor} className={`glass rounded-xl p-5 border ${item.border} flex flex-col gap-3 hover:opacity-80 transition-opacity`}>
+	                <div className="flex items-center gap-4">
+	                  <div className={`shrink-0 w-10 h-10 rounded-lg ${item.bg} flex items-center justify-center`}>
+	                    <item.icon className={`w-5 h-5 ${item.color}`} />
+	                  </div>
+	                  <div className="flex-1 min-w-0">
+	                    <div className="text-xs dark:text-gray-500 text-gray-400 mb-0.5 truncate">{item.sub}</div>
+	                    <h3 className="font-semibold dark:text-white text-gray-900 truncate">{item.title}</h3>
+	                  </div>
+	                </div>
+	                <p className="text-sm dark:text-gray-400 text-gray-500 line-clamp-2">{item.desc}</p>
+	              </a>
+	            ))}
           </div>
         </section>
 
@@ -567,25 +569,43 @@ export default function DeploymentPage() {
         <section id="hardware" className="mb-14">
           <div className="flex items-center gap-3 mb-2">
             <Server className="w-5 h-5 dark:text-green-400 text-green-600" />
-            <h2 className="text-xl font-bold dark:text-white text-gray-900">OpenClaw Box Pro 产品体系</h2>
+            <h2 className="text-xl font-bold dark:text-white text-gray-900">TokenBase 产品体系</h2>
           </div>
-          <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">企业级私有智能体一体化服务器 · 预装 OpenClaw + LLM + Skills · 开箱即用 · 一键启动 · 数据不出企业</p>
+          <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">企业级私有智能体一体化服务器 · 预装 TokenBase + LLM + Skills · 开箱即用 · 一键启动 · 数据不出企业</p>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {boxProProducts.map((product) => (
-              <div key={product.id} className={`glass rounded-2xl border ${product.color} flex flex-col overflow-hidden`}>
-                <div className="p-5 border-b dark:border-white/8 border-gray-100">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${product.badgeColor}`}>{product.badge}</span>
-                    <span className="text-xs dark:text-gray-400 text-gray-500">适用 {product.scale}</span>
-                  </div>
-                  <h3 className="text-lg font-bold dark:text-white text-gray-900">{product.name}</h3>
-                  <p className="text-sm dark:text-gray-400 text-gray-500">{product.subtitle}</p>
-                  <div className="mt-3">
-                    <div className="text-xl font-bold dark:text-white text-gray-900">{product.price}</div>
-                    <div className="text-xs dark:text-gray-500 text-gray-400">{product.priceNote}</div>
-                  </div>
-                </div>
+		              <div key={product.id} className={`glass rounded-2xl border ${product.color} flex flex-col relative`}>
+		                {/* TokenBase Logo \u5370\u7ae0 */}
+		                <div className="absolute -top-10 -right-10 w-48 h-48 opacity-50 dark:opacity-40 pointer-events-none z-0 mix-blend-multiply dark:mix-blend-screen overflow-visible">
+		                  <Image
+		                    src="/images/tokenbase-stamp.png"
+		                    alt="TokenBase"
+		                    width={192}
+		                    height={192}
+		                    className="w-full h-full object-contain"
+		                    priority={false}
+		                  />
+		                </div>
+		                <div className="p-5 border-b dark:border-white/8 border-gray-100 relative z-10">
+	                  <div className="flex items-center justify-between mb-4">
+	                    <span className={`text-xs px-2.5 py-1 rounded-full border font-medium ${product.badgeColor}`}>{product.badge}</span>
+	                    <span className="text-xs dark:text-gray-400 text-gray-500">适用 {product.scale}</span>
+	                  </div>
+	                  <div className="flex items-center gap-3 mb-4">
+	                    <div className={`shrink-0 w-10 h-10 rounded-xl flex items-center justify-center dark:bg-white/5 bg-gray-50 border dark:border-white/10 border-gray-200`}>
+	                      <Server className="w-5 h-5 dark:text-green-400 text-green-600" />
+	                    </div>
+	                    <div className="min-w-0">
+	                      <h3 className="text-lg font-bold dark:text-white text-gray-900 truncate leading-tight">{product.name}</h3>
+	                      <p className="text-xs dark:text-gray-500 text-gray-400 truncate">{product.subtitle}</p>
+	                    </div>
+	                  </div>
+	                  <div className="flex items-baseline gap-2">
+	                    <div className="text-2xl font-black dark:text-white text-gray-900 tracking-tight">{product.price}</div>
+	                    <div className="text-[10px] dark:text-gray-500 text-gray-400 uppercase tracking-wider font-semibold">{product.priceNote}</div>
+	                  </div>
+	                </div>
                 <div className="p-5 border-b dark:border-white/8 border-gray-100">
                   <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">推荐应用场景</div>
                   <div className="flex flex-wrap gap-1.5">
@@ -641,7 +661,7 @@ export default function DeploymentPage() {
         <section id="cloud" className="mb-14">
           <div className="flex items-center gap-3 mb-2">
             <Cloud className="w-5 h-5 dark:text-blue-400 text-blue-600" />
-            <h2 className="text-xl font-bold dark:text-white text-gray-900">OpenClaw Cloud 方案</h2>
+            <h2 className="text-xl font-bold dark:text-white text-gray-900">TokenBase Cloud 方案</h2>
           </div>
           <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">无需采购硬件 · 1 天内完成部署 · 适合企业试点与快速上线</p>
 
@@ -696,7 +716,7 @@ export default function DeploymentPage() {
         <section id="workstation" className="mb-14">
           <div className="flex items-center gap-3 mb-2">
             <Smartphone className="w-5 h-5 dark:text-purple-400 text-purple-600" />
-            <h2 className="text-xl font-bold dark:text-white text-gray-900">OpenClaw Workstation 终端</h2>
+            <h2 className="text-xl font-bold dark:text-white text-gray-900">TokenBase Workstation 终端</h2>
           </div>
           <p className="dark:text-gray-400 text-gray-500 text-sm mb-6">为企业管理者与核心员工提供随时可用的智能助手终端。</p>
 
