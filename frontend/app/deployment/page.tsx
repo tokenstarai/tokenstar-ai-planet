@@ -13,11 +13,12 @@ export const metadata: Metadata = {
   keywords: ['AI私有化部署', 'AI安全', '硬件一体机', 'Box Pro', 'Cloud AI', '数据安全', '系统集成', 'TokenStar', 'OpenClaw部署', '企业AI部署'],
 }
 
-// ─── Box Pro 产品数据 ────────────────────────────────────────────────────────
+// ─── TokenBase 产品数据 ────────────────────────────────────────────────────────
 const boxProProducts = [
   {
     id: 'box-pro-s',
-    name: 'Box Pro S',
+    name: 'TokenBase Mini',
+    originalName: 'Box Pro S',
     subtitle: '入门企业版',
     color: 'border-green-500/40',
     badgeColor: 'bg-green-500/15 text-green-400 border-green-500/30',
@@ -41,7 +42,8 @@ const boxProProducts = [
   },
   {
     id: 'box-pro-m',
-    name: 'Box Pro M',
+    name: 'TokenBase Pro',
+    originalName: 'Box Pro M',
     subtitle: '成长企业版',
     color: 'border-blue-500/40',
     badgeColor: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
@@ -65,7 +67,8 @@ const boxProProducts = [
   },
   {
     id: 'box-pro-l',
-    name: 'Box Pro L',
+    name: 'TokenBase Ultra',
+    originalName: 'Box Pro L',
     subtitle: '大型企业定制',
     color: 'border-purple-500/40',
     badgeColor: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
@@ -89,11 +92,11 @@ const boxProProducts = [
   },
 ]
 
-// ─── Cloud 产品数据 ──────────────────────────────────────────────────────────
+// ─── TokenBase Cloud 产品数据 ──────────────────────────────────────────────────────────
 const cloudProducts = [
   {
     id: 'cloud-starter',
-    name: 'Cloud Starter',
+    name: 'TokenBase Cloud Starter',
     price: '¥399 / 月起',
     hardware: [
       { label: 'CPU', value: '2 核起' },
@@ -108,7 +111,7 @@ const cloudProducts = [
   },
   {
     id: 'cloud-pro',
-    name: 'Cloud Pro',
+    name: 'TokenBase Cloud Pro',
     price: '¥2,999 / 月起',
     hardware: [
       { label: 'CPU', value: '8 核起' },
@@ -123,7 +126,7 @@ const cloudProducts = [
   },
 ]
 
-// ─── Workstation 产品数据 ────────────────────────────────────────────────────
+// ─── TokenBase Workstation 产品数据 ────────────────────────────────────────────────
 const workstationProducts = [
   {
     id: 'ws-iphone',
@@ -252,7 +255,8 @@ const deploymentModes = [
     bg: 'dark:bg-green-500/10 bg-green-50',
     border: 'dark:border-green-500/30 border-green-200',
     title: '私有化内网部署',
-    sub: 'Box Pro 系列',
+    sub: 'TokenBase 系列',
+    logo: true,
     anchor: '#hardware',
     badge: '最高安全',
     badgeColor: 'bg-green-500/15 text-green-400 border-green-500/30',
@@ -267,7 +271,8 @@ const deploymentModes = [
     bg: 'dark:bg-blue-500/10 bg-blue-50',
     border: 'dark:border-blue-500/30 border-blue-200',
     title: '云端托管部署',
-    sub: 'Cloud 系列',
+    sub: 'TokenBase Cloud 系列',
+    logo: true,
     anchor: '#cloud',
     badge: '快速上线',
     badgeColor: 'bg-blue-500/15 text-blue-400 border-blue-500/30',
@@ -282,7 +287,8 @@ const deploymentModes = [
     bg: 'dark:bg-purple-500/10 bg-purple-50',
     border: 'dark:border-purple-500/30 border-purple-200',
     title: '混合终端部署',
-    sub: 'Workstation 系列',
+    sub: 'TokenBase Workstation 系列',
+    logo: true,
     anchor: '#workstation',
     badge: '灵活扩展',
     badgeColor: 'bg-purple-500/15 text-purple-400 border-purple-500/30',
@@ -369,7 +375,19 @@ export default function DeploymentPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {deploymentModes.map((mode) => (
-              <div key={mode.id} className={`glass rounded-2xl border ${mode.border} flex flex-col overflow-hidden`}>
+              <div key={mode.id} className={`glass rounded-2xl border ${mode.border} flex flex-col overflow-hidden relative`}>
+                {/* TokenBase Logo 印章 */}
+                {mode.logo && (
+                  <div className="absolute top-3 right-3 w-24 h-24 opacity-20 dark:opacity-15 pointer-events-none">
+                    <Image
+                      src="/images/tokenbase-stamp.png"
+                      alt="TokenBase"
+                      width={96}
+                      height={96}
+                      className="w-full h-full object-contain filter drop-shadow-lg"
+                    />
+                  </div>
+                )}
                 <div className="p-5 border-b dark:border-white/8 border-gray-100">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2.5">
