@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const boxProProducts = [
   {
     id: 'box-pro-s',
-    name: 'TokenBase Mini',
+    name: 'TokenBase Lite',
     originalName: 'Box Pro S',
     subtitle: '入门企业版',
     color: 'border-green-500/40',
@@ -376,64 +376,67 @@ export default function DeploymentPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {deploymentModes.map((mode) => (
               <div key={mode.id} className={`glass rounded-2xl border ${mode.border} flex flex-col overflow-hidden relative`}>
-                {/* TokenBase Logo 印章 */}
+                {/* TokenBase Logo \u5370\u7ae0 */}
                 {mode.logo && (
-                  <div className="absolute top-3 right-3 w-24 h-24 opacity-20 dark:opacity-15 pointer-events-none">
+                  <div className="absolute -top-4 -right-4 w-40 h-40 opacity-35 dark:opacity-30 pointer-events-none z-0 mix-blend-multiply dark:mix-blend-screen">
                     <Image
                       src="/images/tokenbase-stamp.png"
                       alt="TokenBase"
-                      width={96}
-                      height={96}
-                      className="w-full h-full object-contain filter drop-shadow-lg"
+                      width={160}
+                      height={160}
+                      className="w-full h-full object-contain"
+                      priority={false}
                     />
                   </div>
                 )}
-                <div className="p-5 border-b dark:border-white/8 border-gray-100">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2.5">
-                      <div className={`shrink-0 w-9 h-9 rounded-lg ${mode.bg} flex items-center justify-center`}>
-                        <mode.icon className={`w-4 h-4 ${mode.color}`} />
+                <div className="relative z-10">
+                  <div className="p-5 border-b dark:border-white/8 border-gray-100">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2.5">
+                        <div className={`shrink-0 w-9 h-9 rounded-lg ${mode.bg} flex items-center justify-center`}>
+                          <mode.icon className={`w-4 h-4 ${mode.color}`} />
+                        </div>
+                        <div>
+                          <h3 className="font-bold dark:text-white text-gray-900 leading-snug">{mode.title}</h3>
+                          <p className="text-xs dark:text-gray-500 text-gray-400">{mode.sub}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="font-bold dark:text-white text-gray-900 leading-snug">{mode.title}</h3>
-                        <p className="text-xs dark:text-gray-500 text-gray-400">{mode.sub}</p>
-                      </div>
+                      <span className={`text-xs px-2.5 py-1 rounded-full border font-medium shrink-0 ml-2 ${mode.badgeColor}`}>{mode.badge}</span>
                     </div>
-                    <span className={`text-xs px-2.5 py-1 rounded-full border font-medium shrink-0 ml-2 ${mode.badgeColor}`}>{mode.badge}</span>
                   </div>
-                </div>
-                <div className="p-5 flex-1 space-y-4">
-                  <div>
-                    <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">优势</div>
-                    <ul className="space-y-1">
-                      {mode.pros.map(p => (
-                        <li key={p} className="flex items-start gap-1.5 text-xs dark:text-gray-300 text-gray-600">
-                          <CheckCircle className="w-3 h-3 dark:text-green-400 text-green-500 shrink-0 mt-0.5" />
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="p-5 flex-1 space-y-4">
+                    <div>
+                      <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">\u4f18\u52bf</div>
+                      <ul className="space-y-1">
+                        {mode.pros.map(p => (
+                          <li key={p} className="flex items-start gap-1.5 text-xs dark:text-gray-300 text-gray-600">
+                            <CheckCircle className="w-3 h-3 dark:text-green-400 text-green-500 shrink-0 mt-0.5" />
+                            {p}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">\u6ce8\u610f\u4e8b\u9879</div>
+                      <ul className="space-y-1">
+                        {mode.cons.map(c => (
+                          <li key={c} className="flex items-start gap-1.5 text-xs dark:text-gray-400 text-gray-500">
+                            <span className="w-3 h-3 shrink-0 mt-0.5 text-center leading-3">\u00b7</span>
+                            {c}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="pt-1">
+                      <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-1">\u9002\u7528\u573a\u666f</div>
+                      <p className="text-xs dark:text-gray-400 text-gray-500">{mode.suitable}</p>
+                    </div>
                   </div>
-                  <div>
-                    <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-2">注意事项</div>
-                    <ul className="space-y-1">
-                      {mode.cons.map(c => (
-                        <li key={c} className="flex items-start gap-1.5 text-xs dark:text-gray-400 text-gray-500">
-                          <span className="w-3 h-3 shrink-0 mt-0.5 text-center leading-3">·</span>
-                          {c}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className="p-5 pt-0">
+                    <a href={mode.anchor} className={`block w-full text-center py-2.5 rounded-xl text-xs font-semibold transition-all border ${mode.border} dark:text-white text-gray-700 dark:hover:bg-white/5 hover:bg-gray-50`}>
+                      查看详细方案 <ArrowRight className="w-3 h-3 inline ml-1" />
+                    </a>
                   </div>
-                  <div className="pt-1">
-                    <div className="text-xs font-semibold dark:text-gray-400 text-gray-500 uppercase tracking-wide mb-1">适用场景</div>
-                    <p className="text-xs dark:text-gray-400 text-gray-500">{mode.suitable}</p>
-                  </div>
-                </div>
-                <div className="p-5 pt-0">
-                  <a href={mode.anchor} className={`block w-full text-center py-2.5 rounded-xl text-xs font-semibold transition-all border ${mode.border} dark:text-white text-gray-700 dark:hover:bg-white/5 hover:bg-gray-50`}>
-                    查看详细方案 <ArrowRight className="w-3 h-3 inline ml-1" />
-                  </a>
                 </div>
               </div>
             ))}
