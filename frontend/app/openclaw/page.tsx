@@ -61,6 +61,7 @@ const advantages = [
 ]
 
 export default function OpenClawPage() {
+  // Updated: Link to openclawgate.html for quick start
   return (
     <div className="min-h-screen">
 
