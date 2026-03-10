@@ -88,10 +88,10 @@ export default function OpenClawPage() {
                 让 AI 真正落地业务场景，创造可量化的商业价值。
               </p>
               <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-4">
-                <Link href="/knowledge/quick-start" className="btn-primary flex items-center gap-2 group">
+                <a href="/openclawgate.html" target="_blank" rel="noopener noreferrer" className="btn-primary flex items-center gap-2 group">
                   快速入门
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                </a>
                 <Link href="/hardware" className="btn-secondary flex items-center gap-2">
                   查看部署方案
                 </Link>
@@ -287,10 +287,10 @@ export default function OpenClawPage() {
             无论您是个人开发者还是大型企业，OpenClaw 都有适合您的解决方案。
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/knowledge/quick-start" className="btn-primary flex items-center gap-2 group">
+            <a href="/openclawgate.html" target="_blank" rel="noopener noreferrer" className="btn-primary flex items-center gap-2 group">
               快速入门指南
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
+            </a>
             <Link href="/events" className="btn-secondary">
               参加培训活动
             </Link>
